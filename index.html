@@ -1,14 +1,246 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률사무소 청송 | Law Firm Cheongsong</title>
+    <meta name="description" content="김창희 변호사/가맹거래사. 부산 연제구 소재. 민형사, 가맹분쟁, 학교폭력, 소년보호 사건 전문.">
+    
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+        .text-navy { color: #1e3a8a; } /* 신뢰감을 주는 네이비 */
+        .bg-navy { background-color: #1e3a8a; }
+        .text-gold { color: #b4975a; } /* 명함의 로고 색상 포인트 */
+        
+        /* Hero Section Gradient */
+        .hero-bg {
+            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(30, 58, 138, 0.7)), url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
-<body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+<body class="bg-gray-50">
+
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-scale-balanced text-gold text-2xl"></i>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-xl tracking-tight text-gray-900 leading-none">법률사무소 청송<span class="text-sm font-serif ml-1">Law</span></span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-navy font-medium transition">변호사 소개</a>
+                    <a href="#profile" class="text-gray-600 hover:text-navy font-medium transition">주요 경력</a>
+                    <a href="#expertise" class="text-gray-600 hover:text-navy font-medium transition">업무 분야</a>
+                    <a href="#location" class="px-5 py-2 bg-navy text-white rounded-full hover:bg-blue-900 transition font-medium">오시는 길</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-bg h-screen min-h-[600px] flex items-center justify-center text-center text-white px-4">
+        <div class="max-w-4xl mx-auto animate-fade-in-up pt-16">
+            <p class="text-lg md:text-xl font-medium mb-4 text-gray-300 tracking-wider">변호사 / 가맹거래사</p>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                김 창 희<br>
+                <span class="text-2xl md:text-4xl font-light opacity-90 mt-2 block">Attorney Kim Chang-hee</span>
+            </h1>
+            <div class="w-24 h-1 bg-gold mx-auto mb-8"></div>
+            <p class="text-base md:text-lg text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed">
+                법률사무소 청송은 의뢰인의 권익 보호를 위해<br>
+                정직하고 명쾌한 법률 솔루션을 제공합니다.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#profile" class="px-8 py-4 bg-white text-navy font-bold rounded-lg hover:bg-gray-100 transition shadow-lg">상세 프로필</a>
+                <a href="tel:051-714-1515" class="px-8 py-4 border border-white text-white font-bold rounded-lg hover:bg-white/10 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone"></i> 전화 상담
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <div class="lg:col-span-5 relative">
+                    <div class="w-full h-[550px] bg-gray-100 rounded-lg shadow-xl overflow-hidden relative flex items-center justify-center border border-gray-200">
+                        <div class="text-center p-8">
+                            <i class="fa-solid fa-scale-balanced text-gold text-6xl mb-6"></i>
+                            <h3 class="text-3xl font-serif font-bold text-gray-800 mb-2">법률사무소 청송</h3>
+                            <p class="text-gray-500 font-serif italic">Cheongsong Law Firm</p>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-navy rounded-lg -z-10"></div>
+                </div>
+
+                <div class="lg:col-span-7" id="profile">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="px-3 py-1 bg-navy text-white text-sm font-bold rounded">대표 변호사</span>
+                        <span class="px-3 py-1 bg-gray-200 text-gray-700 text-sm font-bold rounded">가맹거래사</span>
+                    </div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-8">김 창 희 <span class="text-lg text-gray-500 font-normal ml-2">Kim Chang-hee</span></h2>
+                    
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-gold pl-6 py-1">
+                            <p class="text-lg font-bold text-gray-800 mb-1">(전) 부산광역시 북구의회 의원 (8대)</p>
+                        </div>
+
+                        <ul class="space-y-3 text-gray-700 text-lg">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-navy mt-1.5 text-sm"></i>
+                                <span>동아대학교 법학전문대학원 겸임교수</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-navy mt-1.5 text-sm"></i>
+                                <span>부산지방검찰청 형사조정위원</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-navy mt-1.5 text-sm"></i>
+                                <span>부산지방법원 소년위탁보호위원</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-navy mt-1.5 text-sm"></i>
+                                <span>부산북부교육지원청 학교폭력대책심의위원회 의원</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-navy mt-1.5 text-sm"></i>
+                                <span>부울경 프랜차이즈협회 자문변호사</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-navy mt-1.5 text-sm"></i>
+                                <span>부산광역시 사회복지사협회 자문변호사</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-navy mt-1.5 text-sm"></i>
+                                <span>부산지방변호사회 여성변호사특별위원회 부위원장</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-navy font-bold tracking-wide uppercase text-sm">Practice Areas</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 text-gray-900">주요 업무 분야</h2>
+                <div class="w-12 h-1 bg-navy mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6 text-navy group-hover:bg-navy group-hover:text-white transition">
+                        <i class="fa-solid fa-store text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">가맹사업 & 기업법무</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        가맹거래사 자격을 보유한 변호사로서 프랜차이즈 분쟁, 정보공개서 검토, 기업 자문 등 전문적인 법률 서비스를 제공합니다.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6 text-navy group-hover:bg-navy group-hover:text-white transition">
+                        <i class="fa-solid fa-gavel text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">형사조정 & 소년보호</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        검찰청 형사조정위원 및 법원 소년위탁보호위원 경력을 바탕으로 형사 사건 및 소년 보호 사건에 대해 깊이 있는 조력을 다합니다.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition duration-300 border border-gray-100 group">
+                    <div class="w-14 h-14 bg-blue-50 rounded-full flex items-center justify-center mb-6 text-navy group-hover:bg-navy group-hover:text-white transition">
+                        <i class="fa-solid fa-school text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">학교폭력 & 행정</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        교육지원청 학폭위 위원 활동 경험으로 학교폭력 사안에 대한 정확한 절차 대응과 행정적 구제 방안을 제시합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="location" class="bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                
+                <div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <i class="fa-solid fa-scale-balanced text-gold text-3xl"></i>
+                        <span class="font-bold text-2xl text-gray-900">법률사무소 청송<span class="text-sm ml-1 font-serif text-gray-500">Law</span></span>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 group-hover:bg-navy group-hover:text-white transition">
+                                <i class="fa-solid fa-location-dot text-gray-600 group-hover:text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Address</p>
+                                <p class="text-gray-800 font-medium">부산 연제구 법원남로15번길 10, 202호</p>
+                                <p class="text-gray-600 text-sm">(거제동, 미르코아빌딩)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 group-hover:bg-navy group-hover:text-white transition">
+                                <i class="fa-solid fa-phone text-gray-600 group-hover:text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Contact</p>
+                                <p class="text-gray-800"><span class="font-bold inline-block w-12">Tel</span> 051.714.1515</p>
+                                <p class="text-gray-800"><span class="font-bold inline-block w-12">Fax</span> 051.714.1516</p>
+                                <p class="text-gray-800"><span class="font-bold inline-block w-12">Mobile</span> 010.8997.4452</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 group-hover:bg-navy group-hover:text-white transition">
+                                <i class="fa-regular fa-envelope text-gray-600 group-hover:text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Email</p>
+                                <a href="mailto:lawchungsong@daum.net" class="text-gray-800 hover:text-navy hover:underline transition">lawchungsong@daum.net</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative h-full min-h-[300px] rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-gray-400">
+                    <i class="fa-solid fa-map-location-dot text-5xl mb-4 text-gray-300"></i>
+                    <p class="font-medium">지도 영역</p>
+                    <p class="text-sm mt-2">부산 연제구 법원남로15번길 10, 202호</p>
+                    <a href="https://map.naver.com" target="_blank" class="mt-6 px-6 py-2 bg-white border border-gray-300 rounded-full text-sm font-bold text-gray-700 hover:bg-gray-50 transition shadow-sm">
+                        네이버 지도 보기
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-16 pt-8 border-t border-gray-100 text-center text-sm text-gray-500 font-light">
+                &copy; 2026 Law Firm Cheongsong. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
