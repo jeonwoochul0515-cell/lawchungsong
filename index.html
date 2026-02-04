@@ -25,7 +25,7 @@
         
         /* Hero Section Gradient */
         .hero-bg {
-            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(30, 58, 138, 0.7)), url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=2400&q=80');
+            background: linear-gradient(rgba(17, 24, 39, 0.7), rgba(30, 58, 138, 0.6)), url('images/hero-bg.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -39,10 +39,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <i class="fa-solid fa-scale-balanced text-gold text-2xl"></i>
-                    <div class="flex flex-col">
-                        <span class="font-bold text-xl tracking-tight text-gray-900 leading-none">법률사무소 청송<span class="text-sm font-serif ml-1">Law</span></span>
-                    </div>
+                    <img src="images/logo.jpg" alt="법률사무소 청송" class="h-12 w-auto object-contain">
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#about" class="text-gray-600 hover:text-navy font-medium transition">변호사 소개</a>
@@ -177,6 +174,19 @@
                     </p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="booking" class="py-24 bg-navy text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">온라인 법률 상담 예약</h2>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed">
+                변호사 김창희와의 상담을 네이버 예약을 통해 간편하게 진행하세요.
+            </p>
+            <a href="https://m.place.naver.com/place/1285624482/booking" target="_blank" class="px-8 py-4 bg-gold text-navy font-bold rounded-lg hover:bg-yellow-600 transition shadow-lg text-lg flex items-center justify-center gap-3 mx-auto w-fit">
+                <img src="https://ssl.pstatic.net/static/m/place/naver_place_logo.png" alt="네이버 예약 로고" class="h-6">
+                네이버 예약하기
+            </a>
         </div>
     </section>
 
