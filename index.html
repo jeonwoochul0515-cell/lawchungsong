@@ -32,10 +32,17 @@
         }
         
         html { scroll-behavior: smooth; }
+
+        .profile-image-container img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile-image-container:hover img {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
-<h1>Vercel 배포 테스트</h1>
     <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -78,13 +85,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 
-                <div class="lg:col-span-5 relative">
-                    <div class="w-full h-[550px] bg-gray-100 rounded-lg shadow-xl overflow-hidden relative flex items-center justify-center border border-gray-200">
-                        <div class="text-center p-8">
-                            <i class="fa-solid fa-scale-balanced text-gold text-6xl mb-6"></i>
-                            <h3 class="text-3xl font-serif font-bold text-gray-800 mb-2">법률사무소 청송</h3>
-                            <p class="text-gray-500 font-serif italic">Cheongsong Law Firm</p>
-                        </div>
+                <div class="lg:col-span-5 relative profile-image-container">
+                    <div class="w-full h-auto bg-gray-100 rounded-lg shadow-xl overflow-hidden relative border border-gray-200">
+                        <img src="images/lawyer-profile.jpg" alt="김창희 변호사" class="w-full h-full object-cover">
                     </div>
                     <div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-navy rounded-lg -z-10"></div>
                 </div>
