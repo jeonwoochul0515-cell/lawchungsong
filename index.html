@@ -5,13 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>법률사무소 청송 | Law Firm Cheongsong</title>
     <meta name="description" content="김창희 변호사/가맹거래사. 부산 연제구 소재. 민형사, 가맹분쟁, 학교폭력, 소년보호 사건 전문.">
+    <meta name="keywords" content="부산변호사, 가맹거래사, 학교폭력변호사, 소년보호, 프랜차이즈변호사, 법률사무소청송, 김창희변호사, 부산법률사무소">
     <meta name="naver-site-verification" content="7ac89510ab5f062400d0d7d6d444ad5229a00d50" />
-    
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="법률사무소 청송 | 김창희 변호사">
+    <meta property="og:description" content="가맹거래사 자격 보유 변호사. 프랜차이즈·학교폭력·소년보호·형사 사건 전문. 부산 연제구 소재.">
+    <meta property="og:image" content="images/lawyer-profile.jpg">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="법률사무소 청송 | 김창희 변호사">
+    <meta name="twitter:description" content="가맹거래사 자격 보유 변호사. 프랜차이즈·학교폭력·소년보호·형사 사건 전문.">
+    <meta name="twitter:image" content="images/lawyer-profile.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+    <link rel="apple-touch-icon" href="images/logo.jpg">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "name": "법률사무소 청송",
+        "alternateName": "Law Firm Cheongsong",
+        "description": "김창희 변호사/가맹거래사. 프랜차이즈, 학교폭력, 소년보호, 형사 사건 전문 법률사무소.",
+        "url": "https://lawchungsong.web.app",
+        "telephone": "+82-1660-4452",
+        "faxNumber": "+82-51-714-1516",
+        "email": "lawchungsong@daum.net",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "법원남로15번길 10, 202호 (거제동, 미르코아빌딩)",
+            "addressLocality": "부산광역시",
+            "addressRegion": "연제구",
+            "postalCode": "47556",
+            "addressCountry": "KR"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 35.1796,
+            "longitude": 129.0756
+        },
+        "founder": {
+            "@type": "Person",
+            "name": "김창희",
+            "jobTitle": "대표 변호사 / 가맹거래사"
+        },
+        "areaServed": "부산광역시",
+        "priceRange": "$$"
+    }
+    </script>
+
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 
     <style>
         body {
@@ -43,22 +97,57 @@
     </style>
 </head>
 <body class="bg-gray-50">
+    <!-- Page Loader -->
+    <div id="pageLoader" class="fixed inset-0 z-[200] bg-white flex flex-col items-center justify-center transition-opacity duration-500">
+        <img src="images/logo.jpg" alt="" class="h-16 w-auto mb-6 animate-pulse">
+        <div class="w-48 h-1 bg-gray-200 rounded-full overflow-hidden">
+            <div class="h-full bg-navy rounded-full animate-loader-bar"></div>
+        </div>
+    </div>
+
     <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <img src="images/logo.jpg" alt="법률사무소 청송" class="h-12 w-auto object-contain">
+                    <img src="images/logo.jpg" alt="법률사무소 청송 로고" class="h-12 w-auto object-contain">
                 </div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-navy font-medium transition">변호사 소개</a>
-                    <a href="#profile" class="text-gray-600 hover:text-navy font-medium transition">주요 경력</a>
-                    <a href="#expertise" class="text-gray-600 hover:text-navy font-medium transition">업무 분야</a>
-                    <a href="#booking" class="text-gray-600 hover:text-navy font-medium transition">예약</a>
-                    <a href="#location" class="px-5 py-2 bg-navy text-white rounded-full hover:bg-blue-900 transition font-medium">오시는 길</a>
+                    <a href="#about" class="nav-link text-gray-600 hover:text-navy font-medium transition">변호사 소개</a>
+                    <a href="#profile" class="nav-link text-gray-600 hover:text-navy font-medium transition">주요 경력</a>
+                    <a href="#expertise" class="nav-link text-gray-600 hover:text-navy font-medium transition">업무 분야</a>
+                    <a href="#reviews" class="nav-link text-gray-600 hover:text-navy font-medium transition">후기</a>
+                    <a href="#booking" class="nav-link text-gray-600 hover:text-navy font-medium transition">예약</a>
+                    <a href="#location" class="nav-link px-5 py-2 bg-navy text-white rounded-full hover:bg-blue-900 transition font-medium">오시는 길</a>
                 </div>
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5" aria-label="메뉴 열기">
+                    <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-300" id="menuBar1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-300" id="menuBar2"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 transition-all duration-300" id="menuBar3"></span>
+                </button>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Drawer -->
+    <div id="mobileMenu" class="fixed inset-0 z-40 hidden">
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+        <div class="absolute right-0 top-0 h-full w-72 bg-white shadow-2xl transform translate-x-full transition-transform duration-300" id="mobileMenuDrawer">
+            <div class="pt-24 px-6 space-y-1">
+                <a href="#about" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">변호사 소개</a>
+                <a href="#profile" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">주요 경력</a>
+                <a href="#expertise" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">업무 분야</a>
+                <a href="#reviews" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">후기</a>
+                <a href="#booking" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">예약</a>
+                <a href="#location" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">오시는 길</a>
+                <div class="pt-4 border-t border-gray-100 mt-4">
+                    <a href="tel:1660-4452" class="flex items-center gap-3 py-3 px-4 bg-navy text-white rounded-lg font-medium">
+                        <i class="fa-solid fa-phone"></i> 전화 상담
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <header class="hero-bg h-screen min-h-[600px] flex items-center justify-center text-center text-white px-4">
         <div class="max-w-4xl mx-auto animate-fade-in-up pt-16">
@@ -74,20 +163,20 @@
             </p>
             <div class="flex flex-col md:flex-row gap-4 justify-center">
                 <a href="#profile" class="px-8 py-4 bg-white text-navy font-bold rounded-lg hover:bg-gray-100 transition shadow-lg">상세 프로필</a>
-                <a href="tel:051-714-1515" class="px-8 py-4 border border-white text-white font-bold rounded-lg hover:bg-white/10 transition flex items-center justify-center gap-2">
+                <a href="tel:1660-4452" class="px-8 py-4 border border-white text-white font-bold rounded-lg hover:bg-white/10 transition flex items-center justify-center gap-2">
                     <i class="fa-solid fa-phone"></i> 전화 상담
                 </a>
             </div>
         </div>
     </header>
 
-    <section id="about" class="py-24 bg-white">
+    <section id="about" class="py-24 bg-white scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 
                 <div class="lg:col-span-5 relative profile-image-container">
                     <div class="w-full h-auto bg-gray-100 rounded-lg shadow-xl overflow-hidden relative border border-gray-200">
-                        <img src="images/lawyer-profile.jpg" alt="김창희 변호사" class="w-full h-full object-cover">
+                        <img src="images/lawyer-profile.jpg" alt="법률사무소 청송 대표 김창희 변호사 프로필 사진" class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-navy rounded-lg -z-10"></div>
                 </div>
@@ -148,7 +237,7 @@
         </div>
     </section>
 
-    <section id="expertise" class="py-24 bg-gray-50 relative overflow-hidden">
+    <section id="expertise" class="py-24 bg-gray-50 relative overflow-hidden scroll-reveal">
         <!-- Background Decoration -->
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-30">
             <div class="absolute top-10 left-10 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
@@ -323,7 +412,7 @@
         });
     </script>
 
-    <section id="booking" class="py-24 bg-navy text-white">
+    <section id="booking" class="py-24 bg-navy text-white scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">온라인 법률 상담 예약</h2>
             <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed">
@@ -336,7 +425,131 @@
         </div>
     </section>
 
-    <footer id="location" class="bg-white border-t border-gray-200">
+    <!-- 고객 후기 섹션 -->
+    <section id="reviews" class="py-24 bg-white scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-navy font-bold tracking-wide uppercase text-sm">Client Reviews</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 text-gray-900">의뢰인 후기</h2>
+                <div class="w-12 h-1 bg-navy mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 relative">
+                    <div class="flex gap-1 text-gold mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6">"프랜차이즈 분쟁으로 막막했는데, 가맹거래사 자격까지 갖춘 변호사님이라 법률과 실무 양쪽 모두에서 정확한 조언을 받을 수 있었습니다. 결과도 만족스러웠습니다."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm">K</div>
+                        <div>
+                            <p class="font-bold text-gray-900 text-sm">K** 대표</p>
+                            <p class="text-gray-500 text-xs">가맹 분쟁 사건</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-gray-100"></i>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 relative">
+                    <div class="flex gap-1 text-gold mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6">"학교폭력 문제로 아이와 함께 상담을 받았습니다. 아이의 입장에서 진심으로 걱정해주시고, 절차 하나하나 꼼꼼하게 설명해주셔서 불안한 마음이 많이 해소되었습니다."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm">P</div>
+                        <div>
+                            <p class="font-bold text-gray-900 text-sm">P** 학부모</p>
+                            <p class="text-gray-500 text-xs">학교폭력 사건</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-gray-100"></i>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 relative">
+                    <div class="flex gap-1 text-gold mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-6">"형사 사건으로 급하게 연락드렸는데 빠르게 상담 잡아주시고, 사건 진행 상황도 꾸준히 알려주셔서 신뢰가 갔습니다. 결과적으로 좋은 결과를 얻을 수 있었습니다."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm">L</div>
+                        <div>
+                            <p class="font-bold text-gray-900 text-sm">L** 의뢰인</p>
+                            <p class="text-gray-500 text-xs">형사 사건</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-gray-100"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ 섹션 -->
+    <section id="faq" class="py-24 bg-gray-50 scroll-reveal">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-navy font-bold tracking-wide uppercase text-sm">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 text-gray-900">자주 묻는 질문</h2>
+                <div class="w-12 h-1 bg-navy mx-auto mt-6"></div>
+            </div>
+
+            <div class="space-y-4" id="faqAccordion">
+                <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                        <span class="font-bold text-gray-900 pr-4">상담 비용은 어떻게 되나요?</span>
+                        <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">첫 20분 무료 상담을 제공하고 있습니다. 이후 정식 사건 수임 시 사건의 종류와 난이도에 따라 착수금 및 성공보수를 안내드리며, 상담 시 비용에 대해 투명하게 설명해 드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                        <span class="font-bold text-gray-900 pr-4">상담 예약은 어떻게 하나요?</span>
+                        <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">네이버 예약을 통해 간편하게 예약하실 수 있으며, 전화(1660-4452) 또는 카카오톡 채널을 통해서도 예약 가능합니다. 급한 사안의 경우 전화 주시면 빠르게 일정을 조율해 드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                        <span class="font-bold text-gray-900 pr-4">방문 상담 외에 비대면 상담도 가능한가요?</span>
+                        <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">네, 전화 상담 및 화상 상담(Zoom 등)을 통한 비대면 상담이 가능합니다. 부산 외 지역에 계신 분들도 편리하게 상담받으실 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                        <span class="font-bold text-gray-900 pr-4">학교폭력 사건은 어떻게 대응해야 하나요?</span>
+                        <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">학교폭력 사건은 초기 대응이 매우 중요합니다. 학폭위 심의 전에 변호사와 상담하시면, 의견서 작성·증거 정리·심의 대리 등 체계적인 지원을 받을 수 있습니다. 피해자·가해자 모두 조력 가능합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                        <span class="font-bold text-gray-900 pr-4">프랜차이즈(가맹) 관련 분쟁도 상담 가능한가요?</span>
+                        <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="px-6 pb-6 text-gray-600 leading-relaxed">네, 대표 변호사는 가맹거래사 자격을 보유하고 있어 프랜차이즈 법률과 실무 양쪽에 전문성이 있습니다. 정보공개서 등록, 가맹계약 검토, 분쟁 해결, 공정거래위원회 대응 등 폭넓게 조력합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="location" class="bg-white border-t border-gray-200 scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                 
@@ -364,7 +577,7 @@
                             </div>
                             <div>
                                 <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Contact</p>
-                                <p class="text-gray-800"><span class="font-bold inline-block w-12">Tel</span> 051.714.1515</p>
+                                <p class="text-gray-800"><span class="font-bold inline-block w-12">Tel</span> 1660.4452</p>
                                 <p class="text-gray-800"><span class="font-bold inline-block w-12">Fax</span> 051.714.1516</p>
                             </div>
                         </div>
@@ -381,13 +594,34 @@
                     </div>
                 </div>
 
-                <div class="relative h-full min-h-[300px] rounded-xl overflow-hidden shadow-lg border border-gray-200 bg-gray-50 flex flex-col items-center justify-center text-gray-400">
-                    <i class="fa-solid fa-map-location-dot text-5xl mb-4 text-gray-300"></i>
-                    <p class="font-medium">지도 영역</p>
-                    <p class="text-sm mt-2">부산 연제구 법원남로15번길 10, 202호</p>
-                    <a href="https://map.naver.com" target="_blank" class="mt-6 px-6 py-2 bg-white border border-gray-300 rounded-full text-sm font-bold text-gray-700 hover:bg-gray-50 transition shadow-sm">
-                        네이버 지도 보기
-                    </a>
+                <div class="relative h-full min-h-[300px] rounded-2xl overflow-hidden shadow-xl border border-gray-100 group">
+                    <!-- Map Background -->
+                    <iframe src="https://map.naver.com/p/entry/place/1285624482?c=15.00,0,0,0,dh"
+                        width="100%" height="100%" style="min-height:400px; border:0;"
+                        allowfullscreen loading="lazy"
+                        title="법률사무소 청송 위치"></iframe>
+                    <!-- Overlay Card -->
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white/95 to-transparent pt-10 pb-5 px-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center shadow-md flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-900 text-sm">법률사무소 청송</p>
+                                <p class="text-gray-500 text-xs">부산 연제구 법원남로15번길 10, 202호</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="https://map.naver.com/p/entry/place/1285624482" target="_blank"
+                               class="flex-1 text-center py-2.5 bg-[#03C75A] text-white text-sm font-bold rounded-lg hover:bg-[#02b351] transition shadow-sm">
+                                <i class="fa-solid fa-map-location-dot mr-1.5"></i>네이버 지도
+                            </a>
+                            <a href="https://map.kakao.com/link/to/법률사무소 청송,35.1796,129.0756" target="_blank"
+                               class="flex-1 text-center py-2.5 bg-[#FEE500] text-[#3C1E1E] text-sm font-bold rounded-lg hover:bg-[#fdd800] transition shadow-sm">
+                                <i class="fa-solid fa-diamond-turn-right mr-1.5"></i>카카오 길찾기
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -397,5 +631,22 @@
         </div>
     </footer>
 
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+        <!-- Back to Top (hidden by default) -->
+        <button id="backToTop" class="w-12 h-12 bg-gray-700 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-800 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none" aria-label="맨 위로">
+            <i class="fa-solid fa-chevron-up"></i>
+        </button>
+        <!-- KakaoTalk -->
+        <a href="https://pf.kakao.com/_LaKxdn/chat" target="_blank" class="w-14 h-14 bg-[#FEE500] text-[#3C1E1E] rounded-full shadow-lg flex items-center justify-center hover:bg-[#fdd800] transition-all duration-300 hover:scale-110" aria-label="카카오톡 상담">
+            <i class="fa-solid fa-comment text-xl"></i>
+        </a>
+        <!-- Phone Call -->
+        <a href="tel:1660-4452" class="w-14 h-14 bg-navy text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-900 transition-all duration-300 hover:scale-110 animate-bounce-slow" aria-label="전화 상담">
+            <i class="fa-solid fa-phone text-xl"></i>
+        </a>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
