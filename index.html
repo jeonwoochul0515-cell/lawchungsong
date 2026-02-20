@@ -21,9 +21,13 @@
     <meta name="twitter:description" content="가맹거래사 자격 보유 변호사. 프랜차이즈·학교폭력·소년보호·형사 사건 전문.">
     <meta name="twitter:image" content="images/lawyer-profile.jpg">
 
-    <!-- Favicon -->
+    <!-- Favicon & PWA -->
     <link rel="icon" type="image/jpeg" href="images/logo.jpg">
     <link rel="apple-touch-icon" href="images/logo.jpg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -57,6 +61,56 @@
         },
         "areaServed": "부산광역시",
         "priceRange": "$$"
+    }
+    </script>
+
+    <!-- FAQ Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "상담 비용은 어떻게 되나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "첫 20분 무료 상담을 제공하고 있습니다. 이후 정식 사건 수임 시 사건의 종류와 난이도에 따라 착수금 및 성공보수를 안내드리며, 상담 시 비용에 대해 투명하게 설명해 드립니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "상담 예약은 어떻게 하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "네이버 예약을 통해 간편하게 예약하실 수 있으며, 전화(1660-4452) 또는 카카오톡 채널을 통해서도 예약 가능합니다. 급한 사안의 경우 전화 주시면 빠르게 일정을 조율해 드립니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "방문 상담 외에 비대면 상담도 가능한가요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "네, 전화 상담 및 화상 상담(Zoom 등)을 통한 비대면 상담이 가능합니다. 부산 외 지역에 계신 분들도 편리하게 상담받으실 수 있습니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "학교폭력 사건은 어떻게 대응해야 하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "학교폭력 사건은 초기 대응이 매우 중요합니다. 학폭위 심의 전에 변호사와 상담하시면, 의견서 작성·증거 정리·심의 대리 등 체계적인 지원을 받을 수 있습니다. 피해자·가해자 모두 조력 가능합니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "프랜차이즈(가맹) 관련 분쟁도 상담 가능한가요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "네, 대표 변호사는 가맹거래사 자격을 보유하고 있어 프랜차이즈 법률과 실무 양쪽에 전문성이 있습니다. 정보공개서 등록, 가맹계약 검토, 분쟁 해결, 공정거래위원회 대응 등 폭넓게 조력합니다."
+                }
+            }
+        ]
     }
     </script>
 
@@ -549,6 +603,66 @@
         </div>
     </section>
 
+    <!-- 온라인 문의 섹션 -->
+    <section id="contact" class="py-24 bg-navy text-white scroll-reveal">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-gray-300 font-bold tracking-wide uppercase text-sm">Online Inquiry</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">온라인 문의</h2>
+                <div class="w-12 h-1 bg-gold mx-auto mt-6"></div>
+                <p class="mt-4 text-gray-300">간단한 문의 사항을 남겨주시면 빠르게 연락드리겠습니다.</p>
+            </div>
+
+            <form id="contactForm" class="space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">이름 <span class="text-red-400">*</span></label>
+                        <input type="text" name="name" required placeholder="홍길동"
+                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">연락처 <span class="text-red-400">*</span></label>
+                        <input type="tel" name="phone" required placeholder="010-0000-0000"
+                            class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">문의 분야</label>
+                    <select name="category"
+                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition">
+                        <option value="" class="text-gray-900">선택해주세요</option>
+                        <option value="가맹/프랜차이즈" class="text-gray-900">가맹 / 프랜차이즈</option>
+                        <option value="학교폭력/소년보호" class="text-gray-900">학교폭력 / 소년보호</option>
+                        <option value="형사" class="text-gray-900">형사 사건</option>
+                        <option value="행정" class="text-gray-900">행정 소송</option>
+                        <option value="기업법무" class="text-gray-900">기업 법무</option>
+                        <option value="기타" class="text-gray-900">기타</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">문의 내용 <span class="text-red-400">*</span></label>
+                    <textarea name="message" required rows="5" placeholder="문의하실 내용을 간략히 적어주세요."
+                        class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition resize-none"></textarea>
+                </div>
+                <div class="text-center pt-2">
+                    <button type="submit"
+                        class="inline-block bg-white text-navy font-bold text-lg px-12 py-4 rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>문의 보내기
+                    </button>
+                </div>
+            </form>
+
+            <!-- 전송 완료 메시지 -->
+            <div id="contactSuccess" class="hidden text-center py-12">
+                <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fa-solid fa-check text-4xl text-gold"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">문의가 접수되었습니다</h3>
+                <p class="text-gray-300">빠른 시일 내에 연락드리겠습니다.</p>
+            </div>
+        </div>
+    </section>
+
     <footer id="location" class="bg-white border-t border-gray-200 scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -645,6 +759,21 @@
         <a href="tel:1660-4452" class="w-14 h-14 bg-navy text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-900 transition-all duration-300 hover:scale-110 animate-bounce-slow" aria-label="전화 상담">
             <i class="fa-solid fa-phone text-xl"></i>
         </a>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-[150] hidden">
+        <div class="max-w-4xl mx-auto px-4 pb-4">
+            <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 flex flex-col sm:flex-row items-center gap-4">
+                <div class="flex-1 text-sm text-gray-600 leading-relaxed">
+                    <i class="fa-solid fa-cookie-bite text-gold mr-1"></i>
+                    본 웹사이트는 더 나은 서비스 제공을 위해 쿠키를 사용합니다. 사이트 이용 시 쿠키 사용에 동의하게 됩니다.
+                </div>
+                <button onclick="acceptCookies()" class="px-6 py-2.5 bg-navy text-white text-sm font-bold rounded-full hover:bg-blue-900 transition whitespace-nowrap">
+                    동의합니다
+                </button>
+            </div>
+        </div>
     </div>
 
     <script src="main.js"></script>
