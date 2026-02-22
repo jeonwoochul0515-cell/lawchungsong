@@ -205,6 +205,23 @@
     padding-top: 1.5rem;
 }
 
+/* ===== Location Map Responsive Height ===== */
+#location iframe {
+    height: 320px;
+}
+
+@media (min-width: 640px) {
+    #location iframe {
+        height: 400px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #location iframe {
+        height: 450px;
+    }
+}
+
 /* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

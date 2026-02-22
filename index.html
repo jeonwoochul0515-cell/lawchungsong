@@ -1087,86 +1087,89 @@
 
     </main>
 
-    <footer id="location" class="bg-white border-t border-gray-200 scroll-reveal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                
-                <div>
-                    <div class="flex items-center gap-3 mb-8">
-                        <i class="fa-solid fa-scale-balanced text-gold text-3xl"></i>
-                        <span class="font-bold text-2xl text-gray-900">법률사무소 청송<span class="text-sm ml-1 font-serif text-gray-500">Law</span></span>
+    <footer id="location" class="bg-gradient-to-b from-gray-50 to-white border-t border-gray-200 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <p class="text-sm font-bold tracking-widest text-gold uppercase mb-2">Location</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">오시는 길</h2>
+                <div class="mt-3 mx-auto w-12 h-1 bg-gold rounded-full"></div>
+            </div>
+
+            <!-- Map (full width, above the info) -->
+            <div class="relative rounded-2xl overflow-hidden shadow-lg border border-gray-200 mb-10">
+                <iframe src="https://map.naver.com/p/entry/place/1285624482?c=15.00,0,0,0,dh"
+                    class="w-full border-0"
+                    allowfullscreen loading="lazy"
+                    title="법률사무소 청송 위치"></iframe>
+                <!-- Slim bottom bar with map action buttons -->
+                <div class="flex items-center justify-between gap-3 bg-white/95 backdrop-blur px-4 py-3 sm:px-6 border-t border-gray-100">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-8 h-8 bg-navy rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-location-dot text-white text-xs"></i>
+                        </div>
+                        <span class="text-sm font-semibold text-gray-800 truncate">법률사무소 청송</span>
                     </div>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4 group">
-                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 group-hover:bg-navy group-hover:text-white transition">
-                                <i class="fa-solid fa-location-dot text-gray-600 group-hover:text-white"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Address</p>
-                                <p class="text-gray-800 font-medium">부산 연제구 법원남로15번길 10, 202호</p>
-                                <p class="text-gray-600 text-sm">(거제동, 미르코아빌딩)</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4 group">
-                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 group-hover:bg-navy group-hover:text-white transition">
-                                <i class="fa-solid fa-phone text-gray-600 group-hover:text-white"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Contact</p>
-                                <p class="text-gray-800"><span class="font-bold inline-block w-12">Tel</span> 1660.4452</p>
-                                <p class="text-gray-800"><span class="font-bold inline-block w-12">Fax</span> 051.714.1516</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4 group">
-                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 group-hover:bg-navy group-hover:text-white transition">
-                                <i class="fa-regular fa-envelope text-gray-600 group-hover:text-white"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1">Email</p>
-                                <a href="mailto:lawchungsong@daum.net" class="text-gray-800 hover:text-navy hover:underline transition">lawchungsong@daum.net</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative h-full min-h-[300px] rounded-2xl overflow-hidden shadow-xl border border-gray-100 group">
-                    <!-- Map Background -->
-                    <iframe src="https://map.naver.com/p/entry/place/1285624482?c=15.00,0,0,0,dh"
-                        width="100%" height="100%" style="min-height:400px; border:0;"
-                        allowfullscreen loading="lazy"
-                        title="법률사무소 청송 위치"></iframe>
-                    <!-- Overlay Card -->
-                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-white via-white/95 to-transparent pt-10 pb-5 px-6">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center shadow-md flex-shrink-0">
-                                <i class="fa-solid fa-location-dot text-white text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-gray-900 text-sm">법률사무소 청송</p>
-                                <p class="text-gray-500 text-xs">부산 연제구 법원남로15번길 10, 202호</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-2">
-                            <a href="https://map.naver.com/p/entry/place/1285624482" target="_blank"
-                               class="flex-1 text-center py-2.5 bg-[#03C75A] text-white text-sm font-bold rounded-lg hover:bg-[#02b351] transition shadow-sm">
-                                <i class="fa-solid fa-map-location-dot mr-1.5"></i>네이버 지도
-                            </a>
-                            <a href="https://map.kakao.com/link/to/법률사무소 청송,35.1796,129.0756" target="_blank"
-                               class="flex-1 text-center py-2.5 bg-[#FEE500] text-[#3C1E1E] text-sm font-bold rounded-lg hover:bg-[#fdd800] transition shadow-sm">
-                                <i class="fa-solid fa-diamond-turn-right mr-1.5"></i>카카오 길찾기
-                            </a>
-                        </div>
+                    <div class="flex gap-2 flex-shrink-0">
+                        <a href="https://map.naver.com/p/entry/place/1285624482" target="_blank"
+                           class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#03C75A] text-white text-xs sm:text-sm font-bold rounded-lg hover:bg-[#02b351] transition shadow-sm">
+                            <i class="fa-solid fa-map-location-dot"></i><span class="hidden sm:inline">네이버</span> 지도
+                        </a>
+                        <a href="https://map.kakao.com/link/to/법률사무소 청송,35.1796,129.0756" target="_blank"
+                           class="inline-flex items-center gap-1.5 px-4 py-2 bg-[#FEE500] text-[#3C1E1E] text-xs sm:text-sm font-bold rounded-lg hover:bg-[#fdd800] transition shadow-sm">
+                            <i class="fa-solid fa-diamond-turn-right"></i><span class="hidden sm:inline">카카오</span> 길찾기
+                        </a>
                     </div>
                 </div>
             </div>
-            
-            <!-- 마무리 문구 (피크앤드) -->
-            <div class="mt-16 pt-8 border-t border-gray-100 text-center">
-                <p class="text-gray-700 font-medium text-base mb-4 leading-relaxed">1,000건 이상의 사건을 함께한 법률사무소 청송.<br>다음은 당신의 차례입니다.</p>
-                <p class="text-sm text-gray-500 font-light">&copy; 2026 Law Firm Cheongsong. All rights reserved.</p>
+
+            <!-- Info Grid: contact details -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12">
+                <!-- Address -->
+                <div class="flex items-start gap-4 bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-11 h-11 rounded-full bg-navy/10 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-location-dot text-navy text-lg"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Address</p>
+                        <p class="text-gray-900 font-semibold text-sm leading-snug">부산 연제구 법원남로15번길 10, 202호</p>
+                        <p class="text-gray-500 text-xs mt-0.5">(거제동, 미르코아빌딩)</p>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="flex items-start gap-4 bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-11 h-11 rounded-full bg-navy/10 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-phone text-navy text-lg"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Contact</p>
+                        <p class="text-gray-900 font-semibold text-sm"><span class="inline-block w-10 text-gray-500 font-medium">Tel</span>1660.4452</p>
+                        <p class="text-gray-900 font-semibold text-sm"><span class="inline-block w-10 text-gray-500 font-medium">Fax</span>051.714.1516</p>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="flex items-start gap-4 bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="w-11 h-11 rounded-full bg-navy/10 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-regular fa-envelope text-navy text-lg"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Email</p>
+                        <a href="mailto:lawchungsong@daum.net" class="text-gray-900 font-semibold text-sm hover:text-navy hover:underline transition break-all">lawchungsong@daum.net</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closing statement + copyright -->
+            <div class="pt-8 border-t border-gray-200 text-center">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <i class="fa-solid fa-scale-balanced text-gold text-2xl"></i>
+                    <span class="font-bold text-xl text-gray-900">법률사무소 청송</span>
+                </div>
+                <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-5">1,000건 이상의 사건을 함께한 법률사무소 청송.<br>다음은 당신의 차례입니다.</p>
+                <p class="text-xs text-gray-400">&copy; 2026 Law Firm Cheongsong. All rights reserved.</p>
             </div>
         </div>
     </footer>
