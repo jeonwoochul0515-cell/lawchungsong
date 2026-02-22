@@ -124,6 +124,87 @@
     animation-delay: 4s;
 }
 
+/* ===== Price Anchor Strikethrough ===== */
+.price-anchor del {
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,255,255,0.5);
+    text-decoration-thickness: 2px;
+}
+
+/* ===== Popular Badge (Expertise Card) ===== */
+.popular-badge {
+    position: absolute;
+    top: 16px;
+    left: -32px;
+    background: linear-gradient(135deg, #b4975a, #d4b97a);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 40px;
+    transform: rotate(-45deg);
+    z-index: 20;
+    box-shadow: 0 2px 8px rgba(180,151,90,0.3);
+    letter-spacing: 0.5px;
+}
+
+/* ===== Pulse Dot (Trust Bar) ===== */
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+}
+
+.pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ===== Floating Tooltip Bubble ===== */
+.tooltip-bubble {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 12px;
+    background: white;
+    color: #333;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+}
+
+.tooltip-bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tooltip-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+}
+
+/* ===== Trust Icon Row (Booking) ===== */
+.trust-icon-row {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+}
+
 /* ===== Reduced Motion ===== */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

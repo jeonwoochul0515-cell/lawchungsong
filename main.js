@@ -217,6 +217,65 @@ if (contactForm) {
     });
 }
 
+// ===== Floating CTA Dynamic Tooltip =====
+(function() {
+    const tooltip = document.getElementById('floatingTooltip');
+    if (!tooltip) return;
+
+    const messages = [
+        { min: 0, max: 25, text: '궁금한 점 있으시면 편하게 연락주세요' },
+        { min: 25, max: 50, text: '궁금한 점 있으시면 편하게 연락주세요' },
+        { min: 50, max: 75, text: '지금 전화하시면 오늘 상담 가능합니다' },
+        { min: 75, max: 100, text: '지금 바로 상담을 예약해보세요' }
+    ];
+
+    let currentMsg = '';
+    let tooltipTimer = null;
+    let hideTimer = null;
+
+    function updateTooltip() {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPct = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+
+        const match = messages.find(m => scrollPct >= m.min && scrollPct < m.max) || messages[messages.length - 1];
+
+        if (match.text !== currentMsg && scrollPct > 20) {
+            currentMsg = match.text;
+            tooltip.textContent = currentMsg;
+            tooltip.classList.remove('hidden');
+            tooltip.classList.add('show');
+
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function() {
+                tooltip.classList.remove('show');
+            }, 4000);
+        }
+    }
+
+    // Show tooltip periodically based on scroll
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateTooltip, 500);
+    }, { passive: true });
+
+    // Initial show after 5 seconds
+    setTimeout(function() {
+        const scrollY = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPct = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+        if (scrollPct < 25) {
+            tooltip.textContent = messages[0].text;
+            tooltip.classList.remove('hidden');
+            tooltip.classList.add('show');
+            hideTimer = setTimeout(function() {
+                tooltip.classList.remove('show');
+            }, 4000);
+        }
+    }, 5000);
+})();
+
 // ===== Cookie Consent Banner =====
 function acceptCookies() {
     localStorage.setItem('cookieConsent', 'accepted');
