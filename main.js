@@ -52,13 +52,33 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
 
-// ===== Navigation Active Highlight on Scroll =====
+// ===== Unified Scroll Handler =====
 const sections = document.querySelectorAll('section[id], footer[id]');
 const navLinks = document.querySelectorAll('.nav-link');
+const backToTop = document.getElementById('backToTop');
+const scrollProgress = document.getElementById('scrollProgress');
+const nav = document.querySelector('nav');
 
-function updateActiveNav() {
-    const scrollPos = window.scrollY + 120;
+function onScroll() {
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 
+    // Scroll progress bar
+    if (scrollProgress && docHeight > 0) {
+        scrollProgress.style.width = (scrollY / docHeight * 100) + '%';
+    }
+
+    // Nav glassmorphism on scroll
+    if (nav) {
+        if (scrollY > 80) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    }
+
+    // Active nav highlight
+    const scrollPos = scrollY + 120;
     let currentId = '';
     sections.forEach(section => {
         if (section.offsetTop <= scrollPos) {
@@ -73,10 +93,58 @@ function updateActiveNav() {
             link.classList.add('active');
         }
     });
+
+    // Back to top visibility
+    if (backToTop) {
+        if (scrollY > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    }
 }
 
-window.addEventListener('scroll', updateActiveNav, { passive: true });
-updateActiveNav();
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+if (backToTop) {
+    backToTop.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ===== Statistics Counter Animation =====
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'), 10);
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const duration = 2000;
+                const start = performance.now();
+
+                function animate(now) {
+                    const elapsed = now - start;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Ease out cubic
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.round(eased * target);
+                    counter.textContent = current.toLocaleString() + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            });
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.stats-section').forEach(el => counterObserver.observe(el));
 
 // ===== FAQ Accordion =====
 function toggleFaq(button) {
@@ -97,27 +165,12 @@ function toggleFaq(button) {
     }
 }
 
-// ===== Back to Top Button =====
-const backToTop = document.getElementById('backToTop');
-
-window.addEventListener('scroll', function () {
-    if (window.scrollY > 600) {
-        backToTop.classList.add('visible');
-    } else {
-        backToTop.classList.remove('visible');
-    }
-}, { passive: true });
-
-backToTop.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ===== EmailJS 초기화 =====
+// ===== EmailJS =====
 // TODO: EmailJS 가입 후 아래 값을 교체하세요
 // 1. https://www.emailjs.com 가입 (무료 월 200건)
-// 2. Email Services → 이메일 서비스 추가 (Gmail 등)
-// 3. Email Templates → 템플릿 생성 (변수: from_name, phone, category, message)
-// 4. Account → Public Key 복사
+// 2. Email Services -> 이메일 서비스 추가 (Gmail 등)
+// 3. Email Templates -> 템플릿 생성 (변수: from_name, phone, category, message)
+// 4. Account -> Public Key 복사
 const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';     // 교체 필요
 const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';     // 교체 필요
 const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';   // 교체 필요
