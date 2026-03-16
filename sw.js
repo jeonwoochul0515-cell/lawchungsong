@@ -1,10 +1,12 @@
-const CACHE_NAME = 'cheongsong-v2';
+const CACHE_NAME = 'cheongsong-v3';
 const ASSETS = [
     '/',
     '/index.html',
     '/style.css',
     '/main.js',
     '/images/logo.jpg',
+    '/images/icon-192x192.png',
+    '/images/icon-512x512.png',
     '/images/lawyer-profile.jpg',
     '/images/hero-bg.jpg'
 ];

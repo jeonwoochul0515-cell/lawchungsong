@@ -2,21 +2,37 @@
     "name": "법률사무소 청송",
     "short_name": "청송Law",
     "description": "김창희 변호사 / 가맹거래사. 이혼·가사, 프랜차이즈, 학교폭력, 소년보호, 형사·행정 사건 전문.",
+    "id": "/",
     "start_url": "/",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#1e3a8a",
     "orientation": "portrait",
     "icons": [
         {
-            "src": "images/logo.jpg",
+            "src": "images/icon-192x192.png",
             "sizes": "192x192",
-            "type": "image/jpeg"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
-            "src": "images/logo.jpg",
+            "src": "images/icon-512x512.png",
             "sizes": "512x512",
-            "type": "image/jpeg"
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "images/icon-maskable-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "images/icon-maskable-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ]
 }
