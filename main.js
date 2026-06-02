@@ -340,3 +340,33 @@ document.addEventListener('click', function (e) {
             wrap.innerHTML = '<div class="col-span-full text-center text-gray-400 py-6">준비 중입니다.</div>';
         });
 })();
+
+// ===== 쉽게 읽는 대법원 판례 (precedents/index.json) =====
+(function loadPrecedents() {
+    const wrap = document.getElementById('precedentList');
+    if (!wrap) return;
+
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    fetch('precedents/index.json')
+        .then((r) => r.json())
+        .then((list) => {
+            const items = (Array.isArray(list) ? list : []).slice(0, 6);
+            if (!items.length) {
+                wrap.innerHTML = '<div class="col-span-full text-center text-gray-400 py-6">판례 해설을 준비하고 있습니다.</div>';
+                return;
+            }
+            wrap.innerHTML = items.map((c) =>
+                '<a href="precedents/' + encodeURIComponent(c.slug) + '.html" ' +
+                'class="block bg-white rounded-2xl border border-gray-100 p-6 hover:-translate-y-1 hover:shadow-md transition-all duration-300 text-left">' +
+                '<span class="inline-block text-gold text-xs font-bold mb-3">' + esc(c.category || '대법원 판례') + '</span>' +
+                '<h3 class="font-bold text-gray-900 leading-snug mb-2 line-clamp-2">' + esc(c.title) + '</h3>' +
+                '<p class="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">' + esc(c.summary || '') + '</p>' +
+                '<p class="text-gray-400 text-xs">' + esc(c.date || '') + '</p></a>'
+            ).join('');
+        })
+        .catch(() => {
+            wrap.innerHTML = '<div class="col-span-full text-center text-gray-400 py-6">판례 해설을 준비하고 있습니다.</div>';
+        });
+})();
