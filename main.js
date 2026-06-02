@@ -374,6 +374,7 @@ document.addEventListener('click', function (e) {
 // ===== PWA 설치 유도 (푸터 '홈 화면에 설치' 버튼 + 1회성 배너) =====
 (function () {
     const installBtn = document.getElementById('installBtn');
+    const installHint = document.getElementById('installHint');
     const banner = document.getElementById('installBanner');
     const isStandalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -382,7 +383,10 @@ document.addEventListener('click', function (e) {
     // 이미 설치(앱 모드)했거나 설치 완료 기록이 있으면 아무것도 안 함
     if (isStandalone || localStorage.getItem('pwaInstalled')) return;
 
-    function showBtn() { if (installBtn) installBtn.classList.remove('hidden'); }
+    function showBtn() {
+        if (installBtn) installBtn.classList.remove('hidden');
+        if (installHint) installHint.classList.remove('hidden');
+    }
 
     function maybeShowBanner() {
         if (!banner) return;
@@ -424,6 +428,7 @@ document.addEventListener('click', function (e) {
         deferredPrompt = null;
         localStorage.setItem('pwaInstalled', '1');
         if (installBtn) installBtn.classList.add('hidden');
+        if (installHint) installHint.classList.add('hidden');
         if (banner) banner.classList.add('hidden');
     });
 
