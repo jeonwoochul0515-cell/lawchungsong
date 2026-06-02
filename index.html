@@ -369,16 +369,6 @@
             box-shadow: 0 1px 24px rgba(0,0,0,0.06);
         }
 
-        /* Review card subtle gradient border */
-        .review-card {
-            position: relative;
-            transition: all var(--transition);
-        }
-        .review-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-soft);
-        }
-
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -833,82 +823,17 @@
                 <div class="section-divider"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Review 1 -->
-                <div class="review-card bg-gray-50 p-8 rounded-2xl border border-gray-100 relative">
-                    <div class="flex gap-1 text-gold mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed mb-6">"프랜차이즈 분쟁으로 막막했는데, 가맹거래사 자격까지 갖춘 변호사님이라 법률과 실무 양쪽 모두에서 정확한 조언을 받을 수 있었습니다. 결과도 만족스러웠습니다."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm">K</div>
-                        <div>
-                            <p class="font-bold text-gray-900 text-sm">K** 대표</p>
-                            <p class="text-gray-500 text-xs">가맹 분쟁 사건</p>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-gray-100"></i>
-                </div>
-
-                <!-- Review 2 -->
-                <div class="review-card bg-gray-50 p-8 rounded-2xl border border-gray-100 relative">
-                    <div class="flex gap-1 text-gold mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed mb-6">"학교폭력 문제로 아이와 함께 상담을 받았습니다. 아이의 입장에서 진심으로 걱정해주시고, 절차 하나하나 꼼꼼하게 설명해주셔서 불안한 마음이 많이 해소되었습니다."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm">P</div>
-                        <div>
-                            <p class="font-bold text-gray-900 text-sm">P** 학부모</p>
-                            <p class="text-gray-500 text-xs">학교폭력 사건</p>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-gray-100"></i>
-                </div>
-
-                <!-- Review 3 -->
-                <div class="review-card bg-gray-50 p-8 rounded-2xl border border-gray-100 relative">
-                    <div class="flex gap-1 text-gold mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed mb-6">"형사 사건으로 급하게 연락드렸는데 빠르게 상담 잡아주시고, 사건 진행 상황도 꾸준히 알려주셔서 신뢰가 갔습니다. 사건 대응 과정에서 변호사님의 든든한 조력 덕분에 끝까지 흔들리지 않을 수 있었습니다."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm">L</div>
-                        <div>
-                            <p class="font-bold text-gray-900 text-sm">L** 의뢰인</p>
-                            <p class="text-gray-500 text-xs">형사 사건</p>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-gray-100"></i>
-                </div>
-
-                <!-- Review 4: 이혼/가사 -->
-                <div class="review-card bg-gray-50 p-8 rounded-2xl border border-gray-100 relative">
-                    <div class="flex gap-1 text-gold mb-4">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed mb-6">"이혼 과정에서 양육권과 재산분할 문제로 많이 힘들었는데, 변호사님이 차분하게 절차를 설명해주시고 힘든 과정을 끝까지 함께해주셔서 정말 든든했습니다. 감사합니다."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-navy rounded-full flex items-center justify-center text-white font-bold text-sm">S</div>
-                        <div>
-                            <p class="font-bold text-gray-900 text-sm">S** 의뢰인</p>
-                            <p class="text-gray-500 text-xs">이혼·양육권 사건</p>
-                        </div>
-                    </div>
-                    <i class="fa-solid fa-quote-right absolute top-6 right-8 text-4xl text-gray-100"></i>
-                </div>
-            </div>
-
-            <!-- 후기 면책 고지 + CTA -->
-            <p class="text-center text-xs text-gray-400 mt-10">본 후기는 실제 의뢰인의 동의를 받아 게재하였습니다. 개별 사건의 결과는 사안에 따라 다를 수 있습니다.</p>
-            <div class="text-center mt-8">
-                <a href="#booking" class="inline-block px-8 py-4 bg-navy text-white font-bold rounded-full hover:bg-blue-900 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300">
-                    <i class="fa-solid fa-calendar-check mr-2"></i>나도 상담받고 싶습니다
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="text-gray-600 leading-relaxed mb-8">
+                    저희는 꾸며낸 후기 대신, <strong class="text-navy">네이버 플레이스의 실제 방문자 후기</strong>로 있는 그대로 평가받고자 합니다.<br class="hidden sm:block">
+                    의뢰인분들의 진솔한 이야기를 네이버에서 직접 확인해 주세요.
+                </p>
+                <a href="https://m.place.naver.com/place/1285624482/review/visitor" target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-2 px-8 py-4 bg-[#03C75A] text-white font-bold rounded-full hover:bg-[#02b351] transition shadow-lg hover:-translate-y-1 duration-300">
+                    <i class="fa-solid fa-star"></i>네이버 실제 후기 보기
                 </a>
-                <div class="mt-4">
-                    <a href="https://m.place.naver.com/place/1285624482/review/visitor" target="_blank" rel="noopener" class="text-sm text-gray-500 hover:text-navy transition underline underline-offset-4">
-                        <i class="fa-solid fa-star text-gold mr-1"></i>네이버에서 실제 후기 더 보기
-                    </a>
+                <div class="mt-6">
+                    <a href="#booking" class="text-sm text-gray-500 hover:text-navy transition underline underline-offset-4">상담 예약하러 가기 →</a>
                 </div>
             </div>
         </div>
