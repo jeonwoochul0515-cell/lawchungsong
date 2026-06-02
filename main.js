@@ -243,3 +243,20 @@ function acceptCookies() {
         }, 1500);
     }
 })();
+
+// ===== GA4 전환 이벤트 (전화·카카오톡·네이버 예약 클릭) =====
+// 사이트 어디서든 해당 링크 클릭 시 GA4 이벤트 전송 (위임 방식)
+document.addEventListener('click', function (e) {
+    const link = e.target.closest('a');
+    if (!link || typeof gtag !== 'function') return;
+
+    const href = link.getAttribute('href') || '';
+    let method = '';
+    if (href.startsWith('tel:')) method = 'phone';
+    else if (href.includes('pf.kakao.com')) method = 'kakao';
+    else if (href.includes('/booking')) method = 'naver_booking';
+
+    if (method) {
+        gtag('event', 'contact_click', { method: method });
+    }
+});

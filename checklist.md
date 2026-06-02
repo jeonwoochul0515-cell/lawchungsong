@@ -13,12 +13,13 @@
 - **검증**: 폼 흔적 없음 · 헤드리스 스크린샷으로 CTA 카드 정상 렌더 확인 ✅
 - **참고**: `#booking` 섹션이 이미 같은 채널 CTA 보유 → `#contact`는 FAQ 이후 클로징 CTA로 차별화(3단 카드). 버튼 id 부여(contactCallBtn/KakaoBtn/BookingBtn)로 Phase 2 GA 연결 준비 완료.
 
-## Phase 2 — GA4 성과 측정
-- [ ] 2-1. GA4 측정 ID 확보 (G-XXXXXXXXXX) — **사용자 입력 필요**
-- [ ] 2-2. GA4 gtag 스크립트 `<head>`에 삽입
-- [ ] 2-3. 전환 이벤트 연결: 전화 클릭 / 카톡 클릭 / 네이버 예약 클릭
-- [ ] 2-4. 서비스워커 캐시 목록(sw.js) 영향 확인
-- **검증**: GA4 실시간 보고서에 내 방문·클릭 이벤트 잡힘
+## Phase 2 — GA4 성과 측정 ✅ 완료
+- [x] 2-1. GA4 측정 ID 확보: **G-LZFSX216W1**
+- [x] 2-2. gtag.js 스크립트 `<head>` 상단 삽입 (index.html + 404.html)
+- [x] 2-3. 전환 이벤트 연결: main.js 위임 리스너로 tel:/pf.kakao.com//booking 클릭 → `contact_click`(method: phone/kakao/naver_booking)
+- [x] 2-4. sw.js 영향 없음(외부 스크립트, 캐시 대상 아님) 확인
+- **검증**: 헤드리스 테스트로 gtag 함수·config·page_view 수집요청 전송·3종 전환 이벤트 발생 모두 확인 ✅
+- **GA UI 후속(사용자)**: GA4 → 관리 → 이벤트 → `contact_click`을 **주요 이벤트(전환)** 로 표시하면 전환 집계됨.
 
 ## Phase 3 — Tailwind 정적 빌드 + 이미지 최적화 ✅ 완료
 - [~] 3-1. Lighthouse 점수 측정 (전) — 측정 CLI 미설치로 생략, 정성 비교로 대체
