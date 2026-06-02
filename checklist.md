@@ -41,6 +41,14 @@
 - [x] 검증: contact/hero 골드 구분선 표시 확인, about 프로필 네이비 프레임 표시 확인, 회귀 없음
 - **효과**: 죽어있던 골드 구분선·장식 테두리·네비 hover·모달 골드 버튼(흰글씨 무배경이던 것) 정상화
 
+## SEO / GEO (2026) ✅ 완료
+- [x] robots.txt: AI 크롤러 명시 허용 (GPTBot·OAI-SearchBot·ChatGPT-User·PerplexityBot·ClaudeBot·Google-Extended·Applebot-Extended 등)
+- [x] llms.txt 신규 생성 (llmstxt.org 스펙: H1+요약+업무분야/상담/기본정보 링크 섹션)
+- [x] JSON-LD 강화: founder Person에 knowsAbout·hasCredential(변호사/가맹거래사)·sameAs, LegalService에 knowsAbout·hasOfferCatalog(4개 서비스)·areaServed(City/구) 추가
+- [x] sitemap.xml lastmod 2026-06-02 갱신
+- [x] 검증: JSON-LD 3블록(LegalService/FAQPage/Attorney) 전부 유효, robots/llms/sitemap 200 서빙
+- **참고**: GPTBot은 학습용 크롤러 — 학습 데이터 제공이 싫으면 차단 가능(현재는 노출 우선으로 허용). 후속 권장: 구글 서치콘솔/네이버 서치어드바이저에 sitemap 제출, 실제 콘텐츠(칼럼/판례 해설) 추가로 인용 소스화.
+
 ## Phase 4 — 유지보수성 ✅ 완료
 - [x] 4-1. inline `onclick` 22개 → `data-action` 속성 + main.js 단일 위임 디스패처로 이전
   - toggle-menu(7)·toggle-faq(7)·open-modal(4, data-modal)·close-modal(2)·scroll-top(1)·accept-cookies(1)

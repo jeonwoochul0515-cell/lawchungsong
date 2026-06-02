@@ -79,9 +79,29 @@
         "founder": {
             "@type": "Person",
             "name": "김창희",
-            "jobTitle": "대표 변호사 / 가맹거래사"
+            "jobTitle": "대표변호사 / 가맹거래사",
+            "knowsAbout": ["이혼·가사 소송", "양육권", "재산분할", "가맹사업·프랜차이즈 분쟁", "학교폭력", "소년보호사건", "형사사건", "행정소송"],
+            "hasCredential": [
+                { "@type": "EducationalOccupationalCredential", "credentialCategory": "변호사" },
+                { "@type": "EducationalOccupationalCredential", "credentialCategory": "가맹거래사" }
+            ],
+            "sameAs": ["https://pf.kakao.com/_zkzIX"]
         },
-        "areaServed": "부산광역시",
+        "knowsAbout": ["이혼·가사", "양육권", "재산분할", "가맹·프랜차이즈 분쟁", "학교폭력", "소년보호", "형사", "행정소송"],
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "법률 서비스",
+            "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "이혼·가사 (이혼·양육권·재산분할)" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "가맹·프랜차이즈 분쟁" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "학교폭력·소년보호" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "형사·행정 사건" } }
+            ]
+        },
+        "areaServed": [
+            { "@type": "City", "name": "부산광역시" },
+            { "@type": "AdministrativeArea", "name": "부산광역시 연제구" }
+        ],
         "priceRange": "$$",
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",

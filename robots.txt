@@ -1,4 +1,37 @@
+# 법률사무소 청송 robots.txt
+# 일반 검색엔진: 전체 허용
 User-agent: *
+Allow: /
+
+# AI 검색·답변 엔진 크롤러 명시적 허용 (GEO — 인용/노출 목적)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://chang-hee.kim/sitemap.xml
