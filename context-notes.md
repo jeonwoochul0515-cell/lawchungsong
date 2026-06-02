@@ -1,0 +1,44 @@
+# Context Notes — 고도화 작업 결정 기록
+
+> 작업 중 내린 결정과 그 이유를 계속 누적한다. 다음 세션(사람/AI)이 재추론 없이 이어가기 위한 문서.
+
+## 작업 배경 (2026-06-02 기준)
+- 대상: 법률사무소 청송(부산 연제구, 김창희 변호사) 홍보용 정적 사이트.
+- 스택: 순수 HTML/CSS/JS + Tailwind Play CDN + PWA. 빌드 도구 없음.
+- 배포: GitHub(jeonwoochul0515-cell/lawchungsong) → Vercel(주 도메인 chang-hee.kim) + Firebase Hosting 설정 병존.
+- 현재 코드 상태: working tree clean, 기능은 동작하나 아래 갭 존재.
+
+## 발견된 핵심 갭
+1. 문의 폼이 실제로 메일을 안 보냄 — `main.js:174` EmailJS 키가 `YOUR_PUBLIC_KEY` 플레이스홀더. 전송 실패해도 "성공" 화면이 떠서 의뢰인 문의를 놓치는 구조.
+2. 성과 측정 수단 부재 — GA4/네이버 애널리틱스 없음.
+3. 폼 스팸 방어 없음.
+4. Tailwind Play CDN을 프로덕션에 사용 — 공식 비권장. 렌더링 지연·FOUC.
+5. 이미지가 jpg(미최적화) — LCP 저하.
+6. index.html 1216줄 단일 파일 + inline onclick 22개 — 유지보수 부담.
+
+## 확정된 결정
+
+### Phase 1 — 문의 폼: "제거 후 전화·카톡 중심"으로 결정
+- **이유**: EmailJS 키 설정·유지보수 부담을 없애고, 가장 도달 확실한 채널(전화·카톡)로 단순화. 변호사 사무소 특성상 즉시 통화가 전환율이 높음. 갭 1·3을 한 번에 해소.
+- **적용**: 폼/EmailJS/클립보드/성공화면 코드를 걷어내고 그 자리에 전화(1660-4452)·카카오 채널(pf.kakao.com/_zkzIX) CTA 블록을 둔다. 기존 플로팅 CTA·네비 버튼과 톤 일치.
+
+### Phase 2 — 측정: GA4로 결정
+- **이유**: 향후 구글/네이버 광고 집행 가능성 고려 시 GA4가 전환 추적·기능 면에서 유리. 무료.
+- **적용**: gtag 스크립트 삽입 후 전화/카톡/예약 클릭을 전환 이벤트로 설정.
+- **대기**: GA4 측정 ID(G-XXXXXXXXXX) 사용자 입력 필요.
+
+### Phase 3 — Tailwind: "정적 CSS 빌드로 전환"으로 결정
+- **이유**: Play CDN 비권장 이슈 해소 + 속도/SEO 개선. 사용자가 학습 부담을 감수하기로 함.
+- **적용**: Tailwind CLI로 사용 클래스만 추출한 정적 CSS 생성, CDN JS 제거. 동시에 이미지 webp 전환.
+- **주의**: 빌드 도입으로 배포 흐름이 바뀜 — Vercel 빌드 단계 추가 vs 로컬 빌드 후 정적 산출물만 푸시. Phase 3 착수 시 택1 결정 필요.
+
+### Phase 4 — inline onclick 정리: 선택 사항, 후순위
+- **이유**: 동작에는 문제없으나 유지보수성·학습 가치. 1~3 안정화 후 진행.
+
+## 진행 원칙
+- Phase 단위로 끊고 매 Phase 후 배포·확인. 디자인/콘텐츠는 보존, 기능·성능만 변경.
+- 각 Phase의 검증 기준은 `checklist.md` 참조.
+
+## 변경 이력
+- 2026-06-02: 계획 수립 및 Phase 1~3 방향 확정.
+- 2026-06-02: **Phase 1 완료.** index.html `#contact` 폼 → 전화·카톡·네이버 예약 3단 CTA 카드로 교체. EmailJS CDN 스크립트 제거(index.html), main.js의 EmailJS/폼 제출 코드 블록 제거. 잔여 참조 0건 확인, 헤드리스 스크린샷으로 렌더 검증. 발견: `#booking` 섹션이 동일 채널 CTA를 이미 보유 → `#contact`는 FAQ 이후 클로징 CTA 역할로 차별(디자인 상이). 각 CTA에 id(contactCallBtn/contactKakaoBtn/contactBookingBtn) 부여하여 Phase 2 GA 이벤트 연결 대비.
