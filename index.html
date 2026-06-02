@@ -257,7 +257,7 @@
             }
         }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; scroll-padding-top: 6rem; } /* 고정 네비(h-20)에 섹션 제목 안 가리도록 */
 
         .profile-image-container img {
             transition: transform var(--transition);
@@ -884,6 +884,11 @@
                 <a href="#booking" class="inline-block px-8 py-4 bg-navy text-white font-bold rounded-full hover:bg-blue-900 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300">
                     <i class="fa-solid fa-calendar-check mr-2"></i>나도 상담받고 싶습니다
                 </a>
+                <div class="mt-4">
+                    <a href="https://m.place.naver.com/place/1285624482/review/visitor" target="_blank" rel="noopener" class="text-sm text-gray-500 hover:text-navy transition underline underline-offset-4">
+                        <i class="fa-solid fa-star text-gold mr-1"></i>네이버에서 실제 후기 더 보기
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1194,14 +1199,14 @@
 
     <!-- Cookie Consent Banner -->
     <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 z-[150] hidden">
-        <div class="max-w-4xl mx-auto px-4 pb-4">
-            <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 flex flex-col sm:flex-row items-center gap-4">
-                <div class="flex-1 text-sm text-gray-600 leading-relaxed">
+        <div class="max-w-3xl mx-auto px-4 pb-3">
+            <div class="bg-white rounded-xl shadow-2xl border border-gray-100 py-3 px-4 flex flex-row items-center gap-3">
+                <div class="flex-1 text-xs sm:text-sm text-gray-600 leading-snug">
                     <i class="fa-solid fa-cookie-bite text-gold mr-1"></i>
-                    본 웹사이트는 더 나은 서비스 제공을 위해 쿠키를 사용합니다. 사이트 이용 시 쿠키 사용에 동의하게 됩니다.
+                    더 나은 서비스 제공을 위해 쿠키를 사용합니다. 이용 시 쿠키 사용에 동의하게 됩니다.
                 </div>
-                <button data-action="accept-cookies" class="px-6 py-2.5 bg-navy text-white text-sm font-bold rounded-full hover:bg-blue-900 transition whitespace-nowrap">
-                    동의합니다
+                <button data-action="accept-cookies" class="px-5 py-2 bg-navy text-white text-sm font-bold rounded-full hover:bg-blue-900 transition whitespace-nowrap">
+                    동의
                 </button>
             </div>
         </div>
