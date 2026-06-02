@@ -381,7 +381,7 @@
     <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" data-action="scroll-top">
                     <img src="images/logo.jpg" alt="법률사무소 청송 로고" class="h-14 w-auto object-contain" fetchpriority="high">
                 </div>
                 <div class="hidden md:flex space-x-8">
@@ -404,15 +404,15 @@
 
     <!-- Mobile Menu Drawer -->
     <div id="mobileMenu" class="fixed inset-0 z-40 hidden">
-        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" data-action="toggle-menu"></div>
         <div class="absolute right-0 top-0 h-full w-72 bg-white shadow-2xl transform translate-x-full transition-transform duration-300" id="mobileMenuDrawer">
             <div class="pt-24 px-6 space-y-1">
-                <a href="#about" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">변호사 소개</a>
-                <a href="#profile" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">주요 경력</a>
-                <a href="#expertise" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">업무 분야</a>
-                <a href="#reviews" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">후기</a>
-                <a href="#booking" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">예약</a>
-                <a href="#location" onclick="toggleMobileMenu()" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">오시는 길</a>
+                <a href="#about" data-action="toggle-menu" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">변호사 소개</a>
+                <a href="#profile" data-action="toggle-menu" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">주요 경력</a>
+                <a href="#expertise" data-action="toggle-menu" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">업무 분야</a>
+                <a href="#reviews" data-action="toggle-menu" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">후기</a>
+                <a href="#booking" data-action="toggle-menu" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">예약</a>
+                <a href="#location" data-action="toggle-menu" class="block py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-navy rounded-lg font-medium transition">오시는 길</a>
                 <div class="pt-4 border-t border-gray-100 mt-4">
                     <a href="tel:1660-4452" class="flex items-center gap-3 py-3 px-4 bg-navy text-white rounded-lg font-medium">
                         <i class="fa-solid fa-phone"></i> 전화 상담
@@ -598,7 +598,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Card 1: 가맹/기업/지재권 -->
-                <div onclick="openModal('franchise')" tabindex="0" role="button" aria-label="가맹사업·기업·IP 상세 경력 보기" class="expertise-card bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2">
+                <div data-action="open-modal" data-modal="franchise" tabindex="0" role="button" aria-label="가맹사업·기업·IP 상세 경력 보기" class="expertise-card bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div class="relative z-10">
                         <div class="w-16 h-16 bg-navy rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:bg-gold transition-colors duration-300">
@@ -616,7 +616,7 @@
                 </div>
 
                 <!-- Card 2: 소년/학교폭력 -->
-                <div onclick="openModal('juvenile')" tabindex="0" role="button" aria-label="소년보호·학교폭력 상세 경력 보기" class="expertise-card bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2">
+                <div data-action="open-modal" data-modal="juvenile" tabindex="0" role="button" aria-label="소년보호·학교폭력 상세 경력 보기" class="expertise-card bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div class="relative z-10">
                         <div class="w-16 h-16 bg-navy rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:bg-gold transition-colors duration-300">
@@ -634,7 +634,7 @@
                 </div>
 
                 <!-- Card 3: 형사/행정/공공 -->
-                <div onclick="openModal('public')" tabindex="0" role="button" aria-label="형사·행정·공공 상세 경력 보기" class="expertise-card bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2">
+                <div data-action="open-modal" data-modal="public" tabindex="0" role="button" aria-label="형사·행정·공공 상세 경력 보기" class="expertise-card bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-red-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div class="relative z-10">
                         <div class="w-16 h-16 bg-navy rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:bg-gold transition-colors duration-300">
@@ -652,7 +652,7 @@
                 </div>
 
                 <!-- Card 4: 이혼/가사 -->
-                <div onclick="openModal('family')" tabindex="0" role="button" aria-label="이혼·가사 상세 경력 보기" class="expertise-card bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2">
+                <div data-action="open-modal" data-modal="family" tabindex="0" role="button" aria-label="이혼·가사 상세 경력 보기" class="expertise-card bg-white p-8 rounded-2xl shadow-lg hover:-translate-y-2 transition-all duration-300 cursor-pointer group relative overflow-hidden focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-pink-50 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110"></div>
                     <div class="popular-badge">가장 많이 찾는 분야</div>
                     <div class="relative z-10">
@@ -675,7 +675,7 @@
         <!-- Modal Overlay -->
         <div id="expertiseModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <!-- Background backdrop -->
-            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" onclick="closeModal()"></div>
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" data-action="close-modal"></div>
 
             <div class="fixed inset-0 z-10 overflow-y-auto">
                 <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
@@ -700,7 +700,7 @@
                             <a href="tel:1660-4452" class="inline-flex w-full justify-center rounded-md bg-gold px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#a0854e] sm:w-auto transition-colors items-center gap-2">
                                 <i class="fa-solid fa-phone"></i> 전화 상담
                             </a>
-                            <button type="button" class="inline-flex w-full justify-center rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-900 sm:w-auto transition-colors" onclick="closeModal()">닫기</button>
+                            <button type="button" class="inline-flex w-full justify-center rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-900 sm:w-auto transition-colors" data-action="close-modal">닫기</button>
                         </div>
                     </div>
                 </div>
@@ -954,7 +954,7 @@
 
             <div class="space-y-4" id="faqAccordion">
                 <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                    <button data-action="toggle-faq" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
                         <span class="font-bold text-gray-900 pr-4">상담 비용은 어떻게 되나요?</span>
                         <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
                     </button>
@@ -964,7 +964,7 @@
                 </div>
 
                 <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                    <button data-action="toggle-faq" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
                         <span class="font-bold text-gray-900 pr-4">상담 예약은 어떻게 하나요?</span>
                         <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
                     </button>
@@ -974,7 +974,7 @@
                 </div>
 
                 <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                    <button data-action="toggle-faq" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
                         <span class="font-bold text-gray-900 pr-4">방문 상담 외에 비대면 상담도 가능한가요?</span>
                         <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
                     </button>
@@ -984,7 +984,7 @@
                 </div>
 
                 <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                    <button data-action="toggle-faq" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
                         <span class="font-bold text-gray-900 pr-4">학교폭력 사건은 어떻게 대응해야 하나요?</span>
                         <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
                     </button>
@@ -994,7 +994,7 @@
                 </div>
 
                 <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                    <button data-action="toggle-faq" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
                         <span class="font-bold text-gray-900 pr-4">프랜차이즈(가맹) 관련 분쟁도 상담 가능한가요?</span>
                         <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
                     </button>
@@ -1004,7 +1004,7 @@
                 </div>
 
                 <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                    <button data-action="toggle-faq" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
                         <span class="font-bold text-gray-900 pr-4">이혼 소송 절차와 비용이 궁금합니다.</span>
                         <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
                     </button>
@@ -1014,7 +1014,7 @@
                 </div>
 
                 <div class="faq-item bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
+                    <button data-action="toggle-faq" class="w-full flex justify-between items-center p-6 text-left hover:bg-gray-50 transition">
                         <span class="font-bold text-gray-900 pr-4">양육권·재산분할 관련 상담도 가능한가요?</span>
                         <i class="fa-solid fa-chevron-down text-navy transition-transform duration-300 flex-shrink-0"></i>
                     </button>
@@ -1200,7 +1200,7 @@
                     <i class="fa-solid fa-cookie-bite text-gold mr-1"></i>
                     본 웹사이트는 더 나은 서비스 제공을 위해 쿠키를 사용합니다. 사이트 이용 시 쿠키 사용에 동의하게 됩니다.
                 </div>
-                <button onclick="acceptCookies()" class="px-6 py-2.5 bg-navy text-white text-sm font-bold rounded-full hover:bg-blue-900 transition whitespace-nowrap">
+                <button data-action="accept-cookies" class="px-6 py-2.5 bg-navy text-white text-sm font-bold rounded-full hover:bg-blue-900 transition whitespace-nowrap">
                     동의합니다
                 </button>
             </div>

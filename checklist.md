@@ -41,9 +41,12 @@
 - [x] 검증: contact/hero 골드 구분선 표시 확인, about 프로필 네이비 프레임 표시 확인, 회귀 없음
 - **효과**: 죽어있던 골드 구분선·장식 테두리·네비 hover·모달 골드 버튼(흰글씨 무배경이던 것) 정상화
 
-## Phase 4 — 유지보수성 (선택, 천천히)
-- [ ] 4-1. inline `onclick` 22개 → `main.js` 이벤트 리스너로 이전
-- [ ] 4-2. (검토) 긴 index.html 섹션 분리 가능성
+## Phase 4 — 유지보수성 ✅ 완료
+- [x] 4-1. inline `onclick` 22개 → `data-action` 속성 + main.js 단일 위임 디스패처로 이전
+  - toggle-menu(7)·toggle-faq(7)·open-modal(4, data-modal)·close-modal(2)·scroll-top(1)·accept-cookies(1)
+  - openModal/closeModal은 index.html 인라인 스크립트 전역 함수를 디스패처가 호출
+- [x] 검증: 헤드리스로 메뉴·모달 열기/닫기·FAQ·쿠키·스크롤탑 전부 동작 확인 (ALL_PASS)
+- [ ] 4-2. (검토 보류) 긴 index.html 섹션 분리 — 빌드 없이 어려워 현 단계 미진행
 
 ---
 
