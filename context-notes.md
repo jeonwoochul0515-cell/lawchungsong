@@ -50,3 +50,5 @@
   - **이미지 webp**: 새 의존성 없이 전역 headless-tools puppeteer(Chromium canvas)로 변환. hero-bg(48.3→19.5KB), lawyer-profile(55.6→26.9KB). 원본 jpg는 fallback·og:image용으로 유지(@supports image-set, <picture>). **og:image/twitter/JSON-LD는 jpg 유지 — 카카오·네이버 미리보기 webp 미지원 회피.** preload는 webp+type. logo는 제외(5곳·파비콘 불가·실익 낮음).
   - **sw.js**: tailwind.min.css·hero-bg.webp·lawyer-profile.webp 추가, CACHE_NAME v4→v5.
   - **배포 흐름**: "로컬 빌드 후 산출물 커밋" 유지. Vercel은 "build" 스크립트가 없어 자동 빌드 안 함(정적 서빙). 단, package.json 존재로 deploy 시 npm install은 수행될 수 있음(무해). 다음 배포 후 화면 확인 권장.
+- 2026-06-02: **Phase 3 커밋·푸시** (8df4d85, origin/main).
+- 2026-06-02: **사전 골드/네이비 버그 수정.** Phase 3에서 발견한, Tailwind 기본 팔레트에 없어 무효였던 navy/gold 클래스들을 `tailwind.config.js` theme.extend.colors에 등록(navy #1e3a8a/dark #152e6e/light #2d4ea0, gold #b4975a/light #d4b97a — 인라인 CSS 변수와 동일). 재빌드로 bg-gold·border-gold·border-navy·hover:bg-gold·hover:text-navy·focus:ring-navy 등 활성화. 인라인 <style>의 수동 .text-navy/.bg-navy/.text-gold는 동일 값이라 그대로 공존(미수정). 검증: 골드 구분선·about 네이비 프레임 표시 확인, 회귀 없음. **이제 빌드가 색을 알므로 신규 색상 클래스도 정상 동작.**

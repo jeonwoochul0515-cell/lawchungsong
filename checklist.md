@@ -34,6 +34,12 @@
 - **미사용 dead file(미삭제, 알림만)**: 루트 `정장2.jpg`, `images/naver-booking-button.png` — 어디서도 참조 안 됨.
 - **로고 webp 미적용(의도)**: 5곳 사용·파비콘 webp 불가·캐시 1회로 실익 낮아 제외.
 
+## 사전 골드/네이비 클래스 버그 수정 ✅ 완료
+- [x] tailwind.config.js `theme.extend.colors`에 navy/gold 등록 (인라인 --navy/--gold와 동일 값)
+- [x] 재빌드 → bg-gold(8)·border-gold(2)·border-navy(2)·hover:bg-gold(4)·hover:text-navy(16)·focus:ring-navy(4) 등 활성화
+- [x] 검증: contact/hero 골드 구분선 표시 확인, about 프로필 네이비 프레임 표시 확인, 회귀 없음
+- **효과**: 죽어있던 골드 구분선·장식 테두리·네비 hover·모달 골드 버튼(흰글씨 무배경이던 것) 정상화
+
 ## Phase 4 — 유지보수성 (선택, 천천히)
 - [ ] 4-1. inline `onclick` 22개 → `main.js` 이벤트 리스너로 이전
 - [ ] 4-2. (검토) 긴 index.html 섹션 분리 가능성
