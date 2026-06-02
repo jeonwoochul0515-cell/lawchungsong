@@ -277,3 +277,36 @@ document.addEventListener('click', function (e) {
         case 'accept-cookies': acceptCookies(); break;
     }
 });
+
+// ===== 최신 블로그 글 (네이버 RSS → /api/blog 서버리스 함수) =====
+(function loadBlogPosts() {
+    const wrap = document.getElementById('blogPosts');
+    if (!wrap) return;
+
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    const fallback = () => {
+        wrap.innerHTML = '<div class="col-span-full text-center py-6">' +
+            '<a href="https://blog.naver.com/lawchungsong" target="_blank" rel="noopener" ' +
+            'class="text-navy font-semibold hover:underline">네이버 블로그에서 최신 글 보기 →</a></div>';
+    };
+
+    fetch('/api/blog')
+        .then((r) => r.json())
+        .then((data) => {
+            const items = (data && data.items) || [];
+            if (!items.length) { fallback(); return; }
+            wrap.innerHTML = items.map((p) => {
+                const d = new Date(p.pubDate);
+                const date = isNaN(d.getTime()) ? '' :
+                    d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0');
+                return '<a href="' + encodeURI(p.link) + '" target="_blank" rel="noopener" ' +
+                    'class="block bg-gray-50 rounded-2xl border border-gray-100 p-6 hover:-translate-y-1 hover:shadow-md transition-all duration-300">' +
+                    '<div class="flex items-center gap-2 text-gold text-xs font-bold mb-3"><i class="fa-solid fa-blog"></i><span>네이버 블로그</span></div>' +
+                    '<h3 class="font-bold text-gray-900 leading-snug mb-3 line-clamp-2">' + esc(p.title) + '</h3>' +
+                    '<p class="text-gray-400 text-sm">' + date + '</p></a>';
+            }).join('');
+        })
+        .catch(fallback);
+})();
