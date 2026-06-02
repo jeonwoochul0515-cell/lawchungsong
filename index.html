@@ -1245,11 +1245,15 @@
                     <span class="font-bold text-xl text-gray-900">법률사무소 청송</span>
                 </div>
                 <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-5">1,000건 이상의 사건을 함께한 법률사무소 청송.<br>다음은 당신의 차례입니다.</p>
-                <div class="flex items-center justify-center mb-5">
+                <div class="flex items-center justify-center gap-3 mb-5 flex-wrap">
                     <a href="https://blog.naver.com/lawchungsong" target="_blank" rel="noopener" aria-label="법률사무소 청송 네이버 블로그"
                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#03C75A] text-white text-sm font-semibold hover:bg-[#02b351] transition shadow-sm">
                         <i class="fa-solid fa-blog"></i>네이버 블로그
                     </a>
+                    <button id="installBtn" data-action="pwa-install"
+                       class="hidden inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white border border-navy text-navy text-sm font-semibold hover:bg-navy hover:text-white transition shadow-sm">
+                        <i class="fa-solid fa-mobile-screen-button"></i>홈 화면에 설치
+                    </button>
                 </div>
                 <p class="text-xs text-gray-400">&copy; 2026 Law Firm Cheongsong. All rights reserved.</p>
             </div>
@@ -1272,6 +1276,20 @@
             <a href="tel:1660-4452" class="w-14 h-14 bg-navy text-white rounded-full shadow-lg flex items-center justify-center hover:bg-blue-900 transition-all duration-300 hover:scale-110 animate-bounce-slow" aria-label="전화 상담">
                 <i class="fa-solid fa-phone text-xl"></i>
             </a>
+        </div>
+    </div>
+
+    <!-- PWA 설치 유도 배너 (1회성, beforeinstallprompt 시 표시) -->
+    <div id="installBanner" class="fixed bottom-0 left-0 right-0 z-[140] hidden">
+        <div class="max-w-3xl mx-auto px-4 pb-3">
+            <div class="bg-navy text-white rounded-xl shadow-2xl py-3 px-4 flex flex-row items-center gap-3">
+                <div class="flex-1 text-xs sm:text-sm leading-snug">
+                    <i class="fa-solid fa-mobile-screen-button text-gold mr-1"></i>
+                    <span id="installBannerText">홈 화면에 추가하면 다음에 더 빠르게 찾아오실 수 있어요.</span>
+                </div>
+                <button data-action="pwa-install" class="install-banner-btn px-4 py-2 bg-white text-navy text-sm font-bold rounded-full whitespace-nowrap">추가</button>
+                <button data-action="pwa-dismiss" class="install-banner-btn px-3 py-2 text-white/70 text-sm whitespace-nowrap">괜찮아요</button>
+            </div>
         </div>
     </div>
 

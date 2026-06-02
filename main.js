@@ -370,3 +370,70 @@ document.addEventListener('click', function (e) {
             wrap.innerHTML = '<div class="col-span-full text-center text-gray-400 py-6">판례 해설을 준비하고 있습니다.</div>';
         });
 })();
+
+// ===== PWA 설치 유도 (푸터 '홈 화면에 설치' 버튼 + 1회성 배너) =====
+(function () {
+    const installBtn = document.getElementById('installBtn');
+    const banner = document.getElementById('installBanner');
+    const isStandalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    let deferredPrompt = null;
+
+    // 이미 설치(앱 모드)했거나 설치 완료 기록이 있으면 아무것도 안 함
+    if (isStandalone || localStorage.getItem('pwaInstalled')) return;
+
+    function showBtn() { if (installBtn) installBtn.classList.remove('hidden'); }
+
+    function maybeShowBanner() {
+        if (!banner) return;
+        if (localStorage.getItem('installPromptSeen')) return; // 한 번만
+        if (window.innerWidth > 768) return;                   // 모바일에서만
+        if (!localStorage.getItem('cookieConsent')) return;    // 쿠키 배너와 겹치지 않게
+        setTimeout(function () { banner.classList.remove('hidden'); }, 3000);
+    }
+
+    function doInstall() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(function () {
+                deferredPrompt = null;
+                if (banner) banner.classList.add('hidden');
+            });
+        } else if (isIOS) {
+            alert('아이폰에서는 사파리 하단의 공유 버튼을 누른 뒤 "홈 화면에 추가"를 선택하시면 됩니다.');
+        }
+    }
+
+    function dismissBanner() {
+        if (!banner) return;
+        const text = document.getElementById('installBannerText');
+        if (text) text.textContent = '괜찮습니다. 설치하지 않아도 모든 기능을 그대로 이용하실 수 있어요. 도움이 필요하시면 1660-4452로 편하게 연락 주세요.';
+        banner.querySelectorAll('.install-banner-btn').forEach(function (b) { b.classList.add('hidden'); });
+        localStorage.setItem('installPromptSeen', '1');
+        setTimeout(function () { banner.classList.add('hidden'); }, 3500);
+    }
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        showBtn();
+        maybeShowBanner();
+    });
+
+    window.addEventListener('appinstalled', function () {
+        deferredPrompt = null;
+        localStorage.setItem('pwaInstalled', '1');
+        if (installBtn) installBtn.classList.add('hidden');
+        if (banner) banner.classList.add('hidden');
+    });
+
+    // iOS는 beforeinstallprompt가 없으므로 버튼을 직접 노출(클릭 시 안내)
+    if (isIOS) showBtn();
+
+    document.addEventListener('click', function (e) {
+        const el = e.target.closest('[data-action]');
+        if (!el) return;
+        if (el.dataset.action === 'pwa-install') doInstall();
+        else if (el.dataset.action === 'pwa-dismiss') dismissBanner();
+    });
+})();
