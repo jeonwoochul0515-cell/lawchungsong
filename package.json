@@ -1,0 +1,12 @@
+{
+  "name": "lawchungsong",
+  "version": "1.0.0",
+  "private": true,
+  "description": "법률사무소 청송 웹사이트",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./css/tailwind.min.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

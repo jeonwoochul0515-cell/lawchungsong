@@ -185,15 +185,14 @@
     <!-- Preconnect Hints -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
 
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="css/tailwind.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="preload" as="image" href="images/hero-bg.jpg">
+    <link rel="preload" as="image" href="images/hero-bg.webp" type="image/webp">
 
     <style>
         :root {
@@ -239,6 +238,13 @@
             background: linear-gradient(160deg, rgba(17, 24, 39, 0.82), rgba(30, 58, 138, 0.65)), url('images/hero-bg.jpg');
             background-size: cover;
             background-position: center;
+        }
+        /* webp 지원 브라우저는 더 가벼운 hero-bg.webp 사용 (미지원 시 위 jpg fallback) */
+        @supports (background-image: image-set(url("x.webp") type("image/webp"))) {
+            .hero-bg {
+                background-image: linear-gradient(160deg, rgba(17, 24, 39, 0.82), rgba(30, 58, 138, 0.65)),
+                    image-set(url('images/hero-bg.webp') type('image/webp'), url('images/hero-bg.jpg') type('image/jpeg'));
+            }
         }
 
         html { scroll-behavior: smooth; }
@@ -489,7 +495,10 @@
                 
                 <div class="lg:col-span-5 relative profile-image-container">
                     <div class="w-full h-auto bg-gray-100 rounded-lg shadow-xl overflow-hidden relative border border-gray-200">
-                        <img src="images/lawyer-profile.jpg" alt="법률사무소 청송 대표 김창희 변호사 프로필 사진" class="w-full h-full object-cover" loading="lazy">
+                        <picture>
+                            <source srcset="images/lawyer-profile.webp" type="image/webp">
+                            <img src="images/lawyer-profile.jpg" alt="법률사무소 청송 대표 김창희 변호사 프로필 사진" class="w-full h-full object-cover" loading="lazy">
+                        </picture>
                     </div>
                     <div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-navy rounded-lg -z-10"></div>
                 </div>

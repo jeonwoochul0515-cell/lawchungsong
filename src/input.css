@@ -1,0 +1,4 @@
+/* Tailwind 유틸리티 정적 빌드 진입점 — Play CDN(cdn.tailwindcss.com) 대체용 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

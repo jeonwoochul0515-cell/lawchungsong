@@ -1,14 +1,17 @@
-const CACHE_NAME = 'cheongsong-v4';
+const CACHE_NAME = 'cheongsong-v5';
 const ASSETS = [
     '/',
     '/index.html',
+    '/css/tailwind.min.css',
     '/style.css',
     '/main.js',
     '/images/logo.jpg',
     '/images/icon-192x192.png',
     '/images/icon-512x512.png',
     '/images/lawyer-profile.jpg',
-    '/images/hero-bg.jpg'
+    '/images/lawyer-profile.webp',
+    '/images/hero-bg.jpg',
+    '/images/hero-bg.webp'
 ];
 
 // Install - cache core assets

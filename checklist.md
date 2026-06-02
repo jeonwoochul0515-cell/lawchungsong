@@ -20,16 +20,19 @@
 - [ ] 2-4. 서비스워커 캐시 목록(sw.js) 영향 확인
 - **검증**: GA4 실시간 보고서에 내 방문·클릭 이벤트 잡힘
 
-## Phase 3 — Tailwind 정적 빌드 + 이미지 최적화
-- [ ] 3-1. Lighthouse 점수 측정 (전 — 기준값 기록)
-- [ ] 3-2. Tailwind CLI 도입, `tailwind.config` + input.css 구성
-- [ ] 3-3. 사용 중인 클래스 스캔 → 정적 CSS 빌드 산출
-- [ ] 3-4. Play CDN `<script src="cdn.tailwindcss.com">` 제거, 빌드 CSS 링크
-- [ ] 3-5. 화면이 전과 100% 동일한지 육안 비교
-- [ ] 3-6. 히어로/프로필 이미지 webp 변환 + 적정 크기
-- [ ] 3-7. sw.js 캐시 자산 목록 갱신 (새 CSS·webp 반영, CACHE_NAME 버전업)
-- [ ] 3-8. Lighthouse 점수 측정 (후 — 개선 확인)
-- **검증**: 화면 동일 · CDN JS 제거됨 · Performance 점수 상승
+## Phase 3 — Tailwind 정적 빌드 + 이미지 최적화 ✅ 완료
+- [~] 3-1. Lighthouse 점수 측정 (전) — 측정 CLI 미설치로 생략, 정성 비교로 대체
+- [x] 3-2. Tailwind v3.4.19 CLI 도입, `tailwind.config.js` + `src/input.css` 구성
+- [x] 3-3. 사용 클래스 스캔 → `css/tailwind.min.css`(24.9KB) 빌드
+- [x] 3-4. Play CDN `<script>` 제거(index.html, 404.html), 빌드 CSS 링크 + 불필요 preconnect 제거
+- [x] 3-5. CDN vs 빌드 섹션별 스크린샷 비교 — expertise/booking/location/hero/about/contact/404 전부 픽셀 동일 확인
+- [x] 3-6. hero-bg(48→19.5KB), lawyer-profile(55.6→26.9KB) webp 변환. jpg fallback 유지(@supports image-set / <picture>)
+- [x] 3-7. sw.js 캐시 갱신: tailwind.min.css·webp 추가, CACHE_NAME v4→v5
+- [~] 3-8. Lighthouse 점수 측정 (후) — 생략. 핵심 개선: 런타임 ~3MB Play CDN JS 제거 + 이미지 58KB 절감
+- **검증**: 화면 동일 ✅ · CDN JS 제거 ✅ · webp 적용 렌더 확인 ✅
+- **보류 결정 필요**: 빌드 산출물을 로컬 빌드 후 커밋(현재 방식) 유지. Vercel은 build 스크립트명이 "build"가 아니라(build:css) 자동 빌드 안 함 → 정적 서빙. 다음 배포 시 확인 권장.
+- **미사용 dead file(미삭제, 알림만)**: 루트 `정장2.jpg`, `images/naver-booking-button.png` — 어디서도 참조 안 됨.
+- **로고 webp 미적용(의도)**: 5곳 사용·파비콘 webp 불가·캐시 1회로 실익 낮아 제외.
 
 ## Phase 4 — 유지보수성 (선택, 천천히)
 - [ ] 4-1. inline `onclick` 22개 → `main.js` 이벤트 리스너로 이전

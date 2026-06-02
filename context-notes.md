@@ -42,3 +42,11 @@
 ## 변경 이력
 - 2026-06-02: 계획 수립 및 Phase 1~3 방향 확정.
 - 2026-06-02: **Phase 1 완료.** index.html `#contact` 폼 → 전화·카톡·네이버 예약 3단 CTA 카드로 교체. EmailJS CDN 스크립트 제거(index.html), main.js의 EmailJS/폼 제출 코드 블록 제거. 잔여 참조 0건 확인, 헤드리스 스크린샷으로 렌더 검증. 발견: `#booking` 섹션이 동일 채널 CTA를 이미 보유 → `#contact`는 FAQ 이후 클로징 CTA 역할로 차별(디자인 상이). 각 CTA에 id(contactCallBtn/contactKakaoBtn/contactBookingBtn) 부여하여 Phase 2 GA 이벤트 연결 대비.
+- 2026-06-02: **Phase 1 커밋** (b1526df).
+- 2026-06-02: **Phase 3 완료.**
+  - **Tailwind 빌드 전환**: Play CDN 비권장 이슈 해소. tailwindcss v3.4.19 devDep(전역 아님, 프로젝트 node_modules·gitignore). `tailwind.config.js`(content: index/404/main, **커스텀 색은 의도적으로 테마 미등록 — 옵션 B로 화면 100% 동일 유지**), `src/input.css`(@tailwind 3종). 빌드: `npm run build:css` → `css/tailwind.min.css`(24.9KB). index.html·404.html의 `<script src=cdn.tailwindcss.com>` → `<link css/tailwind.min.css>`. cdn.tailwindcss.com preconnect 제거.
+  - **검증 방법**: git stash로 CDN 버전 잠시 복원 → 섹션별(expertise/booking/location) before/after 스크린샷 비교, 픽셀 동일 확인. hero/about/contact/404도 빌드 버전 렌더 정상.
+  - **중요 사전버그(미수정, Phase 3 범위 외)**: `bg-gold`/`border-gold`/`hover:bg-gold`/`hover:text-navy`/`focus:ring-navy` 등은 Tailwind 기본 팔레트에 없고 인라인 설정도 없어 **현재도 무효 상태**. 인라인 `<style>`엔 `.text-navy`/`.bg-navy`/`.text-gold` 3개만 수동 정의됨. → 추후 별도로 다룰 것.
+  - **이미지 webp**: 새 의존성 없이 전역 headless-tools puppeteer(Chromium canvas)로 변환. hero-bg(48.3→19.5KB), lawyer-profile(55.6→26.9KB). 원본 jpg는 fallback·og:image용으로 유지(@supports image-set, <picture>). **og:image/twitter/JSON-LD는 jpg 유지 — 카카오·네이버 미리보기 webp 미지원 회피.** preload는 webp+type. logo는 제외(5곳·파비콘 불가·실익 낮음).
+  - **sw.js**: tailwind.min.css·hero-bg.webp·lawyer-profile.webp 추가, CACHE_NAME v4→v5.
+  - **배포 흐름**: "로컬 빌드 후 산출물 커밋" 유지. Vercel은 "build" 스크립트가 없어 자동 빌드 안 함(정적 서빙). 단, package.json 존재로 deploy 시 npm install은 수행될 수 있음(무해). 다음 배포 후 화면 확인 권장.
