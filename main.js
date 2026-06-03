@@ -263,7 +263,6 @@ document.addEventListener('click', function (e) {
 
 // ===== 이벤트 위임 디스패처 (inline onclick 대체) =====
 // data-action 속성으로 동작을 선언 → 마크업에서 JS 호출 분리
-// openModal/closeModal은 index.html 인라인 스크립트의 전역 함수
 document.addEventListener('click', function (e) {
     const el = e.target.closest('[data-action]');
     if (!el) return;
@@ -271,8 +270,6 @@ document.addEventListener('click', function (e) {
     switch (el.dataset.action) {
         case 'scroll-top':     window.scrollTo(0, 0); break;
         case 'toggle-menu':    toggleMobileMenu(); break;
-        case 'open-modal':     openModal(el.dataset.modal); break;
-        case 'close-modal':    closeModal(); break;
         case 'toggle-faq':     toggleFaq(el); break;
         case 'accept-cookies': acceptCookies(); break;
     }
