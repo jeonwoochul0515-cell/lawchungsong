@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!-- 상담 예약 페이지 — 폼 제출 시 solapi로 사무실에 문자 발송 (법률사무소 청송) -->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상담 예약 | 법률사무소 청송 (부산 김창희 변호사)</title>
+    <meta name="description" content="법률사무소 청송 온라인 상담 예약. 이름과 연락처, 상담 내용을 남겨주시면 김창희 변호사 사무실에서 가장 빠른 시간에 연락드립니다. 부산 연제구, 비밀 보장.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://chang-hee.kim/reserve.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="상담 예약 | 법률사무소 청송">
+    <meta property="og:description" content="이름·연락처·상담 내용을 남겨주시면 가장 빠른 시간에 연락드립니다. 부산 법률사무소 청송.">
+    <meta property="og:url" content="https://chang-hee.kim/reserve.html">
+    <meta property="og:image" content="https://chang-hee.kim/images/og-cover.jpg">
+    <link rel="icon" type="image/png" href="images/icon-192x192.png">
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="css/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --navy:#1e3a8a; --gold:#b4975a; }
+        body { font-family:"Pretendard Variable",Pretendard,-apple-system,sans-serif; color:#1f2937; word-break:keep-all; }
+        .text-navy{color:var(--navy)} .bg-navy{background:var(--navy)} .text-gold{color:var(--gold)} .bg-gold{background:var(--gold)} .border-navy{border-color:var(--navy)}
+        .hero-grad{ background:radial-gradient(circle at 50% 30%, #24489f 0%, #1e3a8a 50%, #142a63 100%); }
+        .field label{ display:block; font-size:.875rem; font-weight:600; color:#374151; margin-bottom:.4rem; }
+        .field input, .field select, .field textarea{
+            width:100%; border:1px solid #d1d5db; border-radius:.75rem; padding:.75rem 1rem;
+            font-size:.95rem; color:#1f2937; background:#fff; transition:border-color .15s, box-shadow .15s;
+        }
+        .field input:focus, .field select:focus, .field textarea:focus{
+            outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(30,58,138,.12);
+        }
+        .field textarea{ resize:vertical; min-height:120px; }
+        .req::after{ content:" *"; color:#dc2626; }
+        /* 허니팟 — 사람 눈에 안 보이지만 봇은 채우는 함정 필드 */
+        .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- 상단 바 -->
+    <header class="bg-white/95 backdrop-blur border-b border-gray-100 sticky top-0 z-20">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2"><img src="images/logo.jpg" alt="법률사무소 청송" class="h-9 w-auto object-contain"></a>
+            <div class="flex items-center gap-4">
+                <a href="index.html#expertise" class="text-sm text-gray-500 hover:text-navy transition hidden sm:inline">업무 분야</a>
+                <a href="tel:1660-4452" class="text-sm font-bold text-white bg-navy px-4 py-2 rounded-full hover:bg-blue-900 transition"><i class="fa-solid fa-phone mr-1"></i>1660-4452</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 히어로 -->
+    <section class="hero-grad text-white">
+        <div class="max-w-5xl mx-auto px-4 py-16 text-center">
+            <p class="text-gold font-bold tracking-widest uppercase text-sm mb-4">Consultation</p>
+            <h1 class="text-3xl md:text-4xl font-extrabold leading-tight mb-4">상담 예약</h1>
+            <p class="text-base md:text-lg text-blue-100 leading-relaxed">남겨주신 내용을 확인하고, 사무실에서 가장 빠른 시간에 연락드립니다.<br>모든 상담은 비밀이 보장됩니다.</p>
+        </div>
+    </section>
+
+    <!-- 예약 폼 -->
+    <section class="max-w-2xl mx-auto px-4 py-14">
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 sm:p-9">
+            <form id="reserveForm" novalidate>
+                <div class="space-y-5">
+                    <div class="field">
+                        <label for="name" class="req">이름</label>
+                        <input type="text" id="name" name="name" autocomplete="name" maxlength="30" placeholder="성함을 입력해 주세요" required>
+                    </div>
+                    <div class="field">
+                        <label for="phone" class="req">연락처</label>
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" maxlength="13" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="field">
+                            <label for="area" class="req">상담 분야</label>
+                            <select id="area" name="area" required>
+                                <option value="" disabled selected>선택해 주세요</option>
+                                <option value="divorce">이혼·가사</option>
+                                <option value="school-violence">학교폭력·소년보호</option>
+                                <option value="criminal">형사·행정</option>
+                                <option value="franchise">가맹·프랜차이즈</option>
+                                <option value="rehabilitation">회생·파산</option>
+                                <option value="etc">기타</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="time">희망 연락 시간대</label>
+                            <select id="time" name="time">
+                                <option value="아무 때나 가능" selected>아무 때나 가능</option>
+                                <option value="평일 오전(09~12시)">평일 오전(09~12시)</option>
+                                <option value="평일 오후(13~18시)">평일 오후(13~18시)</option>
+                                <option value="평일 저녁(18시 이후)">평일 저녁(18시 이후)</option>
+                                <option value="주말">주말</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="content" class="req">상담 내용</label>
+                        <textarea id="content" name="content" maxlength="800" placeholder="상황을 간단히 적어주시면 상담이 더 빠릅니다. (예: 협의이혼 절차와 재산분할 문의)" required></textarea>
+                    </div>
+
+                    <!-- 허니팟 (사람은 비워둠) -->
+                    <div class="hp" aria-hidden="true">
+                        <label>회사명<input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+                    </div>
+
+                    <!-- 개인정보 동의 -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" id="agree" name="agree" class="mt-1 shrink-0 w-4 h-4 accent-[#1e3a8a]" required>
+                            <span class="text-sm text-gray-600 leading-relaxed">
+                                <strong class="text-gray-800">개인정보 수집·이용에 동의합니다.</strong><br>
+                                수집 항목은 이름·연락처·상담 분야·상담 내용이며, 상담 예약 접수와 회신 목적으로만 이용합니다. 보유 기간은 상담 종료 후 즉시 또는 관계 법령이 정한 기간까지입니다. 동의를 거부하실 수 있으나, 이 경우 온라인 예약 접수가 제한됩니다.
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="submitBtn"
+                        class="w-full bg-navy text-white font-bold py-4 rounded-full hover:bg-blue-900 transition shadow-md disabled:opacity-60 disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-paper-plane mr-2"></i>예약 신청하기
+                    </button>
+
+                    <p id="formMsg" class="hidden text-center text-sm font-medium"></p>
+                </div>
+            </form>
+
+            <!-- 다른 상담 방법 -->
+            <div class="mt-8 pt-7 border-t border-gray-100 text-center">
+                <p class="text-sm text-gray-500 mb-4">전화나 카카오톡으로 바로 상담하실 수도 있습니다.</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="tel:1660-4452" class="px-6 py-3 bg-navy text-white font-bold rounded-full hover:bg-blue-900 transition"><i class="fa-solid fa-phone mr-2"></i>전화 1660-4452</a>
+                    <a href="https://pf.kakao.com/_zkzIX/chat" target="_blank" rel="noopener" class="px-6 py-3 bg-[#FEE500] text-[#3C1E1E] font-bold rounded-full hover:bg-[#fdd800] transition"><i class="fa-solid fa-comment mr-2"></i>카카오톡 상담</a>
+                </div>
+                <p class="mt-4 text-xs text-gray-400">상담 가능 시간 · 평일 09:00 – 18:00</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 성공 화면 (제출 성공 시 표시) -->
+    <section id="doneView" class="hidden max-w-2xl mx-auto px-4 py-20 text-center">
+        <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-circle-check text-4xl text-green-500"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">예약 신청이 접수되었습니다</h2>
+        <p class="text-gray-600 leading-relaxed mb-8">남겨주신 연락처로 사무실에서 곧 연락드리겠습니다.<br>급하신 경우 전화 주시면 더 빠르게 도와드립니다.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="tel:1660-4452" class="px-7 py-3 bg-navy text-white font-bold rounded-full hover:bg-blue-900 transition"><i class="fa-solid fa-phone mr-2"></i>전화 1660-4452</a>
+            <a href="index.html" class="px-7 py-3 border border-gray-300 text-gray-700 font-bold rounded-full hover:bg-gray-50 transition">홈으로</a>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-200 py-8 text-center">
+        <a href="index.html#expertise" class="text-sm text-gray-500 hover:text-navy transition"><i class="fa-solid fa-arrow-left mr-1"></i>업무 분야 보기</a>
+        <p class="mt-4 text-xs text-gray-400">&copy; 2026 법률사무소 청송 (Law Firm Cheongsong). All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 연락처 입력 시 자동으로 하이픈 포맷팅
+        const phoneEl = document.getElementById('phone');
+        phoneEl.addEventListener('input', function () {
+            let v = this.value.replace(/\D/g, '').slice(0, 11);
+            if (v.length >= 11) this.value = v.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+            else if (v.length >= 7) this.value = v.replace(/(\d{3})(\d{3,4})(\d{0,4})/, '$1-$2-$3').replace(/-$/, '');
+            else if (v.length >= 4) this.value = v.replace(/(\d{3})(\d{0,4})/, '$1-$2').replace(/-$/, '');
+            else this.value = v;
+        });
+
+        const form = document.getElementById('reserveForm');
+        const btn = document.getElementById('submitBtn');
+        const msg = document.getElementById('formMsg');
+
+        function showMsg(text, ok) {
+            msg.textContent = text;
+            msg.classList.remove('hidden', 'text-red-600', 'text-green-600');
+            msg.classList.add(ok ? 'text-green-600' : 'text-red-600');
+        }
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            msg.classList.add('hidden');
+
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const area = document.getElementById('area').value;
+            const time = document.getElementById('time').value;
+            const content = document.getElementById('content').value.trim();
+            const agree = document.getElementById('agree').checked;
+            const company = form.company.value; // 허니팟
+
+            if (name.length < 2) return showMsg('이름을 정확히 입력해 주세요.', false);
+            if (phone.replace(/\D/g, '').length < 10) return showMsg('연락처를 정확히 입력해 주세요.', false);
+            if (!area) return showMsg('상담 분야를 선택해 주세요.', false);
+            if (content.length < 5) return showMsg('상담 내용을 조금만 더 적어주세요.', false);
+            if (!agree) return showMsg('개인정보 수집·이용에 동의해 주세요.', false);
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>전송 중...';
+
+            try {
+                const r = await fetch('/api/reserve', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, area, time, content, company })
+                });
+                const data = await r.json().catch(() => ({}));
+
+                if (r.ok && data.ok) {
+                    if (window.gtag) gtag('event', 'reserve_submit', { method: 'form' });
+                    document.querySelector('section.max-w-2xl').classList.add('hidden');
+                    document.getElementById('doneView').classList.remove('hidden');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    showMsg('전송에 실패했습니다. 잠시 후 다시 시도하거나 전화(1660-4452)로 연락 주세요.', false);
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-paper-plane mr-2"></i>예약 신청하기';
+                }
+            } catch (err) {
+                showMsg('네트워크 오류가 발생했습니다. 전화(1660-4452)로 연락 주세요.', false);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane mr-2"></i>예약 신청하기';
+            }
+        });
+    </script>
+</body>
+</html>

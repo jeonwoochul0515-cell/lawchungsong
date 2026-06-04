@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./index.html', './404.html', './main.js', './columns/**/*.html', './precedents/**/*.html', './practice/**/*.html'],
+  content: ['./index.html', './404.html', './reserve.html', './main.js', './columns/**/*.html', './precedents/**/*.html', './practice/**/*.html'],
   theme: {
     extend: {
       // 인라인 <style>의 CSS 변수(--navy/--gold)와 동일한 값.
