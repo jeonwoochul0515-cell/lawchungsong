@@ -45,11 +45,11 @@ module.exports = async (req, res) => {
     const k = process.env.SOLAPI_API_KEY || '';
     const s = process.env.SOLAPI_API_SECRET || '';
     return res.status(200).json({
-      v: 3,
+      v: 4,
       keyLen: k.length, keyTrimLen: k.trim().length,
       secretLen: s.length, secretTrimLen: s.trim().length,
-      hasSender: !!process.env.SOLAPI_SENDER,
-      hasTo: !!process.env.RESERVE_TO,
+      from: (process.env.SOLAPI_SENDER || '').replace(/\D/g, ''),
+      to: (process.env.RESERVE_TO || '').replace(/\D/g, ''),
     });
   }
 
