@@ -119,7 +119,8 @@ module.exports = async (req, res) => {
 
     if (!r.ok) {
       console.error('solapi 발송 실패', r.status, data);
-      return res.status(502).json({ ok: false, error: 'send_failed' });
+      // 임시 진단: solapi 오류 사유 노출 (확인 후 제거 예정)
+      return res.status(502).json({ ok: false, error: 'send_failed', status: r.status, detail: data });
     }
 
     return res.status(200).json({ ok: true });
