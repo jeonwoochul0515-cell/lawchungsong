@@ -40,11 +40,14 @@ const AREA_LABELS = {
 };
 
 module.exports = async (req, res) => {
-  // 임시 진단: 값 노출 없이 환경변수 존재 여부만 확인 (확인 후 제거 예정)
+  // 임시 진단: 값은 노출하지 않고 길이·공백 여부만 확인 (확인 후 제거 예정)
   if (req.method === 'GET' && /[?&]diag=1/.test(req.url || '')) {
+    const k = process.env.SOLAPI_API_KEY || '';
+    const s = process.env.SOLAPI_API_SECRET || '';
     return res.status(200).json({
-      hasKey: !!process.env.SOLAPI_API_KEY,
-      hasSecret: !!process.env.SOLAPI_API_SECRET,
+      v: 3,
+      keyLen: k.length, keyTrimLen: k.trim().length,
+      secretLen: s.length, secretTrimLen: s.trim().length,
       hasSender: !!process.env.SOLAPI_SENDER,
       hasTo: !!process.env.RESERVE_TO,
     });
