@@ -6,7 +6,7 @@ const SOLAPI_ENDPOINT = 'https://api.solapi.com/messages/v4/send';
 // solapi HMAC-SHA256 인증 헤더 생성
 function authHeader(apiKey, apiSecret) {
   const date = new Date().toISOString();
-  const salt = crypto.randomBytes(32).toString('hex');
+  const salt = crypto.randomBytes(16).toString('hex');
   const signature = crypto
     .createHmac('sha256', apiSecret)
     .update(date + salt)
@@ -84,8 +84,8 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'invalid_input' });
   }
 
-  const apiKey = process.env.SOLAPI_API_KEY;
-  const apiSecret = process.env.SOLAPI_API_SECRET;
+  const apiKey = (process.env.SOLAPI_API_KEY || '').trim();
+  const apiSecret = (process.env.SOLAPI_API_SECRET || '').trim();
   const from = onlyDigits(process.env.SOLAPI_SENDER) || '16604452';
   const to = onlyDigits(process.env.RESERVE_TO) || '01089974452';
 
