@@ -40,6 +40,16 @@ const AREA_LABELS = {
 };
 
 module.exports = async (req, res) => {
+  // 임시 진단: 값 노출 없이 환경변수 존재 여부만 확인 (확인 후 제거 예정)
+  if (req.method === 'GET' && /[?&]diag=1/.test(req.url || '')) {
+    return res.status(200).json({
+      hasKey: !!process.env.SOLAPI_API_KEY,
+      hasSecret: !!process.env.SOLAPI_API_SECRET,
+      hasSender: !!process.env.SOLAPI_SENDER,
+      hasTo: !!process.env.RESERVE_TO,
+    });
+  }
+
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
