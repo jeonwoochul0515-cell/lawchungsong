@@ -89,7 +89,8 @@ module.exports = async (req, res) => {
 
   const apiKey = (process.env.SOLAPI_API_KEY || '').trim();
   const apiSecret = (process.env.SOLAPI_API_SECRET || '').trim();
-  const from = onlyDigits(process.env.SOLAPI_SENDER) || '16604452';
+  // solapi에 사전등록된 발신번호 (등록번호 변경 시 이 값만 수정)
+  const from = '01026085099';
   const to = onlyDigits(process.env.RESERVE_TO) || '01089974452';
 
   if (!apiKey || !apiSecret) {
