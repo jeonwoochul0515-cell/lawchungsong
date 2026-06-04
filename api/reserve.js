@@ -40,19 +40,6 @@ const AREA_LABELS = {
 };
 
 module.exports = async (req, res) => {
-  // 임시 진단: 값은 노출하지 않고 길이·공백 여부만 확인 (확인 후 제거 예정)
-  if (req.method === 'GET' && /[?&]diag=1/.test(req.url || '')) {
-    const k = process.env.SOLAPI_API_KEY || '';
-    const s = process.env.SOLAPI_API_SECRET || '';
-    return res.status(200).json({
-      v: 4,
-      keyLen: k.length, keyTrimLen: k.trim().length,
-      secretLen: s.length, secretTrimLen: s.trim().length,
-      from: (process.env.SOLAPI_SENDER || '').replace(/\D/g, ''),
-      to: (process.env.RESERVE_TO || '').replace(/\D/g, ''),
-    });
-  }
-
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
@@ -123,8 +110,7 @@ module.exports = async (req, res) => {
 
     if (!r.ok) {
       console.error('solapi 발송 실패', r.status, data);
-      // 임시 진단: solapi 오류 사유 노출 (확인 후 제거 예정)
-      return res.status(502).json({ ok: false, error: 'send_failed', status: r.status, detail: data });
+      return res.status(502).json({ ok: false, error: 'send_failed' });
     }
 
     return res.status(200).json({ ok: true });
