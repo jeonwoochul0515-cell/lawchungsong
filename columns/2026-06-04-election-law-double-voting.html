@@ -47,6 +47,32 @@
         .prose li { margin-bottom: 0.5rem; }
         .prose strong { color: var(--navy); }
     </style>
+    <!-- JSON-LD BreadcrumbList (이동경로) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+                {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "홈",
+                        "item": "https://chang-hee.kim/"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "칼럼",
+                        "item": "https://chang-hee.kim/#columns"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "이중투표 벌금 사건으로 배우는 공직선거법"
+                }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
 
