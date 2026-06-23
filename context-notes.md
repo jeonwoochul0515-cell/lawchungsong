@@ -61,3 +61,12 @@
   - 검증: 함수 파싱 로컬 OK, puppeteer 모킹으로 카드 3개 렌더 OK, fallback OK. **단 실제 /api 함수는 Vercel 배포 후에만 end-to-end 확인 가능**(로컬 python 서버는 함수 미실행). package.json(CommonJS)+/api/*.js 조합은 Vercel 자동 함수 인식.
 - 2026-06-02: **홈페이지 '법률 칼럼'(#columns) 섹션 추가.** 자체 콘텐츠를 데이터 기반으로 노출. `columns/index.json`(목록 메타) + `columns/{slug}.html`(독립 URL 상세 페이지, Article JSON-LD·SEO 메타 포함). main.js가 columns/index.json fetch해 #columns 카드 렌더(FAQ↔blog 사이, blog는 bg-gray-50으로 변경). 첫 칼럼(학폭위 출석 통지서 대응) seed. **중요**: tailwind.config content에 `./columns/**/*.html` 추가해야 칼럼 페이지 전용 클래스(h-9 등)가 빌드됨 — 안 하면 로고 등 깨짐. 향후 자동화가 칼럼 페이지 생성 시 동일 클래스셋만 쓰면 기존 빌드 CSS로 커버됨. 자동 발행 배선(루틴→git commit/push)은 미결: ① 원격 루틴 git push 권한 불확실 ② 무검수 법률 콘텐츠 라이브 게시 리스크 → 검수 게이트 권장.
 - 2026-06-02: **사전 골드/네이비 버그 수정.** Phase 3에서 발견한, Tailwind 기본 팔레트에 없어 무효였던 navy/gold 클래스들을 `tailwind.config.js` theme.extend.colors에 등록(navy #1e3a8a/dark #152e6e/light #2d4ea0, gold #b4975a/light #d4b97a — 인라인 CSS 변수와 동일). 재빌드로 bg-gold·border-gold·border-navy·hover:bg-gold·hover:text-navy·focus:ring-navy 등 활성화. 인라인 <style>의 수동 .text-navy/.bg-navy/.text-gold는 동일 값이라 그대로 공존(미수정). 검증: 골드 구분선·about 네이비 프레임 표시 확인, 회귀 없음. **이제 빌드가 색을 알므로 신규 색상 클래스도 정상 동작.**
+- 2026-06-23: **SEO·GEO·AEO 통합 가이드 적용 (전역 가이드 `SEO_GEO_AEO_최적화_가이드.md` 기준).** 5개 커밋으로 배포.
+  - 토대 점검 결과 이미 ~95% 충족(robots+Yeti, sitemap, canonical, BreadcrumbList 전체, LegalService/Article/FAQPage(practice), 질문형 H2). 남은 갭만 보강.
+  - **GEO §16**: robots.txt에 Anthropic RAG봇 `Claude-User`·`Claude-SearchBot` 추가(기존 ClaudeBot=학습봇, anthropic-ai/Claude-Web=구형).
+  - **GEO §15·§6**: 칼럼·판례 23p Article에 `dateModified`(=datePublished, 신선도)·`image` 추가.
+  - **SEO §5 CWV**: 전체 img 34개에 intrinsic width/height(logo 863x1024, profile 747x1024) → CLS 방지. w-auto는 aspect-ratio 확보, object-cover는 CSS 우선이라 무왜곡. lazy는 header above-fold라 미적용.
+  - **AEO §12 + GEO**: 칼럼16+판례7=23p에 ①본문 상단 '핵심 요약' 두괄식 40~60단어 정답 박스 ②하단 '자주 묻는 질문' 화면 FAQ 2~3개 + FAQPage JSON-LD 1:1. 병렬 서브에이전트 23개로 본문 기반 생성, 법률 광고규정(과장·단정·승률 금지) 준수. **practice 5p는 의도적 제외** — 이미 인트로 섹션+FAQPage 보유, 요약 박스 강제 시 중복·산만.
+  - **SEO/GEO §6**: 칼럼·판례 23p 글별 고유 OG 이미지(1200x630 브랜드 카드, images/og/<slug>.jpg) 생성·교체(기존 공용 lawyer-profile.jpg). 템플릿 HTML→to-png(headless) 렌더, 제목·카테고리 쿼리 주입.
+  - 검증: JSON-LD 87블록 오류 0(FAQPage 29·BreadcrumbList 28·Article 23·LegalService 6·Attorney 1), OG 23개 전부 고유, HTML 구조 무결성 확인.
+  - 후속 권장(미진행): og:image:width/height 태그, 차세대 포맷 OG, 타깃 프롬프트로 AI 인용 주기 점검(§20), 검색콘솔/서치어드바이저 수집요청.
