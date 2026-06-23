@@ -75,6 +75,39 @@
         ]
     }
     </script>
+    <!-- JSON-LD FAQPage (자주 묻는 질문) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "전업주부도 재산분할을 받을 수 있나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "받을 수 있습니다. 법원은 가사노동과 육아도 재산 형성에 대한 기여로 인정합니다. 실제로 전업주부의 기여도를 30~50%로 인정하는 사례가 많습니다. 다만 구체적인 기여도는 사안에 따라 다를 수 있으므로 전문 변호사와 상담하시기 바랍니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "재산분할 청구는 언제까지 해야 하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "이혼이 성립한 날부터 2년 이내에 법원에 청구해야 합니다(민법 제839조의2). 협의이혼이든 재판이혼이든 이혼이 확정된 날부터 기간이 시작되며, 2년이 지나면 청구권이 소멸합니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "배우자가 재산을 숨길 것 같을 때는 어떻게 하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "법원에 재산명시명령이나 금융거래정보 조회를 신청할 수 있습니다. 이혼 소송 중이라면 재산이 빠져나가지 않도록 사전처분(임시처분)을 신청하는 방법도 있습니다. 초기 대응이 빠를수록 보호받을 수 있는 재산이 많아지므로 조기에 변호사와 상담하는 것이 중요합니다."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
 
@@ -93,6 +126,11 @@
         <p class="text-gold font-bold text-sm mb-3">이혼·가사</p>
         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-snug mb-4">이혼할 때 내 재산은 어떻게 나누나요? 재산분할 기본 원리</h1>
         <p class="text-gray-400 text-sm mb-10">2026.06.03 · 법률사무소 청송 김창희 변호사</p>
+
+        <div style="margin-bottom:2rem; padding:1.25rem 1.5rem; background:#eef2ff; border-left:4px solid #1e3a8a; border-radius:0.5rem;">
+            <p style="font-weight:700; color:#1e3a8a; margin-bottom:0.5rem;">핵심 요약</p>
+            <p style="color:#374151; font-size:0.97rem; line-height:1.7; margin:0;">이혼 시 혼인 기간 중 형성된 공동재산은 기여도에 따라 분할됩니다. 전업주부도 가사·육아 기여로 30~50% 인정받을 수 있으며, 특유재산은 원칙적으로 제외됩니다. 청구권은 이혼 확정일로부터 2년 이내에 행사해야 하고, 재산 은닉이 우려되면 재산명시명령·사전처분을 신청할 수 있습니다.</p>
+        </div>
 
         <article class="prose">
             <p>이혼을 결심하고 나서 가장 먼저 드는 걱정 중 하나가 "재산은 어떻게 나눠요?"입니다. 부산에서 이혼·가사 상담을 하다 보면, 이 걱정을 안고 오시는 분들이 정말 많습니다. 당연합니다. 함께 살면서 일군 재산을 어떻게 나누는지 알아야 앞으로의 삶도 계획할 수 있으니까요. 오늘은 복잡한 법률 용어 없이, 엄마가 아이에게 설명하듯 재산분할의 기본 원리를 차근차근 풀어드리겠습니다.</p>
@@ -119,6 +157,25 @@
 
             <p style="margin-top:2rem; padding:1rem 1.25rem; background:#f3f4f6; border-radius:0.75rem; font-size:0.95rem; color:#4b5563;">※ 본 칼럼은 일반적인 법률 정보 제공을 위한 것으로, 구체적 사건에 대한 법률 자문이 아닙니다. <strong>개별 사건의 결과는 사안에 따라 다를 수 있습니다.</strong> 구체적인 사안은 반드시 전문 변호사와 상담하시기 바랍니다. 상담 문의: 전화 1660-4452 / 블로그 https://blog.naver.com/lawchungsong / 사이트 https://chang-hee.kim</p>
         </article>
+
+        <!-- 자주 묻는 질문 (FAQPage 화면 렌더링) -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">자주 묻는 질문</h2>
+            <div class="space-y-4">
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 전업주부도 재산분할을 받을 수 있나요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">받을 수 있습니다. 법원은 가사노동과 육아도 재산 형성에 대한 기여로 인정합니다. 실제로 전업주부의 기여도를 30~50%로 인정하는 사례가 많습니다. 다만 구체적인 기여도는 사안에 따라 다를 수 있으므로 전문 변호사와 상담하시기 바랍니다.</p>
+                </div>
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 재산분할 청구는 언제까지 해야 하나요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">이혼이 성립한 날부터 2년 이내에 법원에 청구해야 합니다(민법 제839조의2). 협의이혼이든 재판이혼이든 이혼이 확정된 날부터 기간이 시작되며, 2년이 지나면 청구권이 소멸합니다.</p>
+                </div>
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 배우자가 재산을 숨길 것 같을 때는 어떻게 하나요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">법원에 재산명시명령이나 금융거래정보 조회를 신청할 수 있습니다. 이혼 소송 중이라면 재산이 빠져나가지 않도록 사전처분(임시처분)을 신청하는 방법도 있습니다. 초기 대응이 빠를수록 보호받을 수 있는 재산이 많아지므로 조기에 변호사와 상담하는 것이 중요합니다.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- 키워드 태그 (5개) -->
         <div class="mt-8 flex flex-wrap gap-2">

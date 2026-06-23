@@ -75,6 +75,39 @@
         ]
     }
     </script>
+    <!-- JSON-LD FAQPage (자주 묻는 질문) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "학폭위 처분 취소 행정소송을 내면 처분이 반드시 취소되나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "반드시 취소되는 것은 아닙니다. 법원은 아이의 행위 자체보다 학교(교육청)가 절차를 적법하게 지켰는지, 처분이 사안에 비해 현저히 과한지(재량권 남용·일탈 여부)를 심사합니다. 개별 사건의 결과는 구체적인 사실관계에 따라 다를 수 있으므로 전문가 상담을 권장합니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "학폭위 처분에 불복하는 행정소송은 언제까지 제기해야 하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "처분 통지를 받은 날부터 90일 이내에 소를 제기해야 합니다. 이 제소기간을 넘기면 절차상 소송 자체가 불가능해지므로, 처분 통지를 받는 즉시 기간을 확인하고 법률 전문가와 신속히 상의하시기 바랍니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "피해 학생 부모로서 상대방이 처분 취소 소송을 제기했을 때 어떻게 대응해야 하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "상대방이 처분 취소 소송을 제기하더라도 피해 학생 측은 소송 참가인 자격으로 법원에 의견을 낼 수 있습니다. 카카오톡 대화 캡처, 상해 진단서, 목격자 진술 등 증거를 시간순으로 정리해 두는 것이 중요하며, 구체적인 대응 방향은 사안에 따라 다를 수 있으므로 전문가 상담을 권장합니다."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
 
@@ -93,6 +126,11 @@
         <p class="text-gold font-bold text-sm mb-3">학교폭력·소년보호</p>
         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-snug mb-4">학교폭력이 '맞소송'으로 번지는 이유 — 부모님이 꼭 알아야 할 것들</h1>
         <p class="text-gray-400 text-sm mb-10">2026.06.12 · 법률사무소 청송 김창희 변호사</p>
+
+        <div style="margin-bottom:2rem; padding:1.25rem 1.5rem; background:#eef2ff; border-left:4px solid #1e3a8a; border-radius:0.5rem;">
+            <p style="font-weight:700; color:#1e3a8a; margin-bottom:0.5rem;">핵심 요약</p>
+            <p style="color:#374151; font-size:0.97rem; line-height:1.7; margin:0;">학교폭력 사건이 '맞소송'으로 번지는 핵심 이유는 학폭위 처분이 입시에 영향을 주기 때문입니다. 처분 취소 행정소송은 절차 적법성과 재량권 남용 여부를 기준으로 심사하며, 제소기간은 처분 통지 후 90일입니다. 피해·가해 양측 모두 초기 대응 방향이 이후 결과를 크게 좌우하므로, 소송 전 전문가 점검이 필요합니다.</p>
+        </div>
 
         <article class="prose">
             <p>부산에서 학교폭력 사건 상담을 하다 보면 요즘 이런 말을 정말 자주 듣습니다. "화해시키려 했더니 상대 부모가 변호사를 선임해버렸어요." 헤럴드경제가 2026년 6월 11일 보도한 기사에 따르면, 국내 학교폭력 신고 건수가 2021년 44,444건에서 2024년 58,502건으로 가파르게 늘었고, 쌍방이 서로를 신고하는 '맞대응' 사건은 전체 심의 건수의 17.8%인 5,464건에 달했습니다. 아이들끼리는 화해할 마음이 있는데, 어른들의 법적 공방이 그 기회를 막아버리는 일이 교실 곳곳에서 벌어지고 있습니다. 오늘은 이 현상의 법적 배경과, 그 속에서 부모님이 어떻게 대응하면 좋을지 차근차근 짚어드리겠습니다.</p>
@@ -119,6 +157,25 @@
                 ※ 본 칼럼은 일반적인 법률 정보 제공을 위한 것으로, 구체적 사건에 대한 법률 자문이 아닙니다. <strong>개별 사건의 결과는 사안에 따라 다를 수 있습니다.</strong> 상담 문의: 전화 1660-4452 / 블로그 blog.naver.com/lawchungsong / 사이트 chang-hee.kim
             </p>
         </article>
+
+        <!-- 자주 묻는 질문 (FAQPage 구조화 데이터와 1:1 대응) -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">자주 묻는 질문</h2>
+            <div class="space-y-4">
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 학폭위 처분 취소 행정소송을 내면 처분이 반드시 취소되나요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">반드시 취소되는 것은 아닙니다. 법원은 아이의 행위 자체보다 학교(교육청)가 절차를 적법하게 지켰는지, 처분이 사안에 비해 현저히 과한지(재량권 남용·일탈 여부)를 심사합니다. 개별 사건의 결과는 구체적인 사실관계에 따라 다를 수 있으므로 전문가 상담을 권장합니다.</p>
+                </div>
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 학폭위 처분에 불복하는 행정소송은 언제까지 제기해야 하나요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">처분 통지를 받은 날부터 90일 이내에 소를 제기해야 합니다. 이 제소기간을 넘기면 절차상 소송 자체가 불가능해지므로, 처분 통지를 받는 즉시 기간을 확인하고 법률 전문가와 신속히 상의하시기 바랍니다.</p>
+                </div>
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 피해 학생 부모로서 상대방이 처분 취소 소송을 제기했을 때 어떻게 대응해야 하나요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">상대방이 처분 취소 소송을 제기하더라도 피해 학생 측은 소송 참가인 자격으로 법원에 의견을 낼 수 있습니다. 카카오톡 대화 캡처, 상해 진단서, 목격자 진술 등 증거를 시간순으로 정리해 두는 것이 중요하며, 구체적인 대응 방향은 사안에 따라 다를 수 있으므로 전문가 상담을 권장합니다.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- 키워드 태그 (5개) -->
         <div class="mt-8 flex flex-wrap gap-2">

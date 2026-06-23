@@ -75,6 +75,39 @@
         ]
     }
     </script>
+    <!-- JSON-LD FAQPage (자주 묻는 질문) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "성범죄 피해자 2차 피해란 무엇인가요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "2차 피해란 범죄 피해 이후 수사·재판 과정에서 추가로 받는 정신적·심리적 상처를 말합니다. 반복 진술 요구, '왜 신고를 늦게 했느냐'는 식의 피해자 귀책 발언, 증거 영상의 부적절한 노출 등이 대표적인 사례입니다. 개별 상황에 따라 다를 수 있으므로 전문가 상담을 권고합니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "성범죄 피해자에게 주어지는 법적 보호 제도는 어떤 것이 있나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "진술 조력인 제도(수사 시 전문가 동석), 영상 진술 제도(법정 직접 출석 없이 영상 증거 활용), 증거 영상 외부 반출 금지, 신변보호 요청(스마트워치·순찰 강화), 성폭력 피해자 국선변호사 무료 지원 등이 있습니다. 구체적 지원 범위는 사안에 따라 다를 수 있습니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "수사·재판 과정에서 2차 피해가 우려될 때 어떻게 대응할 수 있나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "담당 검사에게 환경 개선을 직접 요구하거나, 피해자 국선변호사를 통해 이의를 제기할 수 있습니다. 경찰 신고 시 '진술 조력인 지원'을 함께 요청하는 것도 가능합니다. 구체적인 대응 방법은 사건마다 달라질 수 있어 형사 전문 변호사와 초기에 상담하는 것이 효과적입니다."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
 
@@ -93,6 +126,11 @@
         <p class="text-gold font-bold text-sm mb-3">형사</p>
         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-snug mb-4">피해자가 법원 열람실에서 또 상처받는 이유 — 성범죄 2차 피해를 알면 대응이 달라집니다</h1>
         <p class="text-gray-400 text-sm mb-10">2026.06.18 · 법률사무소 청송 김창희 변호사</p>
+
+        <div style="margin-bottom:2rem; padding:1.25rem 1.5rem; background:#eef2ff; border-left:4px solid #1e3a8a; border-radius:0.5rem;">
+            <p style="font-weight:700; color:#1e3a8a; margin-bottom:0.5rem;">핵심 요약</p>
+            <p style="color:#374151; font-size:0.97rem; line-height:1.7; margin:0;">성범죄 피해자 2차 피해란 수사·재판 과정에서 반복 진술 요구, 피해자 귀책 발언, 증거 영상 부적절 노출 등으로 추가 상처를 받는 것입니다. 우리나라는 진술 조력인, 영상 진술, 피해자 국선변호사 등 여러 보호 제도를 두고 있으며, 제도가 있어도 현장 환경까지 점검해야 실질적 보호가 가능합니다.</p>
+        </div>
 
         <article class="prose">
             <p>2026년 6월 17일, 법률신문에 눈길을 끄는 기사가 실렸습니다. 법원과 검찰의 <strong>열람·등사실(열람실)</strong>에 가림막이 없다는 내용이었습니다. 성범죄 사건의 증거 영상을 확인해야 하는 변호인이 열람실 컴퓨터를 이용할 때, 모자이크도 없이 피해자 얼굴이 노출된 화면이 칸막이도 없는 개방된 공간에서 재생된다는 것입니다. 옆에 앉은 다른 방문객이 그 화면을 볼 수도 있는 구조라는 지적이 나왔습니다.</p>
@@ -130,6 +168,25 @@
 
             <p style="margin-top:2rem; padding:1rem 1.25rem; background:#f3f4f6; border-radius:0.75rem; font-size:0.95rem; color:#4b5563;">※ 참고 기사: 법률신문 「가림막 없는 법원·검찰 열람실」 (2026.06.17). 본 칼럼은 해당 보도를 바탕으로 일반적인 법률 정보를 제공하기 위해 작성된 것으로, 구체적 사건에 대한 법률 자문이 아닙니다. <strong>개별 사건의 결과는 사안에 따라 다를 수 있습니다.</strong></p>
         </article>
+
+        <!-- 자주 묻는 질문 (FAQPage 구조화 데이터와 1:1 대응) -->
+        <section class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">자주 묻는 질문</h2>
+            <div class="space-y-4">
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 성범죄 피해자 2차 피해란 무엇인가요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">2차 피해란 범죄 피해 이후 수사·재판 과정에서 추가로 받는 정신적·심리적 상처를 말합니다. 반복 진술 요구, '왜 신고를 늦게 했느냐'는 식의 피해자 귀책 발언, 증거 영상의 부적절한 노출 등이 대표적인 사례입니다. 개별 상황에 따라 다를 수 있으므로 전문가 상담을 권고합니다.</p>
+                </div>
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 성범죄 피해자에게 주어지는 법적 보호 제도는 어떤 것이 있나요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">진술 조력인 제도(수사 시 전문가 동석), 영상 진술 제도(법정 직접 출석 없이 영상 증거 활용), 증거 영상 외부 반출 금지, 신변보호 요청(스마트워치·순찰 강화), 성폭력 피해자 국선변호사 무료 지원 등이 있습니다. 구체적 지원 범위는 사안에 따라 다를 수 있습니다.</p>
+                </div>
+                <div class="bg-white rounded-xl p-5 border border-gray-100">
+                    <p class="font-bold text-navy mb-2">Q. 수사·재판 과정에서 2차 피해가 우려될 때 어떻게 대응할 수 있나요?</p>
+                    <p class="text-gray-600 text-sm" style="line-height:1.7;">담당 검사에게 환경 개선을 직접 요구하거나, 피해자 국선변호사를 통해 이의를 제기할 수 있습니다. 경찰 신고 시 '진술 조력인 지원'을 함께 요청하는 것도 가능합니다. 구체적인 대응 방법은 사건마다 달라질 수 있어 형사 전문 변호사와 초기에 상담하는 것이 효과적입니다.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- 키워드 태그 (5개) -->
         <div class="mt-8 flex flex-wrap gap-2">
