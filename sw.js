@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cheongsong-v5';
+const CACHE_NAME = 'cheongsong-v6';
 const ASSETS = [
     '/',
     '/index.html',
