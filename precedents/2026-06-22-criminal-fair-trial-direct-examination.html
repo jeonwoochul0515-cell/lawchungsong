@@ -47,6 +47,32 @@
         .prose li { margin-bottom: 0.5rem; }
         .prose strong { color: var(--navy); }
     </style>
+    <!-- JSON-LD BreadcrumbList (이동경로) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+                {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "홈",
+                        "item": "https://chang-hee.kim/"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "판례",
+                        "item": "https://chang-hee.kim/#precedents"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "같은 증거만 보고 무죄를 유죄로? — 대법원이 밝힌 공정한 재판의 최소 조건"
+                }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
 

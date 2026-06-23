@@ -47,6 +47,32 @@
         .prose li { margin-bottom: 0.5rem; }
         .prose strong { color: var(--navy); }
     </style>
+    <!-- JSON-LD BreadcrumbList (이동경로) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+                {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "홈",
+                        "item": "https://chang-hee.kim/"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "판례",
+                        "item": "https://chang-hee.kim/#precedents"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "이혼할 때 남편 회사 주식, 돈으로 받아야 할까? — 대법원이 세운 나눔 기준"
+                }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
 

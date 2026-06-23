@@ -47,6 +47,32 @@
         .prose li { margin-bottom: 0.5rem; }
         .prose strong { color: var(--navy); }
     </style>
+    <!-- JSON-LD BreadcrumbList (이동경로) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+                {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "홈",
+                        "item": "https://chang-hee.kim/"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "판례",
+                        "item": "https://chang-hee.kim/#precedents"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "규정 어기고 준 수수료, 세금에서도 못 뺀다 — 대법원이 확인한 이중 손해의 원칙"
+                }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
 

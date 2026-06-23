@@ -47,6 +47,32 @@
         .prose li { margin-bottom: 0.5rem; }
         .prose strong { color: var(--navy); }
     </style>
+    <!-- JSON-LD BreadcrumbList (이동경로) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+                {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "홈",
+                        "item": "https://chang-hee.kim/"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "칼럼",
+                        "item": "https://chang-hee.kim/#columns"
+                },
+                {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "만 14세 미만은 처벌 못 한다고요? 촉법소년 제도"
+                }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gray-50">
 
