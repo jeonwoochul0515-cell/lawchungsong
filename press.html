@@ -80,6 +80,26 @@
         .cite-card a.src:hover { text-decoration:underline; }
         .cite-meta { color:#9ca3af; font-size:0.8rem; margin-left:0.4rem; }
         .cite-desc { color:#4b5563; font-size:0.93rem; margin-top:0.4rem; line-height:1.7; }
+        .jebo-badge { display:inline-block; background:var(--gold); color:#fff; font-size:0.72rem; font-weight:700; padding:2px 9px; border-radius:20px; margin-left:6px; vertical-align:middle; }
+        .jebo-btn { margin-top:0.8rem; background:var(--navy); color:#fff; font-weight:700; font-size:0.9rem; padding:0.6rem 1.2rem; border:none; border-radius:0.6rem; cursor:pointer; transition:background 0.2s; }
+        .jebo-btn:hover { background:#152e6e; }
+        .jebo-overlay { position:fixed; inset:0; background:rgba(17,24,39,0.6); backdrop-filter:blur(3px); z-index:50; display:flex; align-items:center; justify-content:center; padding:1rem; }
+        .jebo-box { background:#fff; border-radius:1rem; max-width:540px; width:100%; max-height:88vh; overflow-y:auto; padding:1.8rem 1.8rem 1.6rem; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+        .jebo-box h3 { font-size:1.3rem; font-weight:800; color:#111827; margin-bottom:0.3rem; padding-right:1.5rem; }
+        .jebo-box .lead { color:#4b5563; font-size:0.93rem; line-height:1.7; margin-bottom:1.1rem; }
+        .jebo-close { position:absolute; top:0.9rem; right:1.1rem; background:none; border:none; font-size:1.9rem; line-height:1; color:#9ca3af; cursor:pointer; }
+        .jebo-close:hover { color:#374151; }
+        .jebo-sub { font-weight:800; color:var(--navy); font-size:0.95rem; margin:1.1rem 0 0.6rem; }
+        .jebo-step { display:flex; gap:0.7rem; align-items:flex-start; margin-bottom:0.55rem; font-size:0.9rem; color:#374151; line-height:1.55; }
+        .jebo-step .n { flex-shrink:0; width:1.55rem; height:1.55rem; background:var(--navy); color:#fff; border-radius:50%; font-size:0.78rem; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+        .jebo-free { display:inline-block; background:#ecfdf5; color:#047857; font-weight:700; font-size:0.85rem; padding:0.4rem 0.9rem; border-radius:0.5rem; margin:0.4rem 0 0.2rem; }
+        .jebo-cta { display:flex; flex-direction:column; gap:0.6rem; margin-top:1.2rem; }
+        .jebo-cta a { display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.8rem; border-radius:0.7rem; font-weight:700; font-size:0.95rem; text-decoration:none; }
+        .jebo-cta .mail { background:var(--navy); color:#fff; }
+        .jebo-cta .kakao { background:#FEE500; color:#3C1E1E; }
+        .jebo-cta .tel { background:#fff; color:var(--navy); border:1.5px solid var(--navy); }
+        .jebo-note { font-size:0.78rem; color:#9ca3af; margin-top:0.9rem; line-height:1.6; }
+        .jebo-note a { color:#6b7280; text-decoration:underline; }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -121,9 +141,10 @@
 
         <!-- C. 공공기관 위촉·자문 -->
         <h2 class="sec-title"><i class="fa-solid fa-landmark"></i>공공기관 위촉·자문</h2>
-        <div class="cite-card">
-            <a class="src" href="https://www.busan.go.kr/bshotline/about04" target="_blank" rel="noopener">부산광역시 공익제보(익명 대리신고) — 지원 변호사</a>
-            <p class="cite-desc">부산시 공익제보 익명 대리신고 제도에서 '소비자 이익·공정한 경쟁' 분야를 담당하는 지원 변호사로 참여하고 있으며, 부산지방변호사회 인권위원회 위원으로 기재되어 있습니다.</p>
+        <div class="cite-card" style="border:1.5px solid var(--gold); background:#fffdf7;">
+            <a class="src" href="https://www.busan.go.kr/bshotline/about04" target="_blank" rel="noopener">부산광역시 공익제보센터 — 비실명 대리신고 변호사</a><span class="jebo-badge">공식 위촉</span>
+            <p class="cite-desc">김창희 변호사는 <strong>부산광역시 공익제보센터의 비실명(익명) 대리신고 변호사</strong>('소비자의 이익·공정한 경쟁' 분야)이며, 부산지방변호사회 인권위원회 위원입니다. 신분 노출이 두려워 제보를 망설이는 분을 위해 <strong>변호사 이름으로 대신 신고</strong>해 신원을 보호해 드립니다.</p>
+            <button type="button" class="jebo-btn" data-action="open-jebo"><i class="fa-solid fa-shield-halved" style="margin-right:6px;"></i>공익제보 대리신고 안내 · 신청</button>
         </div>
         <div class="cite-card">
             <a class="src" href="#" onclick="return false;" style="cursor:default;">부산시 특별사법경찰 보도자료 — '청렴!든든!' 공익제보 지원 변호사단</a><span class="cite-meta">2024.01.04</span>
@@ -213,6 +234,49 @@
             <a href="index.html" class="text-sm text-gray-500 hover:text-navy transition"><i class="fa-solid fa-arrow-left mr-1"></i>홈으로 돌아가기</a>
         </div>
     </main>
+
+    <!-- 공익제보 비실명 대리신고 모달 -->
+    <div id="jeboModal" class="jebo-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="jeboTitle">
+        <div class="jebo-box">
+            <button class="jebo-close" data-action="close-jebo" aria-label="닫기">&times;</button>
+            <h3 id="jeboTitle"><i class="fa-solid fa-shield-halved text-gold" style="margin-right:7px;"></i>공익제보 비실명 대리신고</h3>
+            <p class="lead">김창희 변호사는 <strong>부산광역시 공익제보센터의 비실명(익명) 대리신고 변호사</strong>입니다. 부패·공익침해 행위를 목격했지만 신분 노출이 두렵다면, 제보 서류에 제보자 대신 <strong>변호사 이름</strong>을 기재해 신원 유출 가능성을 원천 차단합니다.</p>
+            <div class="jebo-free"><i class="fa-solid fa-circle-check" style="margin-right:5px;"></i>법률상담 및 대리신고 수수료 무료</div>
+            <p class="jebo-sub">진행 절차</p>
+            <div class="jebo-step"><span class="n">1</span><span>신고자가 변호사에게 이메일로 상담을 신청합니다.</span></div>
+            <div class="jebo-step"><span class="n">2</span><span>변호사가 공익신고 관련 법률상담과 검토를 진행합니다.</span></div>
+            <div class="jebo-step"><span class="n">3</span><span>변호사가 감사위원회에 <strong>변호사 이름으로</strong> 대리신고합니다.</span></div>
+            <div class="jebo-step"><span class="n">4</span><span>감사위원회가 조사 결과를 변호사에게 통보합니다.</span></div>
+            <div class="jebo-step"><span class="n">5</span><span>변호사가 결과를 신고자에게 전달합니다.</span></div>
+            <p class="jebo-sub">지금 신청하기</p>
+            <div class="jebo-cta">
+                <a class="mail" href="mailto:lawchungsong@daum.net?subject=%5B%EA%B3%B5%EC%9D%B5%EC%A0%9C%EB%B3%B4%20%EB%B9%84%EC%8B%A4%EB%AA%85%20%EB%8C%80%EB%A6%AC%EC%8B%A0%EA%B3%A0%5D%20%EC%83%81%EB%8B%B4%20%EC%8B%A0%EC%B2%AD%20%E2%80%94%20%EB%B2%95%EB%A5%A0%EC%82%AC%EB%AC%B4%EC%86%8C%20%EC%B2%AD%EC%86%A1&body=%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.%20%EB%B6%80%EC%82%B0%EC%8B%9C%20%EA%B3%B5%EC%9D%B5%EC%A0%9C%EB%B3%B4%20%EB%B9%84%EC%8B%A4%EB%AA%85%20%EB%8C%80%EB%A6%AC%EC%8B%A0%EA%B3%A0%20%EC%83%81%EB%8B%B4%EC%9D%84%20%EC%8B%A0%EC%B2%AD%ED%95%A9%EB%8B%88%EB%8B%A4.%0A%0A%E2%96%A0%20%EC%A0%9C%EB%B3%B4%20%EB%B6%84%EC%95%BC%20(%EC%98%88%3A%20%EC%86%8C%EB%B9%84%EC%9E%90%20%EC%9D%B4%EC%9D%B5%C2%B7%EA%B3%B5%EC%A0%95%EA%B2%BD%EC%9F%81%2C%20%ED%99%98%EA%B2%BD%2C%20%EC%95%88%EC%A0%84%20%EB%93%B1)%3A%0A%0A%E2%96%A0%20%EA%B0%84%EB%8B%A8%ED%95%9C%20%EC%A0%9C%EB%B3%B4%20%EB%82%B4%EC%9A%A9%3A%0A%0A%E2%96%A0%20%ED%9A%8C%EC%8B%A0%EB%B0%9B%EC%9D%84%20%EC%97%B0%EB%9D%BD%EC%B2%98(%EC%9D%B4%EB%A9%94%EC%9D%BC%2F%EC%A0%84%ED%99%94)%3A%0A%0A%E2%80%BB%20%EC%9E%91%EC%84%B1%ED%95%B4%20%EC%A3%BC%EC%8B%9C%EB%A9%B4%20%EA%B9%80%EC%B0%BD%ED%9D%AC%20%EB%B3%80%ED%98%B8%EC%82%AC%EA%B0%80%20%EA%B2%80%ED%86%A0%20%ED%9B%84%20%ED%9A%8C%EC%8B%A0%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.%20%EB%B3%B8%20%EB%A9%94%EC%9D%BC%EC%9D%80%20%EB%B3%80%ED%98%B8%EC%82%AC%EC%97%90%EA%B2%8C%20%EC%A7%81%EC%A0%91%20%EC%A0%84%EB%8B%AC%EB%90%98%EB%A9%B0%2C%20%EB%8C%80%EB%A6%AC%EC%8B%A0%EA%B3%A0%20%EC%8B%9C%20%EC%8B%A0%EA%B3%A0%EC%84%9C%EC%97%90%EB%8A%94%20%EC%A0%9C%EB%B3%B4%EC%9E%90%20%EB%8C%80%EC%8B%A0%20%EB%B3%80%ED%98%B8%EC%82%AC%20%EC%9D%B4%EB%A6%84%EC%9D%B4%20%EA%B8%B0%EC%9E%AC%EB%90%98%EC%96%B4%20%EC%8B%A0%EB%B6%84%EC%9D%B4%20%EB%B3%B4%ED%98%B8%EB%90%A9%EB%8B%88%EB%8B%A4.%20(%EC%8B%9C%20%EC%86%8C%EA%B4%80%20%EA%B3%B5%EC%9D%B5%EC%A0%9C%EB%B3%B4%20%ED%95%B4%EB%8B%B9%20%EC%8B%9C%2C%20%EC%83%81%EB%8B%B4%C2%B7%EB%8C%80%EB%A6%AC%EC%8B%A0%EA%B3%A0%20%EB%AC%B4%EB%A3%8C)"><i class="fa-solid fa-envelope"></i> 이메일로 제보 상담 신청</a>
+                <a class="kakao" href="https://pf.kakao.com/_zkzIX/chat" target="_blank" rel="noopener"><i class="fa-solid fa-comment"></i> 카카오톡으로 상담</a>
+                <a class="tel" href="tel:1660-4452"><i class="fa-solid fa-phone"></i> 전화 상담 1660-4452</a>
+            </div>
+            <p class="jebo-note">※ 부산시 소관 공익제보(소비자 이익·공정경쟁, 환경, 국민 건강·안전 등)에 해당하는 경우 상담·대리신고가 무료입니다. 제도 자세히 보기: <a href="https://www.busan.go.kr/bshotline/about04" target="_blank" rel="noopener">부산광역시 공익제보센터</a></p>
+        </div>
+    </div>
+    <script>
+    (function(){
+        var modal = document.getElementById('jeboModal');
+        function openM(){ modal.style.display='flex'; document.body.style.overflow='hidden'; }
+        function closeM(){ modal.style.display='none'; document.body.style.overflow=''; }
+        document.addEventListener('click', function(e){
+            var t = e.target.closest('[data-action]');
+            if (t) {
+                var a = t.getAttribute('data-action');
+                if (a === 'open-jebo') openM();
+                else if (a === 'close-jebo') closeM();
+            } else if (e.target === modal) {
+                closeM();
+            }
+        });
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'Escape' && modal.style.display === 'flex') closeM();
+        });
+    })();
+    </script>
 
     <footer class="border-t border-gray-200 py-8 text-center text-xs text-gray-400">
         &copy; 2026 법률사무소 청송 (Law Firm Cheongsong). All rights reserved.
