@@ -40,12 +40,6 @@
           { "key": "Cache-Control", "value": "no-cache" }
         ]
       }
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/404.html"
-      }
     ]
   }
 }
