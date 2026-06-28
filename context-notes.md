@@ -70,3 +70,12 @@
   - **SEO/GEO §6**: 칼럼·판례 23p 글별 고유 OG 이미지(1200x630 브랜드 카드, images/og/<slug>.jpg) 생성·교체(기존 공용 lawyer-profile.jpg). 템플릿 HTML→to-png(headless) 렌더, 제목·카테고리 쿼리 주입.
   - 검증: JSON-LD 87블록 오류 0(FAQPage 29·BreadcrumbList 28·Article 23·LegalService 6·Attorney 1), OG 23개 전부 고유, HTML 구조 무결성 확인.
   - 후속 권장(미진행): og:image:width/height 태그, 차세대 포맷 OG, 타깃 프롬프트로 AI 인용 주기 점검(§20), 검색콘솔/서치어드바이저 수집요청.
+- 2026-06-28: **소프트 404 수정 + 외부 인용 통합(언론·활동 페이지/sameAs/블로그 초안).**
+  - **소프트404**: firebase.json catch-all rewrite(**→/404.html) 제거. rewrite는 200을 반환해 누락 OG 이미지를 소프트404로 만들던 근본원인. 제거 시 Firebase가 404.html을 진짜 404로 자동 노출. + 누락 OG 4건(06-24~26) 생성(기존 1200x630 템플릿 재현, to-png).
+  - **외부 인용 수집**: 웹 19개 URL + PDF 2건 중 15웹+2PDF 성공. 미수집: 국제신문(asp 동적), 선관위(연결거부), 네이버블로그 goodpeoplei(네이버 차단→굿피플 본사이트 G1로 대체), 중앙일보(차단). 정리: 외부인용_링크목록.md.
+  - **sameAs 보강**: index.html Person(김창희)에 lfind 프로필·cpmadang(정치) 추가, LegalService에 bizno·114 추가.
+  - **언론·활동 페이지**: press.html 신설(칼럼 템플릿 기반). 6개 섹션(언론보도·공공위촉·강연·공익활동·처리사건·경력). ProfilePage+BreadcrumbList JSON-LD, hasOccupation(형사조정위원 등). 네비(데스크톱·모바일)·sitemap 연결. 전용 OG(press-activities.jpg).
+  - **판례 4건 쉽게 풀이**(광고규정 면책): 불법촬영 손배 1500만원 인정(2024가단340864), 한방입원 보험사기 무죄 2건(2018고정220·312), 의사명의 소아진료 의료법위반(2023고합703).
+  - **네이버 외부확산(가이드 §18.5 OSMU)**: 네이버 블로그는 외부 AI 크롤러 차단 → 소유 도메인(press.html)에 동일 내용을 크롤 가능 텍스트로 재배치, 외부 독립도메인 출처(법률신문·굿피플·더버터·lfind)를 본문 링크로 연결. 네이버 블로그 발행용 초안 별도 작성(네이버블로그_초안_김창희변호사_대외활동.md, 배포 제외).
+  - 새 발견 직함(굿피플 G1): 마을부엌 정지 이사장·부산지검 형사조정위원·부산지법 소년위탁보호위원·부산사회복지사협회 자문변호사·로스쿨 겸임교수.
+  - 검증: index/press JSON-LD 5블록 오류 0, sitemap loc 35(press 포함), press.html 풀페이지 렌더 정상.

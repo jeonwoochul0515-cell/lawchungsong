@@ -11,7 +11,9 @@
       "*.log",
       "package.json",
       "package-lock.json",
-      "정장2.jpg"
+      "정장2.jpg",
+      "외부인용_링크목록.md",
+      "네이버블로그_초안_김창희변호사_대외활동.md"
     ],
     "headers": [
       {
