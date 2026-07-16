@@ -12,6 +12,7 @@ on:
       - 'press.html'
       - 'reserve.html'
       - 'sitemap.xml'
+  workflow_dispatch:
 
 jobs:
   notify:
