@@ -1,0 +1,61 @@
+# main 브랜치에 새 글/페이지가 올라올 때마다 네이버·빙에 즉시 색인 요청(IndexNow)을 보낸다
+name: IndexNow Notify
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'columns/**.html'
+      - 'precedents/**.html'
+      - 'practice/**.html'
+      - 'index.html'
+      - 'press.html'
+      - 'reserve.html'
+      - 'sitemap.xml'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 변경된 URL 목록 추출
+        id: diff
+        run: |
+          BASE="${{ github.event.before }}"
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE=$(git rev-parse HEAD^ 2>/dev/null || echo "")
+          fi
+          if [ -z "$BASE" ]; then
+            echo "urls=[]" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          CHANGED=$(git diff --name-only --diff-filter=ACM "$BASE" "${{ github.sha }}" -- \
+            'columns/*.html' 'precedents/*.html' 'practice/*.html' \
+            index.html press.html reserve.html | grep '\.html$' || true)
+          if [ -z "$CHANGED" ]; then
+            echo "urls=[]" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          URLS=$(echo "$CHANGED" | sed -e 's#^index\.html$##' -e "s#^#https://chang-hee.kim/#" | sed 's#/index\.html#/#' | jq -R . | jq -s -c .)
+          echo "urls=$URLS" >> "$GITHUB_OUTPUT"
+          echo "변경된 URL: $URLS"
+
+      - name: IndexNow 제출 (네이버 + 범용 엔드포인트)
+        if: steps.diff.outputs.urls != '[]'
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg host "chang-hee.kim" \
+            --arg key "0924f93c083623f0aac81ce808ed9337" \
+            --arg keyLocation "https://chang-hee.kim/0924f93c083623f0aac81ce808ed9337.txt" \
+            --argjson urlList '${{ steps.diff.outputs.urls }}' \
+            '{host: $host, key: $key, keyLocation: $keyLocation, urlList: $urlList}')
+          for endpoint in "https://searchadvisor.naver.com/indexnow" "https://api.indexnow.org/indexnow"; do
+            echo "POST -> $endpoint"
+            code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$endpoint" \
+              -H "Content-Type: application/json; charset=utf-8" \
+              -d "$PAYLOAD")
+            echo "  응답: $code"
+          done
