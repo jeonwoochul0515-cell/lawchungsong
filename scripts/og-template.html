@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- 칼럼 OG 이미지(1200x630) 생성 템플릿 — ?title=제목&cat=카테고리 쿼리로 주입 후 to-png로 렌더 -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; font-family: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif; }
+  .card {
+    width: 1200px; height: 630px; padding: 64px 84px;
+    background: linear-gradient(135deg, #0e1f4d 0%, #1e3a8a 55%, #16295e 100%);
+    display: flex; flex-direction: column; justify-content: space-between;
+    word-break: keep-all;
+  }
+  .brand { font-size: 30px; font-weight: 800; color: #ffffff; }
+  .brand .gold { color: #d4b97a; }
+  .brand .sub { font-size: 20px; font-weight: 400; color: #b6c2e2; margin-left: 12px; }
+  .mid { }
+  .cat {
+    display: inline-block; background: #b4975a; color: #0e1f4d;
+    font-size: 24px; font-weight: 700; padding: 8px 26px; border-radius: 999px; margin-bottom: 28px;
+  }
+  .title { font-size: 58px; font-weight: 800; color: #ffffff; line-height: 1.32; }
+  .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.25); padding-top: 28px;
+  }
+  .foot .site { font-size: 26px; font-weight: 700; color: #d4b97a; }
+  .foot .tel { font-size: 26px; color: #dbe3f5; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand">법률사무소 <span class="gold">청송</span><span class="sub">· 부산 변호사 김창희</span></div>
+    <div class="mid">
+      <div class="cat" id="cat">카테고리</div>
+      <div class="title" id="title">제목</div>
+    </div>
+    <div class="foot">
+      <div class="site">chang-hee.kim</div>
+      <div class="tel">상담 1660-4452</div>
+    </div>
+  </div>
+  <script>
+    const p = new URLSearchParams(location.search);
+    document.getElementById('cat').textContent = p.get('cat') || '법률 칼럼';
+    document.getElementById('title').textContent = p.get('title') || '';
+    const t = document.getElementById('title');
+    if ((p.get('title') || '').length > 40) t.style.fontSize = '48px';
+  </script>
+</body>
+</html>
