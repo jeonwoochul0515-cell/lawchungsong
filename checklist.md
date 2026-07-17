@@ -104,7 +104,23 @@
 
 ---
 
+## Lighthouse 성능 측정 + 폰트 최적화 (2026-07-17) ✅ 완료
+- [x] Lighthouse를 이 프로젝트에서 처음 실제 측정(`npx lighthouse`, Chrome 임시 설치·프로젝트 종속성 추가 없음). 최초 결과: Performance 55점, FCP/LCP 약 24초. Accessibility 95·Best Practices 100·SEO 100
+- [x] 원인 특정: Pretendard 정적 폰트 6종(4.68MB)을 CDN에서 개별 로드 중이었음. font-family가 이미 "Pretendard Variable"을 1순위로 지정해뒀으나 실제 링크는 static 빌드라 매칭 안 되고 폴백(Pretendard, 9종 중 6종 다운로드)되고 있었음
+- [x] 1차 조치: jsdelivr variable 빌드(단일 파일 2.06MB)로 전환 → 5.25MB→2.6MB, 24초→14초. 57개 파일 전체 적용, 라이브 반영·화면 확인
+- [x] Font Awesome 아이콘도 동일 문제 발견: 아이콘 66종만 쓰는데 cdnjs 풀세트(176KB) 로드 중. fonttools로 66종만 담은 서브셋(8.3KB, 94%↓) 생성해 `fonts/fa-solid-subset.woff2`로 자체 호스팅. 마크업(`<i class="fa-...">`) 변경 없이 later-@font-face 우선순위 트릭으로 무거운 CDN 폰트 대체. fa-regular 단독 사용 1건은 fa-solid로 통일해 폰트 패밀리 하나로 축소
+- [x] 재측정: 2.6MB→2.4MB, 14초→12초. **하지만 Performance 점수는 55점에서 그대로** — Lighthouse 채점 곡선상 12초든 24초든 "허용 임계치(4초)"를 훨씬 초과해 둘 다 최하점 구간이라 점수엔 아직 안 잡힘(사용자에게 이유 설명함)
+- [x] 사용자 질문("한글 폰트를 왜 들고 있나") 받고 커스텀 웹폰트 자체의 존재 이유(기기별 시스템 폰트 차이로 인한 브랜드 불일치 방지) 설명, 두 가지 선택지(①시스템 폰트로 완전 전환 ②실사용 글자만 서브셋) 제시
+- [x] **사용자가 ①(시스템 폰트 전환) 선택, 단 가독성 유지 조건**: Pretendard CDN 링크·jsdelivr preconnect 전체 제거(57개 파일), font-family를 플랫폼별 최상급 한글 시스템 폰트 순서로 교체 — `-apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`. 폰트 다운로드 0으로 완전 제거
+- [x] 제거 스크립트가 남긴 줄바꿈 병합 잔여물(56개 파일)을 별도 스크립트로 전수 정리, 배포 후 페이지 텍스트 전체 정상 로드 확인
+- **참고**: 배포 후 화면 스크린샷 도구가 일시적으로 오류(viewport 0x0 인식) 나서 시각적 확인은 못함 — 순수 CSS 폰트 변경이라 레이아웃 영향 없음, 코드는 깨끗이 검증됨. 사용자가 직접 한 번 열어보고 확인 권장
+- [x] **최종 재측정 결과**: Performance 55→**62점**(실제로 점수 상승 확인), FCP 24초→**1.9초**, 총 전송량 5.25MB→**0.38MB**(93%↓), 요청수 25→17개. 남은 병목은 Total Blocking Time 780ms(GTM 등 JS 실행) — 폰트 이슈는 사실상 해소
+- **후속(선택)**: Total Blocking Time 낮추려면 Google Tag Manager 지연 로딩 등 JS 최적화 여지 있음, 지금 성과로도 충분하면 보류 가능
+
+---
+
 ## 미해결 결정 / 입력 대기
+- [ ] 화면 육안 확인 (스크린샷 도구 오류로 이번 세션에 확인 못함, 텍스트 렌더링은 정상 확인됨)
 - [ ] 네이버 인물정보 수정신청 검토 결과 확인 (제출일 2026-07-16)
 - [ ] lfind.kr 홈페이지 링크 반영 여부 확인 (요청일 2026-07-17)
 - [ ] bizno.net 홈페이지 링크 반영 여부 확인 (요청일 2026-07-17, 2건 접수)
