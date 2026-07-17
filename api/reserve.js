@@ -30,6 +30,24 @@ const onlyDigits = (s) => String(s || '').replace(/\D/g, '');
 // 길이 제한 + 앞뒤 공백 제거
 const clip = (s, n) => String(s || '').trim().slice(0, n);
 
+// 인스턴스 생존 동안의 간이 제출 기록(IP별) — 서버리스 특성상 완벽하진 않지만
+// 스크립트로 같은 인스턴스에 연타하는 봇의 문자 발송 비용을 막는 1차 방어선
+const submitLog = new Map(); // ip -> [timestamp,...]
+const WINDOW_MS = 10 * 60 * 1000; // 10분
+const MAX_PER_WINDOW = 3; // IP당 10분에 3회
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const list = (submitLog.get(ip) || []).filter((t) => now - t < WINDOW_MS);
+  if (list.length >= MAX_PER_WINDOW) {
+    submitLog.set(ip, list);
+    return true;
+  }
+  list.push(now);
+  submitLog.set(ip, list);
+  return false;
+}
+
 const AREA_LABELS = {
   divorce: '이혼·가사',
   'school-violence': '학교폭력·소년보호',
@@ -45,10 +63,19 @@ module.exports = async (req, res) => {
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
   }
 
-  // 외부 봇의 직접 호출 차단(같은 도메인에서 온 요청만 허용, 테스트 환경은 통과)
+  // 외부 봇의 직접 호출 차단 — 브라우저 fetch POST는 항상 Origin을 보내므로
+  // origin/referer가 아예 없는 요청(curl 등 스크립트)도 차단한다
   const origin = req.headers.origin || req.headers.referer || '';
-  if (origin && !/chang-hee\.kim|localhost|127\.0\.0\.1/i.test(origin)) {
+  if (!/chang-hee\.kim|localhost|127\.0\.0\.1/i.test(origin)) {
     return res.status(403).json({ ok: false, error: 'forbidden' });
+  }
+
+  // IP당 반복 제출 제한(문자 발송 비용 방어)
+  const ip = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '')
+    .split(',')[0]
+    .trim();
+  if (isRateLimited(ip)) {
+    return res.status(429).json({ ok: false, error: 'too_many_requests' });
   }
 
   let body;
