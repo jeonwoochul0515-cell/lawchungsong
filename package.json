@@ -6,7 +6,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/input.css -o ./css/tailwind.min.css --minify",
     "topics": "node scripts/topic-pipeline.js",
-    "ranks": "node scripts/rank-monitor.js"
+    "ranks": "node scripts/rank-monitor.js",
+    "ads": "node scripts/setup-ad-campaign.js"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
