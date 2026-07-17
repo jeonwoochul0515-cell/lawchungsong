@@ -1,0 +1,55 @@
+# 새 칼럼이 올라왔는데 OG 이미지가 없으면 CI에서 자동 생성해 커밋한다 (주간 자동 발행 루틴 보조)
+name: Generate OG Images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'columns/index.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 누락 OG 확인
+        id: check
+        run: |
+          MISSING=$(node -e "
+            const idx = require('./columns/index.json');
+            const fs = require('fs');
+            const m = idx.filter(c => !fs.existsSync('images/og/' + c.slug + '.jpg'));
+            console.log(m.length);
+          ")
+          echo "count=$MISSING" >> "$GITHUB_OUTPUT"
+          echo "누락 OG: $MISSING건"
+
+      - name: puppeteer 설치 (CI 전용, 프로젝트 의존성 아님)
+        if: steps.check.outputs.count != '0'
+        run: npm install --no-save puppeteer
+
+      - name: OG 이미지 생성
+        if: steps.check.outputs.count != '0'
+        run: node scripts/generate-og.mjs
+
+      - name: 생성된 이미지 커밋
+        if: steps.check.outputs.count != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/og/*.jpg
+          if git diff --cached --quiet; then
+            echo "커밋할 변경 없음"
+          else
+            git commit -m "chore: 신규 칼럼 OG 이미지 자동 생성"
+            git push
+          fi
