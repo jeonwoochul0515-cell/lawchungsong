@@ -1,9 +1,15 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/",
       "has": [{ "type": "host", "value": "www.chang-hee.kim" }],
-      "destination": "https://chang-hee.kim/:path*",
+      "destination": "https://chang-hee.kim/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [{ "type": "host", "value": "www.chang-hee.kim" }],
+      "destination": "https://chang-hee.kim/:path+",
       "permanent": true
     }
   ],
