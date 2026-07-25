@@ -57,6 +57,40 @@ const AREA_LABELS = {
   etc: '기타',
 };
 
+// 유입 경로를 문자에 넣을 한 줄로 요약한다.
+// 광고 클릭이면 실제 검색어(n_query)와 입찰 키워드(n_keyword)가 가장 중요한 정보다.
+function summarizeAttr(attr) {
+  if (!attr || typeof attr !== 'object') return '기록 없음';
+  const a = attr.first || attr.current || {};
+  const parts = [];
+
+  if (a.n_query) parts.push(`검색어 "${clip(a.n_query, 40)}"`);
+  if (a.n_keyword) parts.push(`광고키워드 "${clip(a.n_keyword, 40)}"`);
+  if (a.utm_campaign) parts.push(`캠페인 ${clip(a.utm_campaign, 30)}`);
+
+  if (!parts.length) {
+    const ref = clip(a.ref, 120);
+    if (!ref) parts.push('직접 방문 또는 즐겨찾기');
+    else if (/naver/i.test(ref)) parts.push('네이버 (검색·블로그 등)');
+    else if (/google/i.test(ref)) parts.push('구글 검색');
+    else if (/daum|kakao/i.test(ref)) parts.push('다음·카카오');
+    else if (/chatgpt|perplexity|claude|gemini|copilot/i.test(ref)) parts.push('AI 검색');
+    else parts.push(ref);
+  } else if (a.utm_source || a.n_media) {
+    parts.unshift(clip(a.utm_source || a.n_media, 20) + ' 광고');
+  }
+
+  if (a.landing) parts.push(`처음 본 페이지 ${clip(a.landing, 60)}`);
+  if (a.at) parts.push(`최초 방문 ${clip(a.at, 20)}`);
+
+  // 첫 방문과 신청 시점이 다르면 재방문 후 신청한 것 — 검토 기간이 있었다는 뜻
+  const cur = attr.current || {};
+  if (a.at && cur.at && a.at.slice(0, 10) !== cur.at.slice(0, 10)) {
+    parts.push('※ 다른 날 다시 방문해 신청');
+  }
+  return parts.join(' · ');
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -119,7 +153,9 @@ module.exports = async (req, res) => {
     `■ 분야: ${area}\n` +
     `■ 희망 연락시간: ${time || '미입력'}\n` +
     '■ 상담내용\n' +
-    content;
+    content +
+    '\n\n■ 유입경로\n' +
+    summarizeAttr(body.attr);
 
   try {
     const r = await fetch(SOLAPI_ENDPOINT, {
