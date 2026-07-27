@@ -120,7 +120,8 @@ module.exports = async (req, res) => {
   }
 
   // 허니팟: 사람 눈에 안 보이는 필드가 채워졌으면 봇으로 간주하고 조용히 성공 응답
-  if (body.company) {
+  // (company는 구버전 필드 — 캐시된 페이지 호환용으로 함께 검사)
+  if (body.company || body.website2) {
     return res.status(200).json({ ok: true });
   }
 
@@ -130,8 +131,9 @@ module.exports = async (req, res) => {
   const time = clip(body.time, 30);
   const content = clip(body.content, 800);
 
-  // 필수값 검증
-  if (name.length < 2 || phone.length < 10 || content.length < 5) {
+  // 필수값 검증 — 휴대전화(01x) 또는 유선(0AB) 형식만 통과 (오타·가짜 번호 차단)
+  const validPhone = /^01[016789]\d{7,8}$/.test(phone) || /^0(2|[3-6]\d)\d{7,8}$/.test(phone);
+  if (name.length < 2 || !validPhone || content.length < 5) {
     return res.status(400).json({ ok: false, error: 'invalid_input' });
   }
 
@@ -146,16 +148,27 @@ module.exports = async (req, res) => {
     return res.status(500).json({ ok: false, error: 'server_misconfigured' });
   }
 
-  const text =
+  // LMS 한도는 EUC-KR 기준 2,000바이트(한글 2바이트). 초과하면 발송 자체가 실패하므로
+  // 상담내용을 바이트 예산에 맞춰 자동 절단한다 — 사연이 긴(절박한) 손님일수록 발송이 실패하던 문제 방지.
+  const euckrBytes = (s) => [...s].reduce((n, ch) => n + (ch.charCodeAt(0) > 0x7f ? 2 : 1), 0);
+  const clipBytes = (s, maxBytes) => {
+    let bytes = 0;
+    for (let i = 0; i < s.length; i++) {
+      bytes += s.charCodeAt(i) > 0x7f ? 2 : 1;
+      if (bytes > maxBytes) return s.slice(0, i) + '…(잘림)';
+    }
+    return s;
+  };
+  const head =
     '[홈페이지 상담예약]\n' +
     `■ 이름: ${name}\n` +
-    `■ 연락처: ${body.phone}\n` +
+    `■ 연락처: ${phone}\n` +
     `■ 분야: ${area}\n` +
     `■ 희망 연락시간: ${time || '미입력'}\n` +
-    '■ 상담내용\n' +
-    content +
-    '\n\n■ 유입경로\n' +
-    summarizeAttr(body.attr);
+    '■ 상담내용\n';
+  const tail = '\n\n■ 유입경로\n' + summarizeAttr(body.attr);
+  const budget = 1900 - euckrBytes(head) - euckrBytes(tail);
+  const text = head + clipBytes(content, Math.max(budget, 200)) + tail;
 
   try {
     const r = await fetch(SOLAPI_ENDPOINT, {
