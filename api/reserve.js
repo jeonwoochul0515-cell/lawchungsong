@@ -189,6 +189,30 @@ module.exports = async (req, res) => {
       return res.status(502).json({ ok: false, error: 'send_failed' });
     }
 
+    // 중앙 접수함(lead-inbox)에 사본 전송 — 문자가 유일 기록이던 문제 해소.
+    // 실패해도 접수 흐름에는 영향 없음(문자는 이미 성공).
+    if (process.env.LEAD_INBOX_TOKEN) {
+      try {
+        await fetch('https://lead-inbox.jeonwoochul0515.workers.dev/api/lead', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-ingest-token': process.env.LEAD_INBOX_TOKEN,
+          },
+          body: JSON.stringify({
+            site: '청송 홈페이지',
+            name,
+            phone,
+            detail: [`분야: ${area}`, time && `연락 희망: ${time}`, content, `유입: ${summarizeAttr(body.attr)}`]
+              .filter(Boolean)
+              .join('\n'),
+          }),
+        });
+      } catch (e) {
+        console.error('lead-inbox 전송 실패', e);
+      }
+    }
+
     return res.status(200).json({ ok: true });
   } catch (e) {
     console.error('solapi 호출 예외', e);
