@@ -1,4 +1,8 @@
 # 내부 작업 문서·원본 자료 — 공개 배포/색인 제외 (실 호스팅 Vercel 기준)
 *.md
 *.pdf
+*.hwpx
+*.skill
 정장2.jpg
+KakaoTalk_*.jpg
+.firebase/
