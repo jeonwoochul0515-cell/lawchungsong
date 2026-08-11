@@ -203,7 +203,8 @@ module.exports = async (req, res) => {
             site: '청송 홈페이지',
             name,
             phone,
-            detail: [`분야: ${area}`, time && `연락 희망: ${time}`, content, `유입: ${summarizeAttr(body.attr)}`]
+            source: summarizeAttr(body.attr),
+            detail: [`분야: ${area}`, time && `연락 희망: ${time}`, content]
               .filter(Boolean)
               .join('\n'),
           }),
