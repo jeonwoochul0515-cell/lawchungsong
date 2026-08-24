@@ -15,3 +15,25 @@ node_modules/
 
 # 로컬 개발용 환경변수 — 커밋 금지 (실제 값은 Vercel 환경변수가 정본)
 .env.local
+
+# ── 개인정보·내부 자료 — 공개 저장소(PUBLIC)에 올리지 않는다 ──
+# 임명장·응시원서·신청서에는 주소·생년월일 등이 들어 있다.
+*.pdf
+*.hwp
+*.hwpx
+*.skill
+KakaoTalk_*.jpg
+정장2.jpg
+자격증빙/
+.firebase/
+
+# 작업 메모·체크리스트 (이미 추적 중인 8개는 아래에서 예외 처리)
+*.md
+!README.md
+!GEMINI.md
+!blueprint.md
+!checklist.md
+!context-notes.md
+!naver-blog/README.md
+!scripts/topic-backlog.md
+!scripts/topic-backlog-debt.md
