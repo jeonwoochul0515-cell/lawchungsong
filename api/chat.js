@@ -6,6 +6,7 @@
 //       ④급박한 위험 신호는 모델과 별개로 서버가 감지해 긴급 안내를 강제한다
 const Anthropic = require('@anthropic-ai/sdk');
 const knowledge = require('./_knowledge.json');
+const { searchCases } = require('./_lawcaddy.js');
 
 const CLAUDE_MODEL = 'claude-sonnet-5';
 
@@ -142,6 +143,14 @@ ${PRECEDENT_KNOWLEDGE}
 - 갈리는 지점이 나오면 그 지점을 짚으며 "여기부터는 변호사님이 기록을 보고 정하실 부분이에요"라고 넘긴다.
 - 증거는 늘 강조한다. 지우지 말 것, 캡처하고 백업해 둘 것.
 
+[참고 판례를 받았을 때 — 지키지 않으면 규정 위반이다]
+- 답변 앞에 [참고 판례] 목록이 주어지는 경우가 있다. 손님 상황과 쟁점이 비슷한 실제 판례다.
+- "비슷한 사안에서 법원이 이렇게 본 적이 있어요" 수준의 사실 안내까지만 한다.
+- "이 판례가 있으니 됩니다", "그러면 이기실 수 있어요" 같은 단정은 절대 하지 않는다.
+- 사건번호는 목록에 있는 것만 쓴다. 목록에 없는 번호를 지어내지 않는다. 번호가 확실치 않으면 번호 없이 말한다.
+- 판례 이야기는 한 문장을 넘기지 않는다. 당신의 본업은 사실관계 정리이지 판례 설명이 아니다.
+- 목록이 비어 있거나 손님 상황과 어긋나면 아예 언급하지 않는다.
+
 [상담 연결]
 - 사실관계가 서너 개 모이면 자연스럽게 상담 예약을 권한다. 신뢰 근거는 사실만 쓴다: 김창희 변호사는 변호사이면서 변리사·가맹거래사 자격을 함께 가지고 있고, 부산지방검찰청 형사조정위원, 법제처 법제자문관, 부산광역시교육청 행정심판위원회 위원, 동아대학교 법학전문대학원 겸임교수를 맡아 왔다.
 - 연결 방법: 대화창 아래 "상담 예약하기" 버튼으로 성함과 연락처를 남기면 연락이 간다. 급하면 전화 1660-4452.
@@ -275,6 +284,34 @@ module.exports = async (req, res) => {
     ? `\n\n[현재 화면] 손님은 지금 "${String(body.page).slice(0, 80)}" 화면을 보고 있다.`
     : '';
 
+  // 로캐디 판례 검색 — 분야가 잡힐 때만 실제로 조회한다(아니면 즉시 빈 결과).
+  // 실패·지연이 대화를 막지 않도록 예외는 전부 삼킨다.
+  let precedentNote = '';
+  try {
+    const convo = history
+      .filter((m) => m.role === 'user')
+      .map((m) => m.content)
+      .join(' ')
+      .slice(-1200);
+    const found = await searchCases(convo, 3);
+    if (found && found.cases && found.cases.length) {
+      const lines = found.cases
+        .map((c, i) => {
+          const head = c.citable && c.caseNumber
+            ? `${i + 1}. ${c.caseNumber} ${c.court}${c.date ? ' (' + c.date + ')' : ''}`
+            : `${i + 1}. (사건번호 인용 불가 — 내용만 참고)`;
+          return `${head}\n   ${c.summary.slice(0, 300)}`;
+        })
+        .join('\n');
+      precedentNote =
+        `\n\n[참고 판례 — ${found.domain} 분야 검색 결과]\n` +
+        '아래는 손님 상황과 쟁점이 비슷한 판례다. 위 [참고 판례를 받았을 때] 규칙을 반드시 지킨다.\n' +
+        lines;
+    }
+  } catch (e) {
+    console.error('판례 검색 실패(무시)', e && e.message);
+  }
+
   const apiKey = (process.env.ANTHROPIC_API_KEY || '').trim();
   if (!apiKey) {
     return res.status(200).json({
@@ -294,7 +331,7 @@ module.exports = async (req, res) => {
     let reply = '';
     let note = '';
     for (let attempt = 0; attempt < 3; attempt++) {
-      const raw = await runClaude(apiKey, (officeNote + pageNote + note).trim(), history);
+      const raw = await runClaude(apiKey, (officeNote + pageNote + precedentNote + note).trim(), history);
       reply = sanitize(raw);
       if (looksBroken(reply)) continue;
       if (lastAssistant && similarity(reply, lastAssistant) > 0.6) {
