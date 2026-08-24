@@ -2,6 +2,7 @@
 const crypto = require('crypto');
 
 const SOLAPI_ENDPOINT = 'https://api.solapi.com/messages/v4/send';
+const NEWLINE = String.fromCharCode(10);
 
 // solapi HMAC-SHA256 인증 헤더 생성
 function authHeader(apiKey, apiSecret) {
@@ -130,6 +131,10 @@ module.exports = async (req, res) => {
   const area = AREA_LABELS[body.area] || '미선택';
   const time = clip(body.time, 30);
   const content = clip(body.content, 800);
+  // 다인(상담 챗봇) 대화 전문 — 손님이 '대화 내용 함께 전달'에 체크한 경우에만 온다.
+  // 문자에는 싣지 않고(LMS 2,000바이트 한도) 중앙 접수함에만 전문으로 남긴다.
+  const chatLog = clip(body.chatLog, 20000);
+  const viaChat = body.via === 'dain';
 
   // 필수값 검증 — 휴대전화(01x) 또는 유선(0AB) 형식만 통과 (오타·가짜 번호 차단)
   const validPhone = /^01[016789]\d{7,8}$/.test(phone) || /^0(2|[3-6]\d)\d{7,8}$/.test(phone);
@@ -166,10 +171,52 @@ module.exports = async (req, res) => {
     `■ 분야: ${area}\n` +
     `■ 희망 연락시간: ${time || '미입력'}\n` +
     '■ 상담내용\n';
-  const tail = '\n\n■ 유입경로\n' + summarizeAttr(body.attr);
+  const chatNote = chatLog ? '\n\n■ 다인 대화: 있음 — 전문은 접수함에서 확인' : '';
+  const tail = chatNote + '\n\n■ 유입경로\n' + summarizeAttr(body.attr);
   const budget = 1900 - euckrBytes(head) - euckrBytes(tail);
   const text = head + clipBytes(content, Math.max(budget, 200)) + tail;
 
+  // ── 접수 누락 방지 ──────────────────────────────────────────────
+  // 접수함 저장과 문자 발송을 서로 독립으로 실행한다. 한쪽이 죽어도 접수는 남는다.
+  // (기존에는 문자가 실패하면 곧바로 502로 끝나 접수함 전송을 시도조차 하지 않았다.)
+  let inboxOk = false;
+  if (process.env.LEAD_INBOX_TOKEN) {
+    try {
+      const detail = [
+        `분야: ${area}`,
+        time && `연락 희망: ${time}`,
+        content,
+        chatLog && `${NEWLINE}─── 다인 대화 전문 ───${NEWLINE}${chatLog}`,
+      ]
+        .filter(Boolean)
+        .join(NEWLINE);
+      const ir = await fetch('https://lead-inbox.jeonwoochul0515.workers.dev/api/lead', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'x-ingest-token': process.env.LEAD_INBOX_TOKEN,
+        },
+        body: JSON.stringify({
+          site: viaChat ? '청송 홈페이지(다인)' : '청송 홈페이지',
+          name,
+          phone,
+          source: summarizeAttr(body.attr),
+          detail,
+        }),
+      });
+      inboxOk = ir.ok;
+      if (!ir.ok) console.error('lead-inbox 응답 실패', ir.status);
+    } catch (e) {
+      console.error('lead-inbox 전송 실패', e);
+    }
+  }
+
+  // 접수함이 실패했으면 문자가 유일한 기록이므로 그 사실을 문자 머리에 알린다.
+  const warn = process.env.LEAD_INBOX_TOKEN && !inboxOk
+    ? '[주의] 접수함 저장 실패 — 이 문자가 유일한 기록입니다.' + NEWLINE
+    : '';
+
+  let smsOk = false;
   try {
     const r = await fetch(SOLAPI_ENDPOINT, {
       method: 'POST',
@@ -178,45 +225,19 @@ module.exports = async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        message: { to, from, text, subject: '홈페이지 상담예약', type: 'LMS' },
+        message: { to, from, text: warn + text, subject: '홈페이지 상담예약', type: 'LMS' },
       }),
     });
-
     const data = await r.json().catch(() => ({}));
-
-    if (!r.ok) {
-      console.error('solapi 발송 실패', r.status, data);
-      return res.status(502).json({ ok: false, error: 'send_failed' });
-    }
-
-    // 중앙 접수함(lead-inbox)에 사본 전송 — 문자가 유일 기록이던 문제 해소.
-    // 실패해도 접수 흐름에는 영향 없음(문자는 이미 성공).
-    if (process.env.LEAD_INBOX_TOKEN) {
-      try {
-        await fetch('https://lead-inbox.jeonwoochul0515.workers.dev/api/lead', {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json',
-            'x-ingest-token': process.env.LEAD_INBOX_TOKEN,
-          },
-          body: JSON.stringify({
-            site: '청송 홈페이지',
-            name,
-            phone,
-            source: summarizeAttr(body.attr),
-            detail: [`분야: ${area}`, time && `연락 희망: ${time}`, content]
-              .filter(Boolean)
-              .join('\n'),
-          }),
-        });
-      } catch (e) {
-        console.error('lead-inbox 전송 실패', e);
-      }
-    }
-
-    return res.status(200).json({ ok: true });
+    smsOk = r.ok;
+    if (!r.ok) console.error('solapi 발송 실패', r.status, data);
   } catch (e) {
     console.error('solapi 호출 예외', e);
+  }
+
+  // 두 경로가 모두 죽었을 때만 손님에게 정직하게 실패를 알린다.
+  if (!smsOk && !inboxOk) {
     return res.status(502).json({ ok: false, error: 'send_failed' });
   }
+  return res.status(200).json({ ok: true });
 };
