@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0"
   }
 }

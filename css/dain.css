@@ -1,0 +1,377 @@
+/* 다인 상담 챗봇 위젯 — 법률사무소 청송 chang-hee.kim
+   우하단 고정 패널(모달 금지 — 손님이 사이트를 계속 둘러보며 대화하는 "동행" 느낌).
+   아바타는 크게(데스크톱 128px / 모바일 106px), 등장은 오버슈트, 상시 부유로 살아있게. */
+
+:root {
+  --dain-navy: #1a2b4c;
+  --dain-navy-soft: #2d4373;
+  --dain-ink: #1f2937;
+  --dain-line: #e5e7eb;
+  --dain-bg: #ffffff;
+  --dain-bubble: #f3f4f6;
+  --dain-accent: #b8860b;
+  --dain-urgent: #b91c1c;
+  --dain-shadow: 0 10px 40px rgba(26, 43, 76, 0.18);
+}
+
+/* ── 아바타 런처 ───────────────────────────────── */
+.dain-launcher {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9998;
+  width: 128px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  animation: dain-enter 0.72s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.dain-launcher__img {
+  display: block;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #eceff3;
+  box-shadow: var(--dain-shadow);
+  border: 3px solid #fff;
+  animation: dain-float 4.6s ease-in-out infinite;
+}
+/* hidden 속성은 클래스의 display 선언에 진다 — 명시적으로 이겨 두어야 표정 전환이 동작한다 */
+.dain-launcher__img[hidden] { display: none; }
+
+.dain-launcher__vid { object-fit: cover; }
+
+.dain-launcher__badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #fff;
+}
+
+@keyframes dain-enter {
+  0% { opacity: 0; transform: translateY(28px) scale(0.6) rotate(-8deg); }
+  60% { opacity: 1; transform: translateY(-6px) scale(1.12) rotate(3deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+@keyframes dain-float {
+  0%, 100% { transform: translateY(0) rotate(-2.4deg); }
+  50% { transform: translateY(-12px) rotate(2.4deg); }
+}
+
+/* ── 말풍선(먼저 거는 말) ──────────────────────── */
+.dain-bubble {
+  position: fixed;
+  right: 158px;
+  bottom: 62px;
+  z-index: 9998;
+  max-width: min(320px, calc(100vw - 190px));
+  padding: 14px 16px;
+  background: #fff;
+  color: var(--dain-ink);
+  font-size: 14.5px;
+  line-height: 1.62;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: var(--dain-shadow);
+  border: 1px solid var(--dain-line);
+  animation: dain-pop 0.4s ease both;
+  cursor: pointer;
+}
+.dain-bubble::after {
+  content: '';
+  position: absolute;
+  right: -7px;
+  bottom: 14px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-right: 1px solid var(--dain-line);
+  border-bottom: 1px solid var(--dain-line);
+  transform: rotate(-45deg);
+}
+.dain-bubble__close {
+  position: absolute;
+  top: -9px;
+  left: -9px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--dain-line);
+  background: #fff;
+  color: #9ca3af;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+@keyframes dain-pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── 대화 패널 ─────────────────────────────────── */
+.dain-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  height: 600px;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  background: var(--dain-bg);
+  border-radius: 18px;
+  box-shadow: var(--dain-shadow);
+  border: 1px solid var(--dain-line);
+  overflow: hidden;
+  animation: dain-panel-in 0.34s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+}
+@keyframes dain-panel-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.dain-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 14px;
+  background: var(--dain-navy);
+  color: #fff;
+  flex: 0 0 auto;
+}
+.dain-head__img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: #eceff3;
+}
+.dain-head__meta { flex: 1; min-width: 0; }
+.dain-head__name { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; }
+.dain-head__role { font-size: 11.5px; opacity: 0.8; margin-top: 2px; }
+.dain-head__close {
+  border: 0;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dain-log {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 16px 14px 8px;
+  background: #fafbfc;
+  -webkit-overflow-scrolling: touch;
+}
+.dain-row { display: flex; margin-bottom: 12px; }
+.dain-row--me { justify-content: flex-end; }
+.dain-msg {
+  max-width: 84%;
+  padding: 10px 13px;
+  font-size: 14.5px;
+  line-height: 1.66;
+  border-radius: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.dain-row--dain .dain-msg {
+  background: #fff;
+  color: var(--dain-ink);
+  border: 1px solid var(--dain-line);
+  border-bottom-left-radius: 4px;
+}
+.dain-row--me .dain-msg {
+  background: var(--dain-navy);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.dain-row--urgent .dain-msg {
+  border-color: var(--dain-urgent);
+  background: #fef2f2;
+  color: #7f1d1d;
+}
+
+.dain-typing { display: inline-flex; gap: 4px; padding: 4px 2px; }
+.dain-typing i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c4c9d2;
+  animation: dain-blink 1.3s infinite;
+}
+.dain-typing i:nth-child(2) { animation-delay: 0.18s; }
+.dain-typing i:nth-child(3) { animation-delay: 0.36s; }
+@keyframes dain-blink {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* 퀵리플라이 */
+.dain-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 14px 10px;
+  background: #fafbfc;
+}
+.dain-quick button {
+  border: 1px solid var(--dain-line);
+  background: #fff;
+  color: var(--dain-navy);
+  font-size: 12.5px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.dain-quick button:hover { background: #f1f5f9; }
+
+/* 입력 */
+.dain-input {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid var(--dain-line);
+  background: #fff;
+}
+.dain-input textarea {
+  flex: 1;
+  resize: none;
+  border: 1px solid var(--dain-line);
+  border-radius: 10px;
+  padding: 9px 11px;
+  font-size: 16px; /* 16px 미만이면 iOS가 포커스 시 확대한다 */
+  line-height: 1.5;
+  max-height: 96px;
+  font-family: inherit;
+  color: var(--dain-ink);
+}
+.dain-input textarea:focus { outline: 2px solid var(--dain-navy-soft); outline-offset: -1px; }
+.dain-input button {
+  flex: 0 0 auto;
+  border: 0;
+  background: var(--dain-navy);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.dain-input button:disabled { opacity: 0.45; cursor: default; }
+.dain-shake { animation: dain-shake 0.32s ease; }
+@keyframes dain-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* 하단 액션 */
+.dain-cta {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 0 10px 10px;
+  background: #fff;
+}
+.dain-cta a, .dain-cta button {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--dain-navy);
+}
+.dain-cta .dain-cta--primary { background: var(--dain-navy); color: #fff; }
+.dain-cta .dain-cta--ghost { background: #fff; color: var(--dain-navy); }
+
+/* ── 인챗 접수 폼 ──────────────────────────────── */
+.dain-form {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--dain-line);
+  background: #fff;
+  flex: 0 0 auto;
+  max-height: 62%;
+  overflow-y: auto;
+}
+.dain-form h4 { margin: 0 0 4px; font-size: 14px; color: var(--dain-navy); }
+.dain-form p.dain-form__lead { margin: 0 0 10px; font-size: 12px; color: #6b7280; line-height: 1.55; }
+.dain-form label { display: block; font-size: 12px; color: #4b5563; margin: 8px 0 4px; }
+.dain-form input[type='text'], .dain-form input[type='tel'] {
+  width: 100%;
+  border: 1px solid var(--dain-line);
+  border-radius: 9px;
+  padding: 10px 11px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--dain-ink);
+}
+.dain-form__check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 12px 0 4px;
+  font-size: 12.5px;
+  color: #374151;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.dain-form__check input { margin-top: 2px; flex: 0 0 auto; width: 16px; height: 16px; }
+.dain-form__row { display: flex; gap: 8px; margin-top: 12px; }
+.dain-form__row button {
+  flex: 1;
+  border-radius: 10px;
+  padding: 11px 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--dain-navy);
+}
+.dain-form__submit { background: var(--dain-navy); color: #fff; }
+.dain-form__cancel { background: #fff; color: #6b7280; border-color: var(--dain-line); }
+.dain-form__msg { margin-top: 9px; font-size: 12.5px; line-height: 1.5; }
+.dain-form__msg--err { color: var(--dain-urgent); }
+.dain-form__msg--ok { color: #15803d; }
+
+/* ── 모바일 ────────────────────────────────────── */
+@media (max-width: 520px) {
+  .dain-launcher, .dain-launcher__img { width: 106px; height: 106px; }
+  .dain-launcher { right: 14px; bottom: 14px; }
+  .dain-bubble { right: 128px; bottom: 48px; max-width: calc(100vw - 152px); font-size: 13.5px; padding: 12px 13px; }
+  .dain-panel {
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 88vh;
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+/* ── 접근성: 움직임 최소화 설정을 존중 ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  .dain-launcher, .dain-launcher__img, .dain-bubble, .dain-panel, .dain-typing i {
+    animation: none !important;
+  }
+}
+
+/* 인쇄 시 위젯 숨김 */
+@media print {
+  .dain-launcher, .dain-bubble, .dain-panel { display: none !important; }
+}
