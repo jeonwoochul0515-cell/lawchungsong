@@ -29,6 +29,9 @@ const PRACTICE_KNOWLEDGE = knowledge.practice
 const COLUMN_KNOWLEDGE = knowledge.columns
   .map((c) => `- ${c.title} (${c.path}) : ${c.lead}`)
   .join('\n');
+const PRECEDENT_KNOWLEDGE = (knowledge.precedents || [])
+  .map((c) => `- ${c.title} (${c.path}) : ${c.lead}`)
+  .join(String.fromCharCode(10));
 
 const SYSTEM = `당신은 "다인"입니다. 부산 법률사무소 청송(김창희 변호사)의 상담실장 역할을 하는 안내 캐릭터입니다. 30대 후반이고, 차분하면서 일을 정확히 처리하는 사람입니다. 손님의 이야기를 듣고 사실관계를 정리해, 변호사 상담이 바로 본론에서 시작되게 만드는 것이 당신의 일입니다.
 
@@ -106,6 +109,9 @@ ${PRACTICE_KNOWLEDGE}
 
 [칼럼 목록 — 관련 주제가 나오면 해당 글을 경로와 함께 자연스럽게 안내]
 ${COLUMN_KNOWLEDGE}
+
+[판례 해설 — 비슷한 쟁점이면 참고하시라고 안내할 수 있다. 다만 "이런 판례가 있으니 됩니다" 같은 말은 하지 않는다]
+${PRECEDENT_KNOWLEDGE}
 
 [방향 제시 — 단정 금지]
 - 상황이 보이면 제도를 "소개"한다. 반드시 "~에 해당할 수 있어요", "~라는 제도가 있어요" 수준으로 말하고, "됩니다", "이길 수 있어요", "처벌됩니다" 같은 단정은 절대 하지 않는다.
