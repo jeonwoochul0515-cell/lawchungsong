@@ -1,0 +1,40 @@
+# 칼럼·판례가 새로 올라오면 다인(상담 챗봇)이 안내할 목록을 자동으로 갱신한다.
+# 이게 없으면 주간 자동 발행된 글을 다인이 모른 채로 남는다.
+name: Dain Knowledge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'columns/**.html'
+      - 'precedents/**.html'
+      - 'practice/**.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 지식 목록 생성
+        run: node scripts/build-dain-knowledge.mjs
+
+      - name: 변경분 커밋
+        run: |
+          if [ -n "$(git status --porcelain api/_knowledge.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add api/_knowledge.json
+            git commit -m "chore(다인): 칼럼·판례 목록 자동 갱신"
+            git push
+          else
+            echo "변경 없음"
+          fi
