@@ -198,6 +198,17 @@
   color: #fff;
   border-bottom-right-radius: 4px;
 }
+/* 말풍선 안 링크 — 눌러야 할 것으로 보이게 */
+.dain-msg a {
+  color: var(--dain-navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+}
+.dain-msg a:hover { color: var(--dain-navy-soft); }
+.dain-row--urgent .dain-msg a { color: var(--dain-urgent); }
+
 .dain-row--urgent .dain-msg {
   border-color: var(--dain-urgent);
   background: #fef2f2;

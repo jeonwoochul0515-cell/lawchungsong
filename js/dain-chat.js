@@ -244,6 +244,43 @@
     render();
   }
 
+
+  // ── 링크 변환 ──────────────────────────────────
+  // 손님이 주소를 직접 입력하는 수고를 없앤다. 다만 아무 URL이나 링크로 만들지 않고,
+  // 우리 서비스 도메인과 이 사이트 내부 경로만 허용 목록으로 처리한다(XSS·피싱 방지).
+  var SERVICE_DOMAINS = [
+    'hakpok-119.com', 'ibyeol119.com', 'myeon-heo.com', 'badadrim.com',
+    'busan-hoiseng.pro', 'barunjeunggeo.com', 'objectionlaw.com',
+    'toesahero.com', 'hakjum.school', 'law-caddy.com',
+  ];
+
+  function escapeHtml(t) {
+    return String(t)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function linkify(text) {
+    var html = escapeHtml(text);
+    // ① 우리 서비스 도메인 → 새 창
+    SERVICE_DOMAINS.forEach(function (d) {
+      var esc = d.replace(/[.]/g, '\\.');
+      var re = new RegExp('(?:https?:\\/\\/)?(?:www\\.)?' + esc, 'g');
+      html = html.replace(re, '<a href="https://' + d + '" target="_blank" rel="noopener noreferrer">' + d + '</a>');
+    });
+    // ② 이 사이트 내부 경로(칼럼·업무분야·판례) → 같은 창
+    html = html.replace(
+      /(^|[\s(])(\/(?:columns|practice|precedents)\/[A-Za-z0-9._-]+\.html)/g,
+      '$1<a href="$2">$2</a>'
+    );
+    // ③ 사무실 전화 → 바로 걸기
+    html = html.replace(/1660-4452/g, '<a href="tel:1660-4452">1660-4452</a>');
+    return html;
+  }
+
   // ── 렌더 ───────────────────────────────────────
   function render() {
     els.log.innerHTML = '';
@@ -252,7 +289,11 @@
       row.className = 'dain-row dain-row--' + (m.role === 'user' ? 'me' : 'dain') + (m.urgent ? ' dain-row--urgent' : '');
       var msg = document.createElement('div');
       msg.className = 'dain-msg';
-      msg.textContent = m.content;
+      if (m.role === 'user') {
+        msg.textContent = m.content;
+      } else {
+        msg.innerHTML = linkify(m.content);
+      }
       row.appendChild(msg);
       els.log.appendChild(row);
     });
