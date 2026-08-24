@@ -251,7 +251,7 @@
   var SERVICE_DOMAINS = [
     'hakpok-119.com', 'ibyeol119.com', 'myeon-heo.com', 'badadrim.com',
     'busan-hoiseng.pro', 'barunjeunggeo.com', 'objectionlaw.com',
-    'toesahero.com', 'hakjum.school', 'law-caddy.com',
+    'toesahero.com',
   ];
 
   function escapeHtml(t) {
