@@ -1,5 +1,6 @@
 // 예약 폼 제출을 받아 solapi로 사무실 휴대폰에 LMS 문자를 발송하는 서버리스 함수
 const crypto = require('crypto');
+const { assess } = require('./_intent.js');
 
 const SOLAPI_ENDPOINT = 'https://api.solapi.com/messages/v4/send';
 const NEWLINE = String.fromCharCode(10);
@@ -177,8 +178,17 @@ module.exports = async (req, res) => {
     `■ 분야: ${area}\n` +
     `■ 희망 연락시간: ${time || '미입력'}\n` +
     '■ 상담내용\n';
+  // 진짜 사건인가, 양식만 받으러 왔나 — 변호사가 어느 건부터 전화할지 고를 수 있게 판정을 실어 보낸다.
+  // 판정이 실패해도 접수는 진행된다(assess는 throw하지 않는다).
+  const intent = await assess({
+    apiKey: (process.env.ANTHROPIC_API_KEY || '').trim(),
+    content,
+    chatLog,
+    attr: body.attr,
+  });
+
   const chatNote = chatLog ? '\n\n■ 다인 대화: 있음 — 전문은 접수함에서 확인' : '';
-  const tail = chatNote + '\n\n■ 유입경로\n' + summarizeAttr(body.attr);
+  const tail = chatNote + '\n\n■ 판정\n' + intent.label + '\n\n■ 유입경로\n' + summarizeAttr(body.attr);
   const budget = 1900 - euckrBytes(head) - euckrBytes(tail);
   const text = head + clipBytes(content, Math.max(budget, 200)) + tail;
 
@@ -207,6 +217,7 @@ module.exports = async (req, res) => {
           name,
           phone,
           source: summarizeAttr(body.attr),
+          intent: intent.label,
           detail,
         }),
       });
