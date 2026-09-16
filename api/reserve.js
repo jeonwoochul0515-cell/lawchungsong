@@ -62,7 +62,12 @@ const AREA_LABELS = {
 // 광고 클릭이면 실제 검색어(n_query)와 입찰 키워드(n_keyword)가 가장 중요한 정보다.
 function summarizeAttr(attr) {
   if (!attr || typeof attr !== 'object') return '기록 없음';
-  const a = attr.first || attr.current || {};
+  // 보내는 쪽이 두 가지다.
+  //  - 예약폼(attribution.js): {first, last, current} 중첩
+  //  - 다인 챗봇(dain-chat.js): {n_query, ref, at} 평평한 객체
+  // 평평한 것을 중첩으로만 읽으면 전부 "직접 방문"으로 찍힌다(2026-09-15 실제로 그랬다).
+  const flat = !attr.first && !attr.current && !attr.last;
+  const a = flat ? attr : attr.first || attr.current || {};
   const parts = [];
 
   if (a.n_query) parts.push(`검색어 "${clip(a.n_query, 40)}"`);
@@ -85,8 +90,9 @@ function summarizeAttr(attr) {
   if (a.at) parts.push(`최초 방문 ${clip(a.at, 20)}`);
 
   // 첫 방문과 신청 시점이 다르면 재방문 후 신청한 것 — 검토 기간이 있었다는 뜻
-  const cur = attr.current || {};
-  if (a.at && cur.at && a.at.slice(0, 10) !== cur.at.slice(0, 10)) {
+  // (평평한 구조에는 비교할 두 시점이 없으므로 건너뛴다)
+  const cur = flat ? {} : attr.current || {};
+  if (a.at && cur.at && String(a.at).slice(0, 10) !== String(cur.at).slice(0, 10)) {
     parts.push('※ 다른 날 다시 방문해 신청');
   }
   return parts.join(' · ');

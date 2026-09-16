@@ -41,13 +41,20 @@
       keys.forEach(function (k) { if (q.get(k)) { got[k] = q.get(k); found = true; } });
       if (found) {
         got.ref = document.referrer || '';
-        got.at = Date.now();
+        // 접수함·문자에 그대로 찍히므로 사람이 읽는 형식으로 넣는다(숫자 timestamp 금지).
+        got.at = new Date().toISOString().slice(0, 16).replace('T', ' ');
+        // 어느 화면으로 들어왔는지 — 어떤 랜딩이 손님을 데려오는지 판단하는 근거다.
+        got.landing = (location.pathname + location.search).slice(0, 200);
         lsSet(LS_ATTR, got);
         keys.forEach(function (k) { q.delete(k); });
         var url = location.pathname + (q.toString() ? '?' + q.toString() : '') + location.hash;
         history.replaceState(null, '', url);
       } else if (!lsGet(LS_ATTR, null) && document.referrer) {
-        lsSet(LS_ATTR, { ref: document.referrer, at: Date.now() });
+        lsSet(LS_ATTR, {
+          ref: document.referrer,
+          at: new Date().toISOString().slice(0, 16).replace('T', ' '),
+          landing: (location.pathname + location.search).slice(0, 200),
+        });
       }
     } catch (e) {}
   })();
@@ -475,7 +482,11 @@
           content: content,
           chatLog: shareEl.checked ? transcript : '',
           via: 'dain',
-          attr: lsGet(LS_ATTR, null) || {},
+          // 공용 계측기(attribution.js)가 있으면 그것을 쓴다 — n_media·utm_term·fbclid와
+          // 첫 방문/마지막 방문까지 잡아 더 정확하다. 없을 때만 챗봇이 모은 것을 보낸다.
+          attr: (typeof window.getAttribution === 'function'
+            ? window.getAttribution()
+            : null) || lsGet(LS_ATTR, null) || {},
         }),
       })
         .then(function (r) { return r.json().then(function (d) { return { ok: r.ok && d && d.ok, d: d }; }); })
