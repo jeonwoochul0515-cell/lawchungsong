@@ -25,8 +25,14 @@
     }
 
     // CTA 블록(전화·예약 버튼이 있는 영역)이 화면에 들어왔나
+    //
+    // `text-white`까지 붙여 좋히는 이유 — 예전에는 `.bg-navy.rounded-2xl`만 봤는데,
+    // index.html의 업무분야 섹션에 있는 작은 아이콘 사각형(w-16 h-16 bg-navy rounded-2xl)이
+    // 문서 순서상 먼저 잡혔다. 그러면 페이지 중간을 지나기만 해도 "CTA 도달"이 찍혀
+    // 도달률이 실제보다 부풀려 기록된다. 칼럼 페이지의 상담 블록은 text-white를 갖고,
+    // index.html은 #booking으로 잡힐다.
     function watchCta() {
-        var cta = document.querySelector('.bg-navy.rounded-2xl, #contact, #booking');
+        var cta = document.querySelector('.bg-navy.text-white.rounded-2xl, #contact, #booking');
         if (!cta || !('IntersectionObserver' in window)) return;
         var io = new IntersectionObserver(function (es) {
             es.forEach(function (e) { if (e.isIntersecting) { s.cta = 1; io.disconnect(); } });
