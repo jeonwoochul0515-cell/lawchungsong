@@ -12,6 +12,7 @@ node_modules/
 /image copy*.png
 /_verify*.png
 .vercel
+.gjc/
 
 # 로컬 개발용 환경변수 — 커밋 금지 (실제 값은 Vercel 환경변수가 정본)
 .env.local
