@@ -443,6 +443,7 @@
     </style>
     <script src="/js/attribution.js" defer></script>
     <script src="/js/engage.js" defer></script>
+    <script src="/js/sequence.js" defer></script>
 </head>
 <body class="bg-gray-50">
     <!-- Scroll Progress Bar -->
@@ -825,6 +826,84 @@
                 </a>
             </div>
         </div>
+    </section>
+
+    <!-- 사건이 지나가는 과정 — 콘셉트 이미지 스토리(images/pear) -->
+    <!-- overflow-hidden 금지 — 조상에 overflow가 있으면 아래 sticky가 재생 도중에 잘린다 -->
+    <section id="journey" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="text-navy font-bold tracking-wide uppercase text-sm">Journey</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 mb-4 text-gray-900">사건은 이런 순서로 지나갑니다</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">처음 법을 만나는 분들은 다음에 무슨 일이 있는지를 가장 궁금해하십니다.</p>
+            </div>
+
+            <div class="space-y-16 md:space-y-24">
+                <!-- 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center scroll-reveal">
+                    <div class="md:col-span-7">
+                        <img src="images/pear/01-arrival-wide.webp" alt="빛이 드는 복도와 빈 벤치" width="1600" height="894" loading="lazy" decoding="async" class="w-full rounded-2xl shadow-lg">
+                    </div>
+                    <div class="md:col-span-5">
+                        <span class="text-gold font-bold text-sm tracking-widest">01</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-3 text-gray-900">문제가 찾아온 날</h3>
+                        <p class="text-gray-600 leading-relaxed">통지서 한 장, 전화 한 통으로 시작됩니다. 뭐부터 해야 하는지 몰라서 며칠을 보내는 것이 가장 아깝습니다. 기한이 있는 절차라면 더 그렇습니다.</p>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center scroll-reveal">
+                    <div class="md:col-span-7 md:order-2">
+                        <img src="images/pear/04-reading-wide.webp" alt="책상 위에 나란히 펌쳐진 서류와 만년필" width="1600" height="894" loading="lazy" decoding="async" class="w-full rounded-2xl shadow-lg">
+                    </div>
+                    <div class="md:col-span-5 md:order-1">
+                        <span class="text-gold font-bold text-sm tracking-widest">02</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-3 text-gray-900">사건을 읽는다</h3>
+                        <p class="text-gray-600 leading-relaxed">먼저 기록을 봅니다. 무엇이 쟁점이고 무엇이 쟁점이 아닌지를 가르는 일이 먼저입니다. 여기서 준비할 자료와 다투지 않을 부분이 정해집니다.</p>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center scroll-reveal">
+                    <div class="md:col-span-7">
+                        <img src="images/pear/07-standing-wide.webp" alt="법정 발언대의 마이크" width="1600" height="894" loading="lazy" decoding="async" class="w-full rounded-2xl shadow-lg">
+                    </div>
+                    <div class="md:col-span-5">
+                        <span class="text-gold font-bold text-sm tracking-widest">03</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-3 text-gray-900">말할 차례가 온다</h3>
+                        <p class="text-gray-600 leading-relaxed">재판이든 심의위원회든, 주어진 시간은 깁니다. 그 시간에 무엇을 넣을지는 그날이 아니라 그전에 정해집니다.</p>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center scroll-reveal">
+                    <div class="md:col-span-7 md:order-2">
+                        <img src="images/pear/10-after-wide.webp" alt="아침 빛이 드는 문틈" width="1600" height="894" loading="lazy" decoding="async" class="w-full rounded-2xl shadow-lg">
+                    </div>
+                    <div class="md:col-span-5 md:order-1">
+                        <span class="text-gold font-bold text-sm tracking-widest">04</span>
+                        <h3 class="text-2xl font-bold mt-2 mb-3 text-gray-900">다시 일상으로</h3>
+                        <p class="text-gray-600 leading-relaxed">사건은 언젠가 끝납니다. 끝난 뒤의 생활이 훨씬 깁니다. 기록을 어떻게 정리할지, 다음을 어떻게 막을지까지가 상담의 마지막입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 05 — 스크롤 시퀀스(마주 앉는 자리) -->
+        <div id="journeySeq" class="relative mt-20 md:mt-28 h-[180vh]" data-seq="13-counsel">
+            <!-- 카피를 아래쪽에 둔다 — 위에 두면 고정 네비(6rem)에 가려 읽힐 수 없다 -->
+            <div class="sticky top-0 h-screen flex items-end justify-center overflow-hidden bg-gray-900">
+                <img id="journeySeqFrame" src="images/pear/13-counsel-wide.webp" alt="둘이 마주 앉는 상담 자리" width="1600" height="894" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10"></div>
+                <div class="relative text-center px-6 max-w-2xl pb-20 md:pb-28 drop-shadow-lg">
+                    <span class="text-gold font-bold text-sm tracking-widest">05</span>
+                    <h3 class="text-3xl md:text-4xl font-bold mt-3 mb-4 text-white">그 전에, 마주 앉는 일부터</h3>
+                    <p class="text-gray-100 leading-relaxed">어떤 사건인지 듣기 전에는 아무것도 정해드릴 수 없습니다. 순서를 정하는 일은 마주 앉는 데서 시작합니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="mt-10 text-center text-xs text-gray-400 px-6">이 단락의 이미지는 AI로 생성한 연출용 이미지입니다. 실제 사무실·법정·사건·의뢰인을 촬영한 사진이 아닙니다.</p>
     </section>
 
     <section id="booking" class="py-24 bg-navy text-white scroll-reveal">
