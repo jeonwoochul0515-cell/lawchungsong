@@ -1,0 +1,112 @@
+{
+  "provider": "Higgsfield",
+  "model": "nano_banana_pro",
+  "notice": "AI 생성 콘셉트 이미지 — 실제 사무실·법정·사건·의뢰인 사진이 아니다",
+  "photos": [
+    {
+      "file": "01-arrival-wide.webp",
+      "chapter": 1,
+      "title": "문제가 찾아온 날",
+      "width": 1600,
+      "bytes": 31708
+    },
+    {
+      "file": "02-arrival-detail.webp",
+      "chapter": 1,
+      "title": "문턱의 빛 — 전개",
+      "width": 1600,
+      "bytes": 19486
+    },
+    {
+      "file": "03-arrival-portrait.webp",
+      "chapter": 1,
+      "title": "들어서는 자리 — 세로 구도",
+      "width": 960,
+      "bytes": 28064
+    },
+    {
+      "file": "04-reading-wide.webp",
+      "chapter": 2,
+      "title": "사건을 읽는다",
+      "width": 1600,
+      "bytes": 31238
+    },
+    {
+      "file": "05-reading-detail.webp",
+      "chapter": 2,
+      "title": "기록의 결 — 전개",
+      "width": 1600,
+      "bytes": 26238
+    },
+    {
+      "file": "06-reading-portrait.webp",
+      "chapter": 2,
+      "title": "사건을 읽는 자리 — 세로 구도",
+      "width": 960,
+      "bytes": 55380
+    },
+    {
+      "file": "07-standing-wide.webp",
+      "chapter": 3,
+      "title": "법정에 선다",
+      "width": 1600,
+      "bytes": 16860
+    },
+    {
+      "file": "08-standing-detail.webp",
+      "chapter": 3,
+      "title": "변론이 시작되는 지점 — 전개",
+      "width": 1600,
+      "bytes": 19800
+    },
+    {
+      "file": "09-standing-portrait.webp",
+      "chapter": 3,
+      "title": "법정에 서는 자리 — 세로 구도",
+      "width": 960,
+      "bytes": 22886
+    },
+    {
+      "file": "10-after-wide.webp",
+      "chapter": 4,
+      "title": "다시 일상으로",
+      "width": 1600,
+      "bytes": 19186
+    },
+    {
+      "file": "11-after-detail.webp",
+      "chapter": 4,
+      "title": "문틈의 아침 — 전개",
+      "width": 1600,
+      "bytes": 21936
+    },
+    {
+      "file": "12-after-portrait.webp",
+      "chapter": 4,
+      "title": "다시 일상으로 — 세로 구도",
+      "width": 960,
+      "bytes": 20058
+    },
+    {
+      "file": "13-counsel-wide.webp",
+      "chapter": 5,
+      "title": "마주 앉는 자리",
+      "width": 1600,
+      "bytes": 64630
+    },
+    {
+      "file": "14-counsel-detail.webp",
+      "chapter": 5,
+      "title": "대화를 시작할 준비 — 전개",
+      "width": 1600,
+      "bytes": 31732
+    },
+    {
+      "file": "15-counsel-portrait.webp",
+      "chapter": 5,
+      "title": "마주 앉는 자리 — 세로 구도",
+      "width": 960,
+      "bytes": 38452
+    }
+  ]
+}

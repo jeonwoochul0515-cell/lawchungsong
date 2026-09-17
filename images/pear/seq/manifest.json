@@ -1,0 +1,90 @@
+{
+  "generated": "2026-09-17",
+  "scenes": [
+    {
+      "name": "01-arrival",
+      "variants": {
+        "w": {
+          "width": 1280,
+          "frames": 31,
+          "bytes": 476076,
+          "pattern": "/images/pear/seq/01-arrival/w/f%03d.webp"
+        },
+        "m": {
+          "width": 720,
+          "frames": 21,
+          "bytes": 142588,
+          "pattern": "/images/pear/seq/01-arrival/m/f%03d.webp"
+        }
+      }
+    },
+    {
+      "name": "04-reading",
+      "variants": {
+        "w": {
+          "width": 1280,
+          "frames": 31,
+          "bytes": 577884,
+          "pattern": "/images/pear/seq/04-reading/w/f%03d.webp"
+        },
+        "m": {
+          "width": 720,
+          "frames": 21,
+          "bytes": 189332,
+          "pattern": "/images/pear/seq/04-reading/m/f%03d.webp"
+        }
+      }
+    },
+    {
+      "name": "07-standing",
+      "variants": {
+        "w": {
+          "width": 1280,
+          "frames": 31,
+          "bytes": 342518,
+          "pattern": "/images/pear/seq/07-standing/w/f%03d.webp"
+        },
+        "m": {
+          "width": 720,
+          "frames": 21,
+          "bytes": 111070,
+          "pattern": "/images/pear/seq/07-standing/m/f%03d.webp"
+        }
+      }
+    },
+    {
+      "name": "10-after",
+      "variants": {
+        "w": {
+          "width": 1280,
+          "frames": 31,
+          "bytes": 355660,
+          "pattern": "/images/pear/seq/10-after/w/f%03d.webp"
+        },
+        "m": {
+          "width": 720,
+          "frames": 21,
+          "bytes": 103944,
+          "pattern": "/images/pear/seq/10-after/m/f%03d.webp"
+        }
+      }
+    },
+    {
+      "name": "13-counsel",
+      "variants": {
+        "w": {
+          "width": 1280,
+          "frames": 31,
+          "bytes": 722590,
+          "pattern": "/images/pear/seq/13-counsel/w/f%03d.webp"
+        },
+        "m": {
+          "width": 720,
+          "frames": 21,
+          "bytes": 230614,
+          "pattern": "/images/pear/seq/13-counsel/m/f%03d.webp"
+        }
+      }
+    }
+  ]
+}

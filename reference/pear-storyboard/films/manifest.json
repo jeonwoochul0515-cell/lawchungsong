@@ -1,0 +1,69 @@
+{
+  "provider": "Higgsfield",
+  "model": "kling3_0",
+  "mode": "std",
+  "duration": 5,
+  "purpose": "스크롤 시퀀스용 연속 프레임 원본",
+  "films": [
+    {
+      "name": "01-arrival",
+      "source": "01-arrival-wide",
+      "upload_id": "4f965edf-9c60-474d-82d6-c476f63ec47a",
+      "status": "completed",
+      "id": "2a353943-5c36-4b0a-aebb-d2fb153c3e86",
+      "prompt": "Extremely slow, steady dolly-in toward the tall lit window at the end of the stone hall. Locked tripod feel, no handheld shake, no rack focus, no cuts. The light shaft creeps slightly across the floor. Nothing enters or leaves the frame. No people, no text, no camera flare.",
+      "estimated_credits": 7.5,
+      "file": "01-arrival.mp4",
+      "bytes": 2744376,
+      "created_at": "2026-09-17T13:39:05.357816Z"
+    },
+    {
+      "name": "04-reading",
+      "source": "04-reading-wide",
+      "upload_id": "8ade71a7-ca88-4a62-ac15-1601eb08f6e3",
+      "status": "completed",
+      "id": "d295b736-ce6a-4981-afa4-572dec34edc1",
+      "prompt": "Extremely slow lateral drift to the right across the walnut desk, revealing the stepped blank documents. Locked, level move, no rotation, no zoom, no cuts. Lamp light stays constant. Papers remain completely blank. No people, no text appearing.",
+      "estimated_credits": 7.5,
+      "file": "04-reading.mp4",
+      "bytes": 2653034,
+      "created_at": "2026-09-17T13:39:09.927976Z"
+    },
+    {
+      "name": "07-standing",
+      "source": "07-standing-wide",
+      "upload_id": "7091d541-c247-4729-91ee-b1ceaa669cf0",
+      "status": "completed",
+      "id": "873e0ae1-3d42-4ccd-9849-a4dec6288916",
+      "prompt": "Extremely slow push-in toward the brass microphone on the counsel table, the bench staying soft behind. Locked tripod feel, no shake, no focus pull, no cuts. Ambient light unchanged. No people enter, no emblem or text appears.",
+      "estimated_credits": 7.5,
+      "file": "07-standing.mp4",
+      "bytes": 1674711,
+      "created_at": "2026-09-17T13:39:14.243036Z"
+    },
+    {
+      "name": "10-after",
+      "source": "10-after-wide",
+      "upload_id": "8fc5b8a5-c61f-4d8a-9153-eb0beb8104e9",
+      "status": "completed",
+      "id": "a73922e9-a615-4e39-ac74-d4b2f4657fde",
+      "prompt": "Extremely slow dolly forward toward the open doorway and the morning city beyond. Locked, level move, no rotation, no exposure change, no cuts. The door does not move. No people, no birds, no signage or readable text appearing.",
+      "estimated_credits": 7.5,
+      "file": "10-after.mp4",
+      "bytes": 2955042,
+      "created_at": "2026-09-17T13:39:19.653602Z"
+    },
+    {
+      "name": "13-counsel",
+      "source": "13-counsel-wide",
+      "upload_id": "cbf0a0a8-ebd3-4d49-9790-7879db1ee2cb",
+      "status": "completed",
+      "id": "156d7d93-b7fc-424c-b14e-d794bd61ec1a",
+      "prompt": "Extremely slow arc to the right around the small round table, chairs holding their position in frame. Smooth gimbal-on-rails feel, no bounce, no zoom, no cuts. Curtain and foliage stay almost still. No people sit down, no text appears.",
+      "estimated_credits": 7.5,
+      "file": "13-counsel.mp4",
+      "bytes": 3555509,
+      "created_at": "2026-09-17T13:39:24.057499Z"
+    }
+  ]
+}
