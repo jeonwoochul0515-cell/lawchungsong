@@ -473,3 +473,8 @@ index는 `#booking`으로 잡힐다.
 헤드리스 검증: 초기 프레임 요청 0건 / 스크롤 후 데스크톱 31·모바일 21 / 진행률 0·25·50·75·100%가
 f001·f009·f016·f024·f031로 선형 / 모션최소화에서 요청 0건 / 콘솔 오류 없음.
 `/api/blog` 404는 로컬 python 서버가 서버리스 함수를 안 돌려서이고 배포 환경과 무관하다.
+
+## 2026-09-24 예약 접수 사무실 알림 문자 → 중앙접수함 이관 (커밋 14ea787, 미배포)
+- /api/reserve는 접수함에 query·visitNo·firstVisit·alertTo(RESERVE_TO, 없으면 기본 수신번호)를 보낸다. alert가 queued/skipped면 사이트 LMS를 안 보내고, off·장애·8초 초과·비정상이면 종전 LMS를 비상용으로 보낸다.
+- visitNo는 js/attribution.js의 localStorage 카운터(sessionStorage 표시로 세션당 1회). 따로 연 새 탭은 새 방문으로 센다(의도된 근사).
+- 다인 챗봇(api/chat.js)에는 사무실 문자가 원래 없다. 대화 시작·이어짐 문자 제거 대상 아님.
