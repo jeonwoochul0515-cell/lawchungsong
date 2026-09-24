@@ -215,6 +215,9 @@ module.exports = async (req, res) => {
   // (기존에는 문자가 실패하면 곧바로 502로 끝나 접수함 전송을 시도조차 하지 않았다.)
   // 사무실 문자는 접수함이 보낸다(2026-09-24 문자 규칙). 응답 alert가 queued·skipped이면 여기서는 보내지 않고,
   // off·장애·8초 초과·비정상 응답이면 아래 종전 문자를 비상용으로 보낸다.
+  // 접수함은 휴대폰 번호로만 보낸다. 수신 번호가 휴대폰이 아니면(유선 등) 받는 사람이 바뀌므로
+  // 접수함에는 기록만(notify:false) 하고 문자는 종전대로 여기서 보낸다.
+  const canDelegate = /^01[0-9]{8,9}$/.test(to);
   let inboxOk = false;
   let inboxAlert = 'fail';
   if (process.env.LEAD_INBOX_TOKEN) {
@@ -241,7 +244,7 @@ module.exports = async (req, res) => {
           intent: intent.label,
           detail,
           ...leadAttrFields(body.attr),
-          alertTo: to,
+          ...(canDelegate ? { alertTo: to } : { notify: false }),
         }),
         signal: AbortSignal.timeout(8000),
       });
@@ -260,7 +263,7 @@ module.exports = async (req, res) => {
     ? '[주의] 접수함 저장 실패 — 이 문자가 유일한 기록입니다.' + NEWLINE
     : '';
 
-  const inboxAlerted = inboxAlert === 'queued' || inboxAlert === 'skipped';
+  const inboxAlerted = canDelegate && (inboxAlert === 'queued' || inboxAlert === 'skipped');
   let smsOk = false;
   if (!inboxAlerted) try {
     const r = await fetch(SOLAPI_ENDPOINT, {
