@@ -99,6 +99,24 @@ function summarizeAttr(attr) {
   return parts.join(' · ');
 }
 
+// 접수함 문자에 들어갈 유입 값(검색어·몇 번째 방문·첫 방문 시각)을 뽑는다.
+// 중첩(attribution.js)이면 이번 방문 → 마지막 → 첫 방문 순으로 검색어를 찾고, 평평한(다인) 것은 그대로 읽는다.
+// 첫 방문 시각은 UTC 분 단위("YYYY-MM-DD HH:MM")라 한국시간으로 바꾼다.
+function leadAttrFields(attr) {
+  if (!attr || typeof attr !== 'object') return {};
+  const flat = !attr.first && !attr.current && !attr.last;
+  const q = (o) => clip((o && (o.n_query || o.utm_term)) || '', 80);
+  const query = flat ? q(attr) : q(attr.current) || q(attr.last) || q(attr.first);
+  const n = Number(attr.visitNo);
+  const at = String((flat ? attr.at : attr.first && attr.first.at) || '');
+  const t = Date.parse(at.replace(' ', 'T') + ':00Z');
+  const out = {};
+  if (query) out.query = query;
+  if (Number.isInteger(n) && n > 0) out.visitNo = n;
+  if (Number.isFinite(t)) out.firstVisit = new Date(t + 9 * 3600 * 1000).toISOString().slice(0, 16).replace('T', ' ');
+  return out;
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -195,7 +213,10 @@ module.exports = async (req, res) => {
   // ── 접수 누락 방지 ──────────────────────────────────────────────
   // 접수함 저장과 문자 발송을 서로 독립으로 실행한다. 한쪽이 죽어도 접수는 남는다.
   // (기존에는 문자가 실패하면 곧바로 502로 끝나 접수함 전송을 시도조차 하지 않았다.)
+  // 사무실 문자는 접수함이 보낸다(2026-09-24 문자 규칙). 응답 alert가 queued·skipped이면 여기서는 보내지 않고,
+  // off·장애·8초 초과·비정상 응답이면 아래 종전 문자를 비상용으로 보낸다.
   let inboxOk = false;
+  let inboxAlert = 'fail';
   if (process.env.LEAD_INBOX_TOKEN) {
     try {
       const detail = [
@@ -219,10 +240,16 @@ module.exports = async (req, res) => {
           source: summarizeAttr(body.attr),
           intent: intent.label,
           detail,
+          ...leadAttrFields(body.attr),
+          alertTo: to,
         }),
+        signal: AbortSignal.timeout(8000),
       });
       inboxOk = ir.ok;
       if (!ir.ok) console.error('lead-inbox 응답 실패', ir.status);
+      const ij = ir.ok ? await ir.json().catch(() => null) : null;
+      const a = ij && ij.ok === true ? ij.alert : '';
+      if (a === 'queued' || a === 'skipped' || a === 'off') inboxAlert = a;
     } catch (e) {
       console.error('lead-inbox 전송 실패', e);
     }
@@ -233,8 +260,9 @@ module.exports = async (req, res) => {
     ? '[주의] 접수함 저장 실패 — 이 문자가 유일한 기록입니다.' + NEWLINE
     : '';
 
+  const inboxAlerted = inboxAlert === 'queued' || inboxAlert === 'skipped';
   let smsOk = false;
-  try {
+  if (!inboxAlerted) try {
     const r = await fetch(SOLAPI_ENDPOINT, {
       method: 'POST',
       headers: {

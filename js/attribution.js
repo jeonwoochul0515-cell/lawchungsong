@@ -65,10 +65,26 @@
         }
     }
 
+    // 이 브라우저의 몇 번째 방문인가 — 브라우저 세션(탭 묶음)마다 한 번만 1씩 올린다
+    var VISIT_KEY = 'cs_visit_no';
+    var VISIT_FLAG = 'cs_visit_counted';
+    function countVisit() {
+        try {
+            var n = parseInt(localStorage.getItem(VISIT_KEY) || '0', 10) || 0;
+            if (!sessionStorage.getItem(VISIT_FLAG)) {
+                n += 1;
+                localStorage.setItem(VISIT_KEY, String(n));
+                sessionStorage.setItem(VISIT_FLAG, '1');
+            }
+        } catch (e) { /* 저장소 차단 시 방문 수는 비워 둔다 */ }
+    }
+
     // 상담 폼에서 호출해 서버로 보낼 유입 정보를 얻는다
     window.getAttribution = function () {
         var out = {};
         try {
+            var visitNo = parseInt(localStorage.getItem(VISIT_KEY) || '0', 10);
+            if (visitNo > 0) out.visitNo = visitNo;
             var first = localStorage.getItem(KEY);
             var last = localStorage.getItem(LAST_KEY);
             if (first) out.first = JSON.parse(first);
@@ -81,4 +97,5 @@
     window.getVisitorId = visitorId;
 
     save();
+    countVisit();
 })();
