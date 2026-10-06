@@ -46,6 +46,7 @@
         .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
     </style>
     <script src="/js/attribution.js" defer></script>
+    <script src="/js/naver-wcs.js" defer></script>
     <script src="/js/engage.js" defer></script>
 </head>
 <body class="bg-white">
@@ -221,6 +222,7 @@
 
                 if (r.ok && data.ok) {
                     if (window.gtag) gtag('event', 'reserve_submit', { method: 'form' });
+                    if (window.naverConv) window.naverConv('lead');
                     document.querySelector('section.max-w-2xl').classList.add('hidden');
                     document.getElementById('doneView').classList.remove('hidden');
                     window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -493,6 +493,7 @@
         .then(function (res) {
           if (!res.ok) throw new Error('fail');
           leadDone = true;
+          if (window.naverConv) window.naverConv('lead');
           ssSet(SS_LEAD, true);
           f.remove();
           log.push({ role: 'assistant', content: name + '님, 접수됐어요. 확인하는 대로 ' + (officeOpen() ? '곧' : '다음 영업일 아침에 가장 먼저') + ' 연락드릴게요. 그 사이에도 궁금한 게 있으면 편하게 물어봐 주세요.' });
