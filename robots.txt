@@ -1,4 +1,4 @@
-# 법률사무소 청송 robots.txt
+# 법률사무소 청송law robots.txt
 # 일반 검색엔진: 전체 허용
 User-agent: *
 Allow: /
