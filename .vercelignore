@@ -6,3 +6,6 @@
 정장2.jpg
 KakaoTalk_*.jpg
 .firebase/
+# 광고 운영 스크립트·키워드 목록 — 운영 주소에서 열리지 않게(2026-10-09 보안점검)
+scripts/
+ad-keywords/

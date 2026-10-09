@@ -1,6 +1,7 @@
 // 예약 폼 제출을 받아 solapi로 사무실 휴대폰에 LMS 문자를 발송하는 서버리스 함수
 const crypto = require('crypto');
 const { assess } = require('./_intent.js');
+const { originAllowed, clientIp } = require('./_guard.js');
 
 const SOLAPI_ENDPOINT = 'https://api.solapi.com/messages/v4/send';
 const NEWLINE = String.fromCharCode(10);
@@ -124,16 +125,13 @@ module.exports = async (req, res) => {
   }
 
   // 외부 봇의 직접 호출 차단 — 브라우저 fetch POST는 항상 Origin을 보내므로
-  // origin/referer가 아예 없는 요청(curl 등 스크립트)도 차단한다
-  const origin = req.headers.origin || req.headers.referer || '';
-  if (!/chang-hee\.kim|localhost|127\.0\.0\.1/i.test(origin)) {
+  // Origin이 없거나 운영 주소와 정확히 같지 않으면 거부한다(로컬 개발 주소는 DEV_ORIGINS 환경변수로만 허용)
+  if (!originAllowed(req.headers.origin)) {
     return res.status(403).json({ ok: false, error: 'forbidden' });
   }
 
   // IP당 반복 제출 제한(문자 발송 비용 방어)
-  const ip = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '')
-    .split(',')[0]
-    .trim();
+  const ip = clientIp(req);
   if (isRateLimited(ip)) {
     return res.status(429).json({ ok: false, error: 'too_many_requests' });
   }
@@ -169,9 +167,10 @@ module.exports = async (req, res) => {
 
   const apiKey = (process.env.SOLAPI_API_KEY || '').trim();
   const apiSecret = (process.env.SOLAPI_API_SECRET || '').trim();
-  // solapi에 사전등록된 발신번호 (등록번호 변경 시 이 값만 수정)
-  const from = '01026085099';
-  const to = onlyDigits(process.env.RESERVE_TO) || '01089974452';
+  // 발신번호(solapi 사전등록)·수신번호는 Vercel 환경변수에서만 읽는다 — 공개 저장소에 번호를 두지 않는다
+  const from = onlyDigits(process.env.SOLAPI_SENDER);
+  const to = onlyDigits(process.env.RESERVE_TO);
+  if (!from || !to) console.error('문자 번호 환경변수(SOLAPI_SENDER/RESERVE_TO) 미설정');
 
   if (!apiKey || !apiSecret) {
     console.error('solapi 환경변수(SOLAPI_API_KEY/SECRET) 미설정');
