@@ -487,3 +487,12 @@ f001·f009·f016·f024·f031로 선형 / 모션최소화에서 요청 0건 / 콘
 - AIO 측정 장부: `C:\Users\jeonw\.antigravity\lawchungsong\aio\` (질문 11개, 측정 0회 — 크롬 확장 미연결).
 - 첫 화면 "10년간 1,000건 이상"은 대표가 확인한 사실(2026-10-09) — 유지.
 - 2026-10-09 광고문구점검(커밋 81dd9d0): 판례 7편·칼럼 2편의 "형사 전문 변호사"류 → "형사 사건을 다루는 변호사". 주간 자동 발행 글에 "전문 변호사"가 다시 들어오는지 발행 뒤 `rg "전문 ?변호사|전문으로 다루" columns precedents`로 본다.
+
+## 2026-10-16 검색 노출 1단계 — 대표 이미지·파비콘·사이트맵 (터미널 핸드오프 Phase 1, 미배포)
+- 근거: `C:\Users\jeonw\.antigravity\guponoodle\어사이드핸드오프\chang-hee.kim_터미널핸드오프_20261016.md`.
+- og:image 404 원인: og-images.yml이 9/17부터 매번 push 거절(dain-knowledge.yml과 같은 시각에 push, "fetch first")로 실패했다. 이미지는 만들었는데 못 올렸다. 9/1~9/14에도 실패 기록이 있다.
+- 고친 방식: generate-og.mjs가 index.json slug가 아니라 **각 HTML의 og:image 주소**에서 파일명을 얻는다(발행 루틴이 slug와 다른 이름·default-*.jpg를 쓰는 글이 있다). 판례도 대상. 워크플로는 html 변경에도 돌고, 한 번에 하나(concurrency), 최신 main 체크아웃, push 거절 시 pull --rebase 재시도 5회.
+- 로컬 생성: `PUPPETEER_DIR=C:/Users/jeonw/tools/headless-tools node scripts/generate-og.mjs` (저장소 의존성 아님). 개수만 셀 때는 `--check`.
+- OG 카드 상호를 '법률사무소 청송law'로 고쳤다. 9/16 이전 카드 115장은 아직 '법률사무소 청송' 표기다 — 다시 만들려면 해당 jpg를 지우고 위 명령.
+- 사이트맵 lastmod는 바꾸지 않았다. 이번 변경은 head만 바뀐 것이라 날짜를 올리면 가짜 최신일이 된다.
+- 판례·칼럼 제목 135쪽 끝이 '... 변호사 청송'(상호 단독 표기)이다 — Phase 3 제목 손볼 때 같이 고칠 것.
