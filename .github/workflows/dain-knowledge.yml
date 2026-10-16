@@ -32,6 +32,10 @@ jobs:
         with:
           node-version: 20
 
+      # 새 글 상담 상자에 업무 페이지 버튼을 달고, 업무 페이지 "이 분야의 법률 칼럼"을 최신 6편으로 갱신한다
+      - name: 업무 페이지 연결
+        run: node scripts/link-practice.mjs
+
       - name: 지식 목록 생성
         run: node scripts/build-dain-knowledge.mjs
 
@@ -39,14 +43,14 @@ jobs:
       # (og-images.yml과 같은 방식. 2026-09-17 이후 이미지 쪽이 "fetch first"로 실패하던 것과 같은 위험)
       - name: 변경분 커밋
         run: |
-          if [ -z "$(git status --porcelain api/_knowledge.json)" ]; then
+          if [ -z "$(git status --porcelain api/_knowledge.json columns precedents practice)" ]; then
             echo "변경 없음"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add api/_knowledge.json
-          git commit -m "chore(다인): 칼럼·판례 목록 자동 갱신"
+          git add api/_knowledge.json columns precedents practice
+          git commit -m "chore(다인): 칼럼·판례 목록·업무 페이지 연결 자동 갱신"
           for i in 1 2 3 4 5; do
             if git pull --rebase origin main && git push origin HEAD:main; then
               exit 0
