@@ -500,3 +500,4 @@ f001·f009·f016·f024·f031로 선형 / 모션최소화에서 요청 0건 / 콘
 - **함정 — CI(우분투)에는 한글 글꼴이 없다.** 8월부터 CI가 만든 카드(약 70장)는 글자가 전부 네모(□)였다. 고친 워크플로(fonts-noto-cjk 설치, 글꼴 없으면 멈춤)와 og:title 빈 값 대비는 **로컬 브랜치 `og-font-fix`(16b2697)에만 있고 main에는 없다** — 독립 검토가 2회 시간 초과로 막혀 보류. 그 전까지 새 글 카드는 CI가 또 네모로 만든다 → 발행 뒤 로컬에서 해당 jpg를 지우고 다시 그린다.
 - og:title 안에 큰따옴표를 이스케이프하지 않은 글 6편이 있다(값이 빈 문자열로 읽힘): 칼럼 07-21·07-27·07-28·08-11·09-01, 판례 09-29.
 - 2026-10-16 낮: og-font-fix를 main에 합침(8cff70a). **독립 검토 생략: Codex 연결 장애(chatgpt.com 무응답), 대표 승인 2026-10-16** — 1회 예외. 메타 태그 큰따옴표 오류 8편(og:title 7·description 1)을 &quot;로 고침(cf1db35). 발행 루틴이 제목에 큰따옴표를 그대로 넣는 것이 원인이라 새 글에서 다시 생길 수 있다.
+- 2026-10-16 오후: dain-knowledge.yml에 push 재시도(concurrency 그룹, checkout ref main, 거절 시 pull --rebase 후 최대 5회, 실패 시 exit 1 — og-images.yml과 같은 방식)를 넣었다. 독립 검토: check.py review는 2회 모두 Codex 오류로 막혀 한도 소진, 같은 packet-only 명령으로 같은 패킷(sha 일치)을 직접 넘겨 Codex PASS(기록 claude-codex-checker/runs/chlaw-dain-retry/review-manual.txt).
