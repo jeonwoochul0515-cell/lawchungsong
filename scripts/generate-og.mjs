@@ -35,6 +35,7 @@ for (const { dir, cat } of SECTIONS) {
     console.warn(`${dir}/index.json 읽기 실패 — 카테고리 기본값으로 계속:`, e.message);
   }
   const catBySlug = new Map(index.map((c) => [c.slug, c.category]));
+  const titleBySlug = new Map(index.map((c) => [c.slug, c.title]));
   for (const f of readdirSync(resolve(root, dir))) {
     if (!f.endsWith('.html') || f === 'index.html') continue;
     const html = readFileSync(resolve(root, dir, f), 'utf8');
@@ -48,7 +49,10 @@ for (const { dir, cat } of SECTIONS) {
     const file = m[1];
     if (existsSync(resolve(root, 'images', 'og', file)) || jobs.has(file)) continue;
     const slug = f.slice(0, -'.html'.length);
-    jobs.set(file, DEFAULTS[file] || { cat: catBySlug.get(slug) || cat, title: meta(html, 'og:title') || slug });
+    // og:title 안의 큰따옴표가 이스케이프되지 않아 빈 값으로 읽히는 글이 있어 목록 제목 → <title> 순으로 대신 쓴다
+    const pageTitle = decode((html.match(/<title>([^<]*)<\/title>/) || [, ''])[1]).split(' | ')[0].trim();
+    const title = meta(html, 'og:title') || titleBySlug.get(slug) || pageTitle || slug;
+    jobs.set(file, DEFAULTS[file] || { cat: catBySlug.get(slug) || cat, title });
   }
 }
 

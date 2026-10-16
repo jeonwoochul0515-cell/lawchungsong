@@ -40,6 +40,14 @@ jobs:
         if: steps.check.outputs.count != '0'
         run: npm install --no-save puppeteer
 
+      # 우분투 실행기에는 한글 글꼴이 없어 카드 글자가 전부 네모(□)로 찍혔다(2026-08~10 CI 생성분 약 70장)
+      - name: 한글 글꼴 설치
+        if: steps.check.outputs.count != '0'
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q fonts-noto-cjk
+          # 한글 글꼴이 안 잡히면 네모 그림을 올리지 말고 여기서 멈춘다
+          fc-list :lang=ko | grep -q .
+
       - name: OG 이미지 생성
         if: steps.check.outputs.count != '0'
         run: node scripts/generate-og.mjs
