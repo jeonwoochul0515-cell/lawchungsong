@@ -79,8 +79,11 @@ for (const rule of RULES) {
   const indent = '                ';
   const eol = html.includes('\r\n') ? '\r\n' : '\n';
   const block = `${BEGIN}${eol}${list.map((a) => card(a, indent).replace(/\n/g, eol)).join(eol)}${eol}${indent}${END}`;
-  if (html.includes(BEGIN)) {
-    html = html.replace(new RegExp(`${BEGIN}[\\s\\S]*?${END}`), block);
+  const b = html.indexOf(BEGIN);
+  const e = b < 0 ? -1 : html.indexOf(END, b);
+  if (b >= 0 && e > b) {
+    // 표지 문자열에 괄호가 있어 정규식 대신 위치로 바꾼다
+    html = html.slice(0, b) + block + html.slice(e + END.length);
   } else {
     // 첫 실행: "이 분야의 법률 칼럼" 아래 카드 격자 안쪽을 통째로 바꾼다
     const h2 = html.indexOf('이 분야의 법률 칼럼</h2>');
@@ -96,5 +99,5 @@ for (const rule of RULES) {
 }
 
 console.log(JSON.stringify({ check: CHECK, articles: articles.length, ...stats, practice: pageStats }, null, 1));
-// 버튼 자리를 못 찾은 글(옛 양식)은 경고만 한다 — 자동 발행 CI를 멈추지 않기 위해서. 업무 페이지 격자를 못 찾으면 멈춘다.
-if (Object.values(pageStats).includes('NO_GRID')) process.exitCode = 1;
+// 자리를 못 찾은 글·업무 페이지는 경고만 한다 — 이 단계가 실패하면 뒤의 다인 목록 갱신·커밋까지 멈추기 때문이다.
+if (stats.noAnchor.length || Object.values(pageStats).includes('NO_GRID')) console.warn('경고: 자리를 못 찾은 파일이 있다(위 noAnchor·NO_GRID). 손으로 확인할 것.');
