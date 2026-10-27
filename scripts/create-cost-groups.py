@@ -26,10 +26,10 @@ DATA = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 GROUPS = [
  {"name": "10_비용_초저가", "budget": 500, "lo": 0, "hi": 2000,
   "headline": "사건별 비용 상담 안내",
-  "desc": "부산 연제구 법률사무소 청송. 사안을 듣고 절차와 비용을 함께 안내합니다."},
+  "desc": "부산 연제구 법률사무소 청송law. 사안을 듣고 절차와 비용을 함께 안내합니다."},
  {"name": "11_비용_핵심", "budget": 1500, "lo": 2000, "hi": 6000,
   "headline": "사건별 비용 상담 안내",
-  "desc": "부산 연제구 법률사무소 청송. 사안을 듣고 절차와 비용을 함께 안내합니다."},
+  "desc": "부산 연제구 법률사무소 청송law. 사안을 듣고 절차와 비용을 함께 안내합니다."},
 ]
 URL = f"{BASE}/reserve.html?{UTM}cost"
 

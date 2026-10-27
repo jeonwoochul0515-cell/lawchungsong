@@ -29,7 +29,7 @@ GROUPS = [
  {"name": "07_롱테일_이혼가사", "field": "이혼가사", "budget": 500,
   "url": f"{BASE}/practice/divorce.html?{UTM}lt_divorce",
   "headline": "양육비 재산분할 기준안내",
-  "desc": "부산가정법원 위탁보호위원 출신 변호사가 산정 기준을 짚어드립니다."},
+  "desc": "부산가정법원 보호소년 위탁보호위원 출신 변호사가 산정 기준을 짚어드립니다."},
  {"name": "08_롱테일_가맹", "field": "가맹", "budget": 300,
   "url": f"{BASE}/practice/franchise.html?{UTM}lt_franchise",
   "headline": "가맹계약 정보공개서 검토",
