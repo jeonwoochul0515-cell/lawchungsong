@@ -25,6 +25,10 @@
         if (ready) send(type); else queue.push(type);
     };
 
+    // 원문 HTML의 네이버 공통 스크립트가 이미 페이지 조회를 보냈으면 다시 보내지 않고 전환만 쓴다
+    if (window.wcs && window.wcs_add && window.wcs_add['wa'] === WA) {
+        ready = true;
+    } else {
     var s = document.createElement('script');
     s.src = 'https://wcs.naver.net/wcslog.js';
     s.async = true;
@@ -40,6 +44,7 @@
         } catch (e) { /* 차단기 등으로 실패해도 사이트 동작에는 영향 없음 */ }
     };
     (document.head || document.documentElement).appendChild(s);
+    }
 
     // 전화·카카오톡 링크 클릭(사이트 전체, 위임 방식)
     document.addEventListener('click', function (e) {
