@@ -8,10 +8,11 @@
 
 ## 발행 대기 (위에서부터 순서대로)
 
-- [ ] **지급명령에 이의가 들어왔다 — 소송으로 넘어간 다음의 순서** — 타깃 키워드: 지급명령이의신청(2,520). 요지: 이의신청 기간(2주)과 효력(소 제기 간주), 인지대·송달료 추가 납부, 조정 회부 가능성, 처음부터 소장을 내는 편이 빠른 사건의 구분. 받아드림 소개 1회.
+(현재 대기 중인 주제가 없습니다 — 백로그 소진)
 
 ## 발행 완료
 
+- [x] 2026-10-29 **지급명령에 이의가 들어왔다 — 소송으로 넘어간 다음의 순서** (`columns/2026-10-29-busan-payment-order-objection-lawsuit-transition.html`)
 - [x] 2026-10-22 **집행관과 채무자 집에 들어가는 날 — 유체동산 압류의 실제** (`columns/2026-10-22-busan-movable-property-seizure-reality.html`)
 - [x] 2026-10-15 **소송 전에 재산을 먼저 묶는다 — 가압류와 담보공탁의 현실** (`columns/2026-10-15-busan-provisional-attachment-security-bond.html`)
 - [x] 2026-10-01 **채무자가 재산을 숨겼는지 확인하는 법 — 재산명시·재산조회·채무불이행자명부** (`columns/2026-10-01-busan-asset-disclosure-debtor-registry.html`)
